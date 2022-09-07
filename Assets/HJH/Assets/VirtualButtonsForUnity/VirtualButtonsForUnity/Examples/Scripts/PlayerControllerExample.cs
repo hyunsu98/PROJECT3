@@ -32,12 +32,11 @@ public class PlayerControllerExample : MonoBehaviour
         Vector2 movement = playerInput.Player.Move.ReadValue<Vector2>();
         Vector3 move = new Vector3(movement.x, 0, movement.y);
         controller.Move(move * Time.deltaTime * playerSpeed);
-
+        Debug.Log(movement.x + " " + movement.y);
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
         }
-
         // bool jumpPress = playerInput.Player.Jump.IsPressed();
         bool jumpPress = playerInput.Player.Jump.triggered;
         if (jumpPress && groundedPlayer)
