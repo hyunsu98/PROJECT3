@@ -84,4 +84,9 @@ public class PlayerMove_HJH : MonoBehaviour
             jumpCount = firstJumpCount;
         }
     }
+
+    public virtual void Skill1()
+    {
+
+    }
 }
