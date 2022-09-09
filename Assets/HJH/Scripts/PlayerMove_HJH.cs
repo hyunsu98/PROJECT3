@@ -14,7 +14,10 @@ public class PlayerMove_HJH : MonoBehaviour
     public int jumpCount = 2;
     int firstJumpCount;
     public bool keyboardMode = false;
+    //점프했는지 체크하게 하기 위해
+    bool jumpCheckStart = false;
     Animator am;
+    public GameObject dashEffect;
     public enum State
     {
         Idle,
@@ -32,6 +35,7 @@ public class PlayerMove_HJH : MonoBehaviour
         cc = GetComponent<CharacterController>();
         can = GameObject.Find("Controller Canvas");
         moveVec = Vector3.zero;
+        //am.SetInteger("Jump",jumpCount);
         firstJumpCount = jumpCount;
     }
     void Start()
@@ -44,6 +48,7 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         if(state == State.Idle)
         {
+            am.SetTrigger("Idle");
             if (keyboardMode == true)
             {
                 KeyBoardMove();
@@ -53,10 +58,15 @@ public class PlayerMove_HJH : MonoBehaviour
             {
                 JoyStickMove();
                 can.SetActive(true);
+            }
+            if(moveVec.x != 0)
+            {
+                state = State.Run;
             }
         }
         else if(state == State.Run)
         {
+            am.SetTrigger("Run");
             if (keyboardMode == true)
             {
                 KeyBoardMove();
@@ -67,34 +77,51 @@ public class PlayerMove_HJH : MonoBehaviour
                 JoyStickMove();
                 can.SetActive(true);
             }
+            if(moveVec.x == 0)
+            {
+                state = State.Idle;
+            }
         }
         else if(state == State.Jump)
         {
-
+            if (keyboardMode == true)
+            {
+                KeyBoardMove();
+                can.SetActive(false);
+            }
+            else
+            {
+                JoyStickMove();
+                can.SetActive(true);
+            }
+            if (!cc.isGrounded)
+            {
+                moveVec.y += gravity * Time.deltaTime;
+                jumpCheckStart = true;
+                
+            }
+            if(jumpCheckStart == true && cc.isGrounded)
+            {
+                am.SetTrigger("JumpEnd");
+                jumpCheckStart = false;
+                jumpCount = firstJumpCount;
+                state = State.Idle;
+            }
         }
         else if(state == State.Dash)
         {
 
         }
+        cc.Move(moveVec * Time.deltaTime);
 
-        
-        
-        
+
+
     }
     void KeyBoardMove()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         moveVec.x = x * speed;
-        if(moveVec.x == 0 && moveVec.z == 0)
-        {
-            state = State.Idle;
-            am.SetTrigger("Idle");
-        }
-        else
-        {
-            am.SetTrigger("Run");
-        }
         if (moveVec.x < 0)
         {
             transform.eulerAngles = new Vector3(0, -90, 0);
@@ -112,7 +139,10 @@ public class PlayerMove_HJH : MonoBehaviour
         {
             Jump();
         }
-        cc.Move(moveVec * Time.deltaTime);
+        else if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Dash();
+        }
         
     }
 
@@ -121,15 +151,6 @@ public class PlayerMove_HJH : MonoBehaviour
         float x = joy.Horizontal;
         float z = joy.Vertical;
         moveVec.x = x * speed;
-        if (moveVec.x == 0 && moveVec.z == 0)
-        {
-            state = State.Idle;
-            am.SetTrigger("Idle");
-        }
-        else
-        {
-            am.SetTrigger("Run");
-        }
         if (moveVec.x < 0)
         {
             transform.eulerAngles = new Vector3(0,-90,0);
@@ -138,32 +159,50 @@ public class PlayerMove_HJH : MonoBehaviour
         {
             transform.eulerAngles = new Vector3(0, 90, 0);
         }
-        Debug.Log(cc.isGrounded);
         if (!cc.isGrounded)
         {
             moveVec.y += gravity * Time.deltaTime;
         }
-        cc.Move(moveVec * Time.deltaTime);
+        
     }
 
     public void Jump()
     {
-        //더블 점프 버그있음 왜그런지는 모르겠음
         state = State.Jump;
+        //더블 점프 버그있음 왜그런지는 모르겠음
 
-        jumpCount--;
-        if (jumpCount>0)
+        if (jumpCount > 0)
         {
+            Debug.Log("Jump");
             moveVec.y = jumpPower;
             am.SetTrigger("Jump");
         }
-        if (cc.isGrounded)
+        jumpCount--;
+    }
+    public float dashRange = 2;
+    public void Dash()
+    {
+        Instantiate(dashEffect, transform.position, Quaternion.identity);
+        StartCoroutine(DashEffect());
+    }
+
+    IEnumerator DashEffect()
+    {
+        cc.Move(new Vector3(dashRange, 0, 0));
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
+        GameObject sword = null;
+        foreach (Transform child in allChildren)
         {
-            Debug.Log("why");
-            am.SetTrigger("JumpEnd");
-            jumpCount = firstJumpCount;
-            state = State.Idle;
+            if(child.gameObject.name == "Sword")
+            {
+                sword = child.gameObject;
+            }
         }
+        sword.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        sword.SetActive(true);
     }
 
     public virtual void Skill1()
