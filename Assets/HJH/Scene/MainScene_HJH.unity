@@ -8338,7 +8338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be24ccc78371cef45856e70a7745c677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 5
+  jumpPower: 10
   gravity: -9.8
   joy: {fileID: 54053570}
   speed: 5
@@ -8361,7 +8361,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &956151144
 GameObject:
