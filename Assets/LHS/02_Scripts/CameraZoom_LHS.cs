@@ -48,6 +48,11 @@ public class CameraZoom_LHS : MonoBehaviour
         {
             distance_target2target = 3;
         }
+
+        else if (distance_target2target > 5)
+        {
+            distance_target2target = 5;
+        }
         // 두 타겟의 거리가  5가 넘으면 ZoomActive 가 켜지게
         //if (Vector3.Distance(target1.transform.position, target2.transform.position) < 5)
         //{
