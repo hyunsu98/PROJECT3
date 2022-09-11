@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerWarrior_HJH : PlayerMove_HJH
 {
+    ImpactReceiver_HJH impact;
     // Start is called before the first frame update
     void Start()
     {
-        
+        impact = GetComponent<ImpactReceiver_HJH>();
     }
 
     // Update is called once per frame
@@ -102,6 +103,11 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         cc.Move(moveVec * Time.deltaTime);
 
     }
+
+    public override void Skill1()
+    {
+        
+    }
     public override void Attack1()
     {
         am.SetTrigger("Attack");
@@ -111,7 +117,6 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public void AttackOver()
     {
-        Debug.Log("?");
         state = State.Idle;
         Weapon.GetComponent<Weapon_HJH>().Attack = false;
     }

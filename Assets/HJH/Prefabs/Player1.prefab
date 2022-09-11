@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5073490129327903343}
   - component: {fileID: 5128277309780116227}
+  - component: {fileID: 3187563655604384292}
   - component: {fileID: 5078281403823108201}
   - component: {fileID: 7016337918096897358}
   - component: {fileID: 5329424675700912626}
@@ -60,6 +61,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3187563655604384292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078390142427002503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b72a290648e3b340a9eeae02c4db949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!143 &5078281403823108201
 CharacterController:
   m_ObjectHideFlags: 0
@@ -92,7 +105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpPower: 5
   gravity: -9.8
-  joy: {fileID: 0}
   speed: 3
   jumpCount: 2
   keyboardMode: 0
@@ -113,6 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af84cb3e7dd0d0a4285236e0a84f1757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
 --- !u!1 &5078454442857116849
 GameObject:
   m_ObjectHideFlags: 0

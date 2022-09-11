@@ -22,7 +22,8 @@ public class Weapon_HJH : MonoBehaviour
         {
             if (other.GetComponent<PlayerHp_HJH>() != null && other.name != "Player1")
             {
-                other.GetComponent<PlayerHp_HJH>().Hp += 10;
+                other.GetComponent<PlayerHp_HJH>().Damage(other.transform.position - transform.position);
+                Attack = false;
             }
         }
     }

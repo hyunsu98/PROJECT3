@@ -9,7 +9,7 @@ public class PlayerMove_HJH : MonoBehaviour
     public float gravity = -9.8f;
     protected VariableJoystick joy;
     public float speed;
-    protected Vector3 moveVec;
+    public Vector3 moveVec;
     protected CharacterController cc;
     public int jumpCount = 2;
     protected int firstJumpCount;
