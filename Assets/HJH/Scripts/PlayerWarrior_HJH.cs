@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class PlayerWarrior_HJH : PlayerMove_HJH
 {
-    ImpactReceiver_HJH impact;
+
     // Start is called before the first frame update
     void Start()
     {
-        impact = GetComponent<ImpactReceiver_HJH>();
+
     }
 
     // Update is called once per frame
@@ -74,7 +74,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                 {
                     am.SetTrigger("JumpEnd");
                     jumpCheckStart = false;
-                    jumpCount = firstJumpCount;
+                    Invoke("JumpCountReturn", 1f);
                     state = State.Idle;
                 }
             }
@@ -103,7 +103,10 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         cc.Move(moveVec * Time.deltaTime);
 
     }
-
+    void JumpCountReturn()
+    {
+        jumpCount = firstJumpCount;
+    }
     public override void Skill1()
     {
         

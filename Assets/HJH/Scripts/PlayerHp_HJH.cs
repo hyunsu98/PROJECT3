@@ -7,6 +7,7 @@ public class PlayerHp_HJH : MonoBehaviour
     ImpactReceiver_HJH impact;
     [SerializeField]
     int hp = 0;
+    Animator am;
     PlayerMove_HJH pm;
     public int Hp
     {
@@ -28,12 +29,12 @@ public class PlayerHp_HJH : MonoBehaviour
         if(point.x > 0)
         {
             pm.moveVec = Vector3.zero;
-            impact.AddImpact(new Vector3(1, 1, 0), ((hp/30) + 1) * 30);
+            impact.AddImpact(new Vector3(1, 1, 0), ((hp/30) + 1) * 50);
         }
         else
         {
             pm.moveVec = Vector3.zero;
-            impact.AddImpact(new Vector3(-1, 1, 0), ((hp / 30) + 1) * 30);
+            impact.AddImpact(new Vector3(-1, 1, 0), ((hp / 30) + 1) * 50);
         }
         Hp += 10;
 
@@ -44,6 +45,7 @@ public class PlayerHp_HJH : MonoBehaviour
     {
         impact = GetComponent<ImpactReceiver_HJH>();
         pm = GetComponent<PlayerMove_HJH>();
+        am = GetComponent<Animator>();
     }
 
     // Update is called once per frame

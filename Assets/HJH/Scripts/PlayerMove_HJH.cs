@@ -19,6 +19,7 @@ public class PlayerMove_HJH : MonoBehaviour
     protected Animator am;
     public GameObject dashEffect;
     public bool Player = false;
+    PlayerHp_HJH hp;
     public enum State
     {
         Idle,
@@ -35,6 +36,7 @@ public class PlayerMove_HJH : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        hp = GetComponent<PlayerHp_HJH>();
         joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
         Transform[] allChildren = GetComponentsInChildren<Transform>();
         foreach (Transform child in allChildren)
@@ -120,7 +122,7 @@ public class PlayerMove_HJH : MonoBehaviour
                 {
                     am.SetTrigger("JumpEnd");
                     jumpCheckStart = false;
-                    jumpCount = firstJumpCount;
+                    Invoke("JumpCountReturn", 3f);
                     state = State.Idle;
                 }
             }
@@ -134,12 +136,16 @@ public class PlayerMove_HJH : MonoBehaviour
             }
             else if (state == State.Attacked)
             {
-
+                StartCoroutine(Stun(hp.Hp));
             }
 
         }
         else
         {
+            if(state == State.Attacked)
+            {
+                StartCoroutine(Stun(hp.Hp));
+            }
             if (!cc.isGrounded)
             {
                 moveVec.y += gravity * Time.deltaTime;
@@ -149,6 +155,26 @@ public class PlayerMove_HJH : MonoBehaviour
         cc.Move(moveVec * Time.deltaTime);
 
 
+    }
+
+    void JumpCountReturn()
+    {
+        jumpCount = firstJumpCount;
+    }
+
+    IEnumerator Stun(int stunTime)
+    {
+        am.SetTrigger("Damage");
+        yield return new WaitForSeconds(stunTime / 150);
+        am.SetTrigger("Idle");
+        if(cc.isGrounded == true)
+        {
+            state = State.Jump;
+        }
+        else
+        {
+            state = State.Idle;
+        }
     }
     protected void KeyBoardMove()
     {
