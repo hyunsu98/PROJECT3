@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove_HJH : MonoBehaviour
+public class PlayerMove_LHS : MonoBehaviour
 {
     public float jumpPower = 5;
     protected GameObject can;
@@ -20,6 +20,38 @@ public class PlayerMove_HJH : MonoBehaviour
     public GameObject dashEffect;
     public bool Player = false;
     PlayerHp_HJH hp;
+
+    #region 현숙추가
+    //****레이어 충돌 변수
+    int playerLayer, groundLayer;
+    bool fallGround;
+
+    //****충돌무시(열림)
+    void IgnoreLayerTrue()
+    {
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, true);
+    }
+    //****충돌적용(닫힘)
+    void IgnoreLayerFalse()
+    {
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, false);
+    }
+    //****착지면에 떨어지는 키를 눌렀을때 0.2초간 레이어 충돌이 무시된 후 다시 적용
+    IEnumerator LayerOpenClose()
+    {
+        fallGround = true;
+        IgnoreLayerTrue();
+        yield return new WaitForSeconds(0.3f);
+        IgnoreLayerFalse();
+        fallGround = false;
+    }
+
+    //**** Ray변수
+    private RaycastHit hit;
+    private int layerMask;
+    public float distance = 3;
+    #endregion
+
     public enum State
     {
         Idle,
@@ -55,12 +87,26 @@ public class PlayerMove_HJH : MonoBehaviour
     }
     void Start()
     {
-        
+        #region 현숙추가
+        //****LayerMask 지정
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
+
+        layerMask = 1 << 8;
+        #endregion
     }
 
     // Update is called once per frame
     void Update()
     {
+        #region 현숙추가
+        //****Alpha1 누르면 떨어지기 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            print("alpha1 누름");
+            StartCoroutine(LayerOpenClose());
+        }
+        #endregion
 
         if (Player == true)
         {
@@ -170,6 +216,7 @@ public class PlayerMove_HJH : MonoBehaviour
         if(cc.isGrounded == true)
         {
             state = State.Jump;
+            
         }
         else
         {
@@ -199,13 +246,25 @@ public class PlayerMove_HJH : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            //****
+            // 점프중이라면 True
+            IgnoreLayerTrue();
             Jump();
         }
         else if (Input.GetKeyDown(KeyCode.Q))
         {
             Dash();
         }
-        
+
+        #region 현숙추가
+        // 아래로 레이를 쐈을 때 
+        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
+        {
+            print(hit.transform.name);
+            IgnoreLayerFalse();
+        }
+        #endregion
+
     }
 
     protected void JoyStickMove()
