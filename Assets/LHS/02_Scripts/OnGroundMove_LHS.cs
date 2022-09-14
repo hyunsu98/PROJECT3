@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class OnGroundMove_LHS : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision collision)
+    private void Start()
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        
+    }
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Debug.Log("´ê¾Ò´Ù");
+        if (hit.gameObject.CompareTag("Ground"))
         {
-
-            this.transform.parent = collision.transform;
+            Debug.Log("´ê¾Ò´Ù");
+            this.transform.parent = hit.transform;
 
         }
+    }
+    //private void OnControllerCollider(Collision collision)
+    //{
+       
 
-    }
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-            this.transform.parent = null;
-    }
+    //}
+    //private void OnCollisionExit(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Ground"))
+    //        this.transform.parent = null;
+    //}
 }

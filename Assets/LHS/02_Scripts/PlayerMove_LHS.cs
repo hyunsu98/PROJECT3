@@ -49,6 +49,7 @@ public class PlayerMove_LHS : MonoBehaviour
     //**** Rayº¯¼ö
     private RaycastHit hit;
     private int layerMask;
+    private int layerMask2;
     public float distance = 3;
     #endregion
 
@@ -93,6 +94,7 @@ public class PlayerMove_LHS : MonoBehaviour
         groundLayer = LayerMask.NameToLayer("Ground");
 
         layerMask = 1 << 8;
+        layerMask2 = 1 << 9;
         #endregion
     }
 
@@ -227,6 +229,7 @@ public class PlayerMove_LHS : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+
         moveVec.x = x * speed;
         if (moveVec.x < 0)
         {
@@ -262,6 +265,13 @@ public class PlayerMove_LHS : MonoBehaviour
         {
             print(hit.transform.name);
             IgnoreLayerFalse();
+        }
+
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 1, layerMask2) && moveVec.x != 0)
+        {
+            Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
+            print(hit.transform.name);
+            moveVec = Vector3.zero;
         }
         #endregion
 
