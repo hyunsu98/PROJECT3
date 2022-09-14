@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMove_HJH : MonoBehaviour
+public class PlayerMove_LHS : MonoBehaviour
 {
     public float jumpPower = 5;
     protected GameObject can;
@@ -19,8 +19,40 @@ public class PlayerMove_HJH : MonoBehaviour
     protected Animator am;
     public GameObject dashEffect;
     public bool Player = false;
-    public float upDown = 0;
     PlayerHp_HJH hp;
+
+    #region 현숙추가
+    //****레이어 충돌 변수
+    int playerLayer, groundLayer;
+    bool fallGround;
+
+    //****충돌무시(열림)
+    void IgnoreLayerTrue()
+    {
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, true);
+    }
+    //****충돌적용(닫힘)
+    void IgnoreLayerFalse()
+    {
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, false);
+    }
+    //****착지면에 떨어지는 키를 눌렀을때 0.2초간 레이어 충돌이 무시된 후 다시 적용
+    IEnumerator LayerOpenClose()
+    {
+        fallGround = true;
+        IgnoreLayerTrue();
+        yield return new WaitForSeconds(0.3f);
+        IgnoreLayerFalse();
+        fallGround = false;
+    }
+
+    //**** Ray변수
+    private RaycastHit hit;
+    private int layerMask;
+    private int layerMask2;
+    public float distance = 3;
+    #endregion
+
     public enum State
     {
         Idle,
@@ -29,7 +61,7 @@ public class PlayerMove_HJH : MonoBehaviour
         Dash,
         Attack,
         Attacked,
-        JumpAttack,
+
     }
     public State state = State.Idle;
     protected GameObject Weapon = null;
@@ -56,33 +88,33 @@ public class PlayerMove_HJH : MonoBehaviour
     }
     void Start()
     {
-        
-    }
-    public void ChangeState(State s)
-    {
-        if (state == s) return;
-        state = s;
-        switch (s)
-        {
-            case State.Idle:
-                am.SetTrigger("Idle");
-                break;
-            case State.Run:
-                am.SetTrigger("Run");
-                break;
+        #region 현숙추가
+        //****LayerMask 지정
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
 
-        }
-
+        layerMask = 1 << 8;
+        layerMask2 = 1 << 9;
+        #endregion
     }
 
     // Update is called once per frame
     void Update()
     {
+        #region 현숙추가
+        //****Alpha1 누르면 떨어지기 
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            print("alpha1 누름");
+            StartCoroutine(LayerOpenClose());
+        }
+        #endregion
 
         if (Player == true)
         {
             if (state == State.Idle)
             {
+                am.SetTrigger("Idle");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -95,11 +127,12 @@ public class PlayerMove_HJH : MonoBehaviour
                 }
                 if (moveVec.x != 0)
                 {
-                    ChangeState(State.Run);
+                    state = State.Run;
                 }
             }
             else if (state == State.Run)
             {
+                am.SetTrigger("Run");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -112,7 +145,7 @@ public class PlayerMove_HJH : MonoBehaviour
                 }
                 if (moveVec.x == 0)
                 {
-                    ChangeState(State.Idle);
+                    state = State.Idle;
                 }
             }
             else if (state == State.Jump)
@@ -131,14 +164,14 @@ public class PlayerMove_HJH : MonoBehaviour
                 {
                     moveVec.y += gravity * Time.deltaTime;
                     jumpCheckStart = true;
+
                 }
                 if (jumpCheckStart == true && cc.isGrounded)
                 {
-                    moveVec.y = 0;
                     am.SetTrigger("JumpEnd");
                     jumpCheckStart = false;
                     Invoke("JumpCountReturn", 3f);
-                    ChangeState(State.Idle);
+                    state = State.Idle;
                 }
             }
             else if (state == State.Dash)
@@ -181,20 +214,22 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         am.SetTrigger("Damage");
         yield return new WaitForSeconds(stunTime / 150);
+        am.SetTrigger("Idle");
         if(cc.isGrounded == true)
         {
             state = State.Jump;
+            
         }
         else
         {
-            ChangeState(State.Idle);
+            state = State.Idle;
         }
     }
     protected void KeyBoardMove()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        upDown = z;
+
         moveVec.x = x * speed;
         if (moveVec.x < 0)
         {
@@ -212,26 +247,40 @@ public class PlayerMove_HJH : MonoBehaviour
             moveVec.y += gravity * Time.deltaTime;
            
         }
-        if (Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            JButton();
+            //****
+            // 점프중이라면 True
+            IgnoreLayerTrue();
+            Jump();
         }
-        else if (Input.GetKeyDown(KeyCode.K))
+        else if (Input.GetKeyDown(KeyCode.Q))
         {
-            SButton();
+            Dash();
         }
-        else if (Input.GetKeyDown(KeyCode.J))
+
+        #region 현숙추가
+        // 아래로 레이를 쐈을 때 
+        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
         {
-            AButton();
+            print(hit.transform.name);
+            IgnoreLayerFalse();
         }
-        
+
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 1, layerMask2) && moveVec.x != 0)
+        {
+            Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
+            print(hit.transform.name);
+            moveVec = Vector3.zero;
+        }
+        #endregion
+
     }
 
     protected void JoyStickMove()
     {
         float x = joy.Horizontal;
         float z = joy.Vertical;
-        upDown = z;
         moveVec.x = x * speed;
         if (moveVec.x < 0)
         {
@@ -251,31 +300,16 @@ public class PlayerMove_HJH : MonoBehaviour
         
     }
 
-    public void JButton()
-    {
-        if(upDown < 0)
-        {
-            DownJump();
-        }
-        else
-        {
-            Jump();
-        }
-
-    }
-    public virtual void DownJump()
-    {
-
-    }
 
 
     public virtual void Jump()
     {
-        ChangeState(State.Jump);
+        state = State.Jump;
         //더블 점프 버그있음 왜그런지는 모르겠음
 
         if (jumpCount > 0)
         {
+            Debug.Log("Jump");
             moveVec.y = jumpPower;
             am.SetTrigger("Jump");
         }
@@ -297,15 +331,7 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         if (state == State.Idle)
         {
-            StopAttack();
-        }
-        else if (state == State.Run)
-        {
-            MoveAttack();
-        }
-        else if (state == State.Jump)
-        {
-            JumpAttack();
+            Attack1();
         }
     }
     
@@ -322,17 +348,12 @@ public class PlayerMove_HJH : MonoBehaviour
 
     }
 
-    public virtual void StopAttack()
+    public virtual void Attack1()
     {
       
     }
 
-    public virtual void MoveAttack()
-    {
-
-    }
-
-    public virtual void JumpAttack()
+    public virtual void Attack2()
     {
 
     }
