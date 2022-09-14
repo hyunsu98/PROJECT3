@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5078281403823108201}
   - component: {fileID: 7016337918096897358}
   - component: {fileID: 5329424675700912626}
+  - component: {fileID: -5237858175099546372}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Untagged
@@ -112,9 +113,11 @@ MonoBehaviour:
   dashEffect: {fileID: 0}
   Player: 1
   upDown: 0
+  distance: 3
   state: 0
   dashRange: 2
   weapon: Sword
+  skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
 --- !u!114 &5329424675700912626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +131,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
+--- !u!114 &-5237858175099546372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078390142427002503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5909e78e5892f214d9dcafa78af95aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}
 --- !u!1 &5078454442857116849
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attack: 0
+  Damage: 10
 --- !u!95 &5128430259218980873
 Animator:
   serializedVersion: 4

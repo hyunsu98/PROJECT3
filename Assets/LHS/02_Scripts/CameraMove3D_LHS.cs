@@ -25,6 +25,11 @@ public class CameraMove3D_LHS : MonoBehaviour
 
     private void Start()
     {
+        GameObject[] a = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i <  a.Length; i++)
+        {
+            targets.Add(a[i].transform);
+        }
         cam = GetComponent<Camera>();
     }
 

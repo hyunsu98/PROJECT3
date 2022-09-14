@@ -21,6 +21,42 @@ public class PlayerMove_HJH : MonoBehaviour
     public bool Player = false;
     public float upDown = 0;
     PlayerHp_HJH hp;
+
+    #region 현숙추가
+    //****레이어 충돌 변수
+    int playerLayer, groundLayer;
+    bool fallGround;
+
+    //****충돌무시(열림)
+    protected void IgnoreLayerTrue()
+    {
+        Debug.Log("점프되라");
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, true);
+        print(Physics.GetIgnoreLayerCollision(playerLayer, groundLayer));
+    }
+    //****충돌적용(닫힘)
+    protected void IgnoreLayerFalse()
+    {
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, false);
+    }
+
+    //****착지면에 떨어지는 키를 눌렀을때 0.2초간 레이어 충돌이 무시된 후 다시 적용
+    IEnumerator LayerOpenClose()
+    {
+        fallGround = true;
+        IgnoreLayerTrue();
+        yield return new WaitForSeconds(0.3f);
+        IgnoreLayerFalse();
+        fallGround = false;
+    }
+
+    //**** Ray변수
+    private RaycastHit hit;
+    private int layerMask;
+    private int layerMask2;
+    public float distance = 3;
+    #endregion
+
     public enum State
     {
         Idle,
@@ -37,6 +73,7 @@ public class PlayerMove_HJH : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        
         hp = GetComponent<PlayerHp_HJH>();
         joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
         Transform[] allChildren = GetComponentsInChildren<Transform>();
@@ -54,8 +91,16 @@ public class PlayerMove_HJH : MonoBehaviour
         //am.SetInteger("Jump",jumpCount);
         firstJumpCount = jumpCount;
     }
-    void Start()
+    protected void Start()
     {
+        #region 현숙추가
+        //****LayerMask 지정
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
+
+        layerMask = 1 << 8;
+        layerMask2 = 1 << 9;
+        #endregion
         
     }
     public void ChangeState(State s)
@@ -78,7 +123,7 @@ public class PlayerMove_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         if (Player == true)
         {
             if (state == State.Idle)
@@ -169,7 +214,6 @@ public class PlayerMove_HJH : MonoBehaviour
 
         cc.Move(moveVec * Time.deltaTime);
 
-
     }
 
     void JumpCountReturn()
@@ -224,7 +268,24 @@ public class PlayerMove_HJH : MonoBehaviour
         {
             AButton();
         }
-        
+
+        #region 현숙추가
+        // 점프 발판
+        // 아래로 레이를 쐈을 때 
+        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
+        {
+            print(hit.transform.name);
+            IgnoreLayerFalse();
+        }
+
+        // 벽 점프d
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 1, layerMask2) && moveVec.x != 0)
+        {
+            Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
+            print(hit.transform.name);
+            moveVec = Vector3.zero;
+        }
+        #endregion
     }
 
     protected void JoyStickMove()
@@ -265,7 +326,7 @@ public class PlayerMove_HJH : MonoBehaviour
     }
     public virtual void DownJump()
     {
-
+        StartCoroutine(LayerOpenClose());
     }
 
 
@@ -273,6 +334,10 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         ChangeState(State.Jump);
         //더블 점프 버그있음 왜그런지는 모르겠음
+
+        //****
+        // 점프중이라면 True
+        IgnoreLayerTrue();
 
         if (jumpCount > 0)
         {
@@ -308,7 +373,7 @@ public class PlayerMove_HJH : MonoBehaviour
             JumpAttack();
         }
     }
-    
+
     public float dashRange = 2;
     public virtual void Dash()
     {
@@ -324,7 +389,7 @@ public class PlayerMove_HJH : MonoBehaviour
 
     public virtual void StopAttack()
     {
-      
+
     }
 
     public virtual void MoveAttack()
@@ -336,5 +401,5 @@ public class PlayerMove_HJH : MonoBehaviour
     {
 
     }
-    
+
 }
