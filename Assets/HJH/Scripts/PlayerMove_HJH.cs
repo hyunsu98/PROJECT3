@@ -19,7 +19,44 @@ public class PlayerMove_HJH : MonoBehaviour
     protected Animator am;
     public GameObject dashEffect;
     public bool Player = false;
+    public float upDown = 0;
     PlayerHp_HJH hp;
+
+    #region 현숙추가
+    //****레이어 충돌 변수
+    int playerLayer, groundLayer;
+    bool fallGround;
+
+    //****충돌무시(열림)
+    protected void IgnoreLayerTrue()
+    {
+        Debug.Log("점프되라");
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, true);
+        print(Physics.GetIgnoreLayerCollision(playerLayer, groundLayer));
+    }
+    //****충돌적용(닫힘)
+    protected void IgnoreLayerFalse()
+    {
+        Physics.IgnoreLayerCollision(playerLayer, groundLayer, false);
+    }
+
+    //****착지면에 떨어지는 키를 눌렀을때 0.2초간 레이어 충돌이 무시된 후 다시 적용
+    IEnumerator LayerOpenClose()
+    {
+        fallGround = true;
+        IgnoreLayerTrue();
+        yield return new WaitForSeconds(0.3f);
+        IgnoreLayerFalse();
+        fallGround = false;
+    }
+
+    //**** Ray변수
+    private RaycastHit hit;
+    private int layerMask;
+    private int layerMask2;
+    public float distance = 3;
+    #endregion
+
     public enum State
     {
         Idle,
@@ -28,7 +65,7 @@ public class PlayerMove_HJH : MonoBehaviour
         Dash,
         Attack,
         Attacked,
-
+        JumpAttack,
     }
     public State state = State.Idle;
     protected GameObject Weapon = null;
@@ -36,6 +73,7 @@ public class PlayerMove_HJH : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        
         hp = GetComponent<PlayerHp_HJH>();
         joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
         Transform[] allChildren = GetComponentsInChildren<Transform>();
@@ -53,20 +91,43 @@ public class PlayerMove_HJH : MonoBehaviour
         //am.SetInteger("Jump",jumpCount);
         firstJumpCount = jumpCount;
     }
-    void Start()
+    protected void Start()
     {
+        #region 현숙추가
+        //****LayerMask 지정
+        playerLayer = LayerMask.NameToLayer("Player");
+        groundLayer = LayerMask.NameToLayer("Ground");
+
+        layerMask = 1 << 8;
+        layerMask2 = 1 << 9;
+        #endregion
         
+    }
+    public void ChangeState(State s)
+    {
+        if (state == s) return;
+        state = s;
+        switch (s)
+        {
+            case State.Idle:
+                am.SetTrigger("Idle");
+                break;
+            case State.Run:
+                am.SetTrigger("Run");
+                break;
+
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
         if (Player == true)
         {
             if (state == State.Idle)
             {
-                am.SetTrigger("Idle");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -79,12 +140,11 @@ public class PlayerMove_HJH : MonoBehaviour
                 }
                 if (moveVec.x != 0)
                 {
-                    state = State.Run;
+                    ChangeState(State.Run);
                 }
             }
             else if (state == State.Run)
             {
-                am.SetTrigger("Run");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -97,7 +157,7 @@ public class PlayerMove_HJH : MonoBehaviour
                 }
                 if (moveVec.x == 0)
                 {
-                    state = State.Idle;
+                    ChangeState(State.Idle);
                 }
             }
             else if (state == State.Jump)
@@ -116,14 +176,14 @@ public class PlayerMove_HJH : MonoBehaviour
                 {
                     moveVec.y += gravity * Time.deltaTime;
                     jumpCheckStart = true;
-
                 }
                 if (jumpCheckStart == true && cc.isGrounded)
                 {
+                    moveVec.y = 0;
                     am.SetTrigger("JumpEnd");
                     jumpCheckStart = false;
                     Invoke("JumpCountReturn", 3f);
-                    state = State.Idle;
+                    ChangeState(State.Idle);
                 }
             }
             else if (state == State.Dash)
@@ -154,7 +214,6 @@ public class PlayerMove_HJH : MonoBehaviour
 
         cc.Move(moveVec * Time.deltaTime);
 
-
     }
 
     void JumpCountReturn()
@@ -166,20 +225,20 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         am.SetTrigger("Damage");
         yield return new WaitForSeconds(stunTime / 150);
-        am.SetTrigger("Idle");
         if(cc.isGrounded == true)
         {
             state = State.Jump;
         }
         else
         {
-            state = State.Idle;
+            ChangeState(State.Idle);
         }
     }
     protected void KeyBoardMove()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        upDown = z;
         moveVec.x = x * speed;
         if (moveVec.x < 0)
         {
@@ -197,21 +256,43 @@ public class PlayerMove_HJH : MonoBehaviour
             moveVec.y += gravity * Time.deltaTime;
            
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            Jump();
+            JButton();
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.K))
         {
-            Dash();
+            SButton();
         }
-        
+        else if (Input.GetKeyDown(KeyCode.J))
+        {
+            AButton();
+        }
+
+        #region 현숙추가
+        // 점프 발판
+        // 아래로 레이를 쐈을 때 
+        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
+        {
+            print(hit.transform.name);
+            IgnoreLayerFalse();
+        }
+
+        // 벽 점프d
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 1, layerMask2) && moveVec.x != 0)
+        {
+            Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
+            print(hit.transform.name);
+            moveVec = Vector3.zero;
+        }
+        #endregion
     }
 
     protected void JoyStickMove()
     {
         float x = joy.Horizontal;
         float z = joy.Vertical;
+        upDown = z;
         moveVec.x = x * speed;
         if (moveVec.x < 0)
         {
@@ -231,16 +312,35 @@ public class PlayerMove_HJH : MonoBehaviour
         
     }
 
+    public void JButton()
+    {
+        if(upDown < 0)
+        {
+            DownJump();
+        }
+        else
+        {
+            Jump();
+        }
+
+    }
+    public virtual void DownJump()
+    {
+        StartCoroutine(LayerOpenClose());
+    }
 
 
     public virtual void Jump()
     {
-        state = State.Jump;
+        ChangeState(State.Jump);
         //더블 점프 버그있음 왜그런지는 모르겠음
+
+        //****
+        // 점프중이라면 True
+        IgnoreLayerTrue();
 
         if (jumpCount > 0)
         {
-            Debug.Log("Jump");
             moveVec.y = jumpPower;
             am.SetTrigger("Jump");
         }
@@ -248,7 +348,7 @@ public class PlayerMove_HJH : MonoBehaviour
     }
     public void SButton()
     {
-        if(state != State.Idle)
+        if (state != State.Idle)
         {
             Dash();
         }
@@ -262,10 +362,18 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         if (state == State.Idle)
         {
-            Attack1();
+            StopAttack();
+        }
+        else if (state == State.Run)
+        {
+            MoveAttack();
+        }
+        else if (state == State.Jump)
+        {
+            JumpAttack();
         }
     }
-    
+
     public float dashRange = 2;
     public virtual void Dash()
     {
@@ -279,14 +387,19 @@ public class PlayerMove_HJH : MonoBehaviour
 
     }
 
-    public virtual void Attack1()
-    {
-      
-    }
-
-    public virtual void Attack2()
+    public virtual void StopAttack()
     {
 
     }
-    
+
+    public virtual void MoveAttack()
+    {
+
+    }
+
+    public virtual void JumpAttack()
+    {
+
+    }
+
 }
