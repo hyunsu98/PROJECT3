@@ -278,7 +278,7 @@ public class PlayerMove_HJH : MonoBehaviour
             IgnoreLayerFalse();
         }
 
-        // 벽 점프d
+        // 벽 점프
         if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 1, layerMask2) && moveVec.x != 0)
         {
             Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
@@ -286,6 +286,7 @@ public class PlayerMove_HJH : MonoBehaviour
             moveVec = Vector3.zero;
         }
         #endregion
+
     }
 
     protected void JoyStickMove()
