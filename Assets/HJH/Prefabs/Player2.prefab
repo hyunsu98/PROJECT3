@@ -443,6 +443,7 @@ GameObject:
   - component: {fileID: 2524652284191957906}
   - component: {fileID: 2524652284191957905}
   - component: {fileID: 5728962312677335604}
+  - component: {fileID: -3841554685536804767}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -536,10 +537,13 @@ MonoBehaviour:
   jumpPower: 5
   gravity: -9.8
   speed: 0
+  moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2
   keyboardMode: 0
   dashEffect: {fileID: 0}
   Player: 0
+  upDown: 0
+  distance: 3
   state: 0
   dashRange: 2
   weapon: 
@@ -555,6 +559,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b72a290648e3b340a9eeae02c4db949, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3841554685536804767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525578878964693710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5909e78e5892f214d9dcafa78af95aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  respawnPoint: {fileID: 0}
 --- !u!1 &2525588061981245610
 GameObject:
   m_ObjectHideFlags: 0

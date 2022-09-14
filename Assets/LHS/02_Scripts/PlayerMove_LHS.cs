@@ -103,6 +103,7 @@ public class PlayerMove_LHS : MonoBehaviour
     {
         #region 현숙추가
         //****Alpha1 누르면 떨어지기 
+        // DownJump()
         if (Input.GetKeyDown(KeyCode.S))
         {
             print("alpha1 누름");
@@ -267,6 +268,7 @@ public class PlayerMove_LHS : MonoBehaviour
             IgnoreLayerFalse();
         }
 
+        // 벽 점프
         if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 1, layerMask2) && moveVec.x != 0)
         {
             Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
