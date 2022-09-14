@@ -19,6 +19,7 @@ public class PlayerMove_HJH : MonoBehaviour
     protected Animator am;
     public GameObject dashEffect;
     public bool Player = false;
+    public float upDown = 0;
     PlayerHp_HJH hp;
     public enum State
     {
@@ -28,7 +29,7 @@ public class PlayerMove_HJH : MonoBehaviour
         Dash,
         Attack,
         Attacked,
-
+        JumpAttack,
     }
     public State state = State.Idle;
     protected GameObject Weapon = null;
@@ -57,6 +58,22 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         
     }
+    public void ChangeState(State s)
+    {
+        if (state == s) return;
+        state = s;
+        switch (s)
+        {
+            case State.Idle:
+                am.SetTrigger("Idle");
+                break;
+            case State.Run:
+                am.SetTrigger("Run");
+                break;
+
+        }
+
+    }
 
     // Update is called once per frame
     void Update()
@@ -66,7 +83,6 @@ public class PlayerMove_HJH : MonoBehaviour
         {
             if (state == State.Idle)
             {
-                am.SetTrigger("Idle");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -79,12 +95,11 @@ public class PlayerMove_HJH : MonoBehaviour
                 }
                 if (moveVec.x != 0)
                 {
-                    state = State.Run;
+                    ChangeState(State.Run);
                 }
             }
             else if (state == State.Run)
             {
-                am.SetTrigger("Run");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -97,7 +112,7 @@ public class PlayerMove_HJH : MonoBehaviour
                 }
                 if (moveVec.x == 0)
                 {
-                    state = State.Idle;
+                    ChangeState(State.Idle);
                 }
             }
             else if (state == State.Jump)
@@ -116,14 +131,14 @@ public class PlayerMove_HJH : MonoBehaviour
                 {
                     moveVec.y += gravity * Time.deltaTime;
                     jumpCheckStart = true;
-
                 }
                 if (jumpCheckStart == true && cc.isGrounded)
                 {
+                    moveVec.y = 0;
                     am.SetTrigger("JumpEnd");
                     jumpCheckStart = false;
                     Invoke("JumpCountReturn", 3f);
-                    state = State.Idle;
+                    ChangeState(State.Idle);
                 }
             }
             else if (state == State.Dash)
@@ -166,20 +181,20 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         am.SetTrigger("Damage");
         yield return new WaitForSeconds(stunTime / 150);
-        am.SetTrigger("Idle");
         if(cc.isGrounded == true)
         {
             state = State.Jump;
         }
         else
         {
-            state = State.Idle;
+            ChangeState(State.Idle);
         }
     }
     protected void KeyBoardMove()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        upDown = z;
         moveVec.x = x * speed;
         if (moveVec.x < 0)
         {
@@ -197,13 +212,17 @@ public class PlayerMove_HJH : MonoBehaviour
             moveVec.y += gravity * Time.deltaTime;
            
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.L))
         {
-            Jump();
+            JButton();
         }
-        else if (Input.GetKeyDown(KeyCode.Q))
+        else if (Input.GetKeyDown(KeyCode.K))
         {
-            Dash();
+            SButton();
+        }
+        else if (Input.GetKeyDown(KeyCode.J))
+        {
+            AButton();
         }
         
     }
@@ -212,6 +231,7 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         float x = joy.Horizontal;
         float z = joy.Vertical;
+        upDown = z;
         moveVec.x = x * speed;
         if (moveVec.x < 0)
         {
@@ -231,16 +251,31 @@ public class PlayerMove_HJH : MonoBehaviour
         
     }
 
+    public void JButton()
+    {
+        if(upDown < 0)
+        {
+            DownJump();
+        }
+        else
+        {
+            Jump();
+        }
+
+    }
+    public virtual void DownJump()
+    {
+
+    }
 
 
     public virtual void Jump()
     {
-        state = State.Jump;
+        ChangeState(State.Jump);
         //더블 점프 버그있음 왜그런지는 모르겠음
 
         if (jumpCount > 0)
         {
-            Debug.Log("Jump");
             moveVec.y = jumpPower;
             am.SetTrigger("Jump");
         }
@@ -262,7 +297,15 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         if (state == State.Idle)
         {
-            Attack1();
+            StopAttack();
+        }
+        else if (state == State.Run)
+        {
+            MoveAttack();
+        }
+        else if (state == State.Jump)
+        {
+            JumpAttack();
         }
     }
     
@@ -279,12 +322,17 @@ public class PlayerMove_HJH : MonoBehaviour
 
     }
 
-    public virtual void Attack1()
+    public virtual void StopAttack()
     {
       
     }
 
-    public virtual void Attack2()
+    public virtual void MoveAttack()
+    {
+
+    }
+
+    public virtual void JumpAttack()
     {
 
     }

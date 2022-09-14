@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerWarrior_HJH : PlayerMove_HJH
 {
-
+    public GameObject skillEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,6 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         {
             if (state == State.Idle)
             {
-                am.SetTrigger("Idle");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -31,12 +30,11 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                 }
                 if (moveVec.x != 0)
                 {
-                    state = State.Run;
+                    ChangeState(State.Run);
                 }
             }
             else if (state == State.Run)
             {
-                am.SetTrigger("Run");
                 if (keyboardMode == true)
                 {
                     KeyBoardMove();
@@ -49,7 +47,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                 }
                 if (moveVec.x == 0)
                 {
-                    state = State.Idle;
+                    ChangeState(State.Idle);
                 }
             }
             else if (state == State.Jump)
@@ -75,7 +73,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                     am.SetTrigger("JumpEnd");
                     jumpCheckStart = false;
                     Invoke("JumpCountReturn", 1f);
-                    state = State.Idle;
+                    ChangeState(State.Idle);
                 }
             }
             else if (state == State.Dash)
@@ -109,9 +107,22 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public override void Skill1()
     {
-        
+        am.SetTrigger("Skill");
+
+
     }
-    public override void Attack1()
+    public void Skill()
+    {
+        GameObject skill = Instantiate(skillEffect, gameObject.transform.position, Quaternion.identity);
+        Destroy(skill, 1f);
+        skill.GetComponent<Weapon_HJH>().Attack = true;
+        state = State.Attack;
+    }
+    public void SkillOver()
+    {
+        state = State.Idle;
+    }
+    public override void StopAttack()
     {
         am.SetTrigger("Attack");
         Weapon.GetComponent<Weapon_HJH>().Attack = true;
@@ -134,7 +145,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     IEnumerator DashEffect()
     {
-        if (transform.eulerAngles.y > 0)
+        if (transform.rotation.y > 0)
         {
             cc.Move(new Vector3(dashRange, 0, 0));
         }
@@ -147,5 +158,10 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         yield return new WaitForSeconds(0.1f);
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         Weapon.SetActive(true);
+    }
+    public override void JumpAttack()
+    {
+        am.SetTrigger("JumpAttack");
+        Weapon.GetComponent<Weapon_HJH>().Attack = true;
     }
 }
