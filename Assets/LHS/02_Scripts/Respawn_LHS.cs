@@ -8,6 +8,7 @@ public class Respawn_LHS : MonoBehaviour
 
     CharacterController cc;
 
+    public int RespawnCount = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +29,22 @@ public class Respawn_LHS : MonoBehaviour
         {
             cc.enabled = false;
             transform.position = respawnPoint.position;
-            cc.enabled = true;
+
+            StartCoroutine(PlayerRespawn());
+
+
         }
+    }
+
+    IEnumerator PlayerRespawn()
+    {
+        cc.enabled = true;
+        if (RespawnCount > 0)
+        {
+            print("Á×¾î¾ßÁö");
+        }
+        RespawnCount--;
+        yield return new WaitForSeconds(0.3f);
+        
     }
 }

@@ -278,14 +278,16 @@ public class PlayerMove_HJH : MonoBehaviour
             IgnoreLayerFalse();
         }
 
-        // 벽 점프d
-        if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 1, layerMask2) && moveVec.x != 0)
+        //벽 점프
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, out hit, 0.8f, layerMask2) && moveVec.x != 0)
         {
-            Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
+            Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 0.8f);
             print(hit.transform.name);
             moveVec = Vector3.zero;
         }
+
         #endregion
+
     }
 
     protected void JoyStickMove()
