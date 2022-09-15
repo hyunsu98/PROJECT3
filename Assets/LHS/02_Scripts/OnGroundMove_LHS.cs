@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class OnGroundMove_LHS : MonoBehaviour
 {
+    CharacterController cc;
+
     private void Start()
     {
-        
+        cc = GetComponent<CharacterController>();
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -15,6 +17,7 @@ public class OnGroundMove_LHS : MonoBehaviour
         {
             Debug.Log("´ê¾Ò´Ù");
             this.transform.parent = hit.transform;
+            
 
         }
     }
