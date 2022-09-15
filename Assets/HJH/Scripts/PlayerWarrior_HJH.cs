@@ -5,15 +5,12 @@ using UnityEngine;
 public class PlayerWarrior_HJH : PlayerMove_HJH
 {
     public GameObject skillEffect;
-    // Start is called before the first frame update
-    protected void Start()
-    {
-        base.Start();
-    }
+    // Start is called before the first frame updatepublic float upDown = 0;
 
     // Update is called once per frame
     void Update()
     {
+
         if (Player == true)
         {
             if (state == State.Idle)
@@ -73,7 +70,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                     am.SetTrigger("JumpEnd");
                     jumpCheckStart = false;
                     Invoke("JumpCountReturn", 1f);
-                    ChangeState(State.Idle);
+                    state = State.Idle;
                 }
             }
             else if (state == State.Dash)
@@ -88,6 +85,10 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
             {
 
             }
+            else if(state == State.JumpAttack)
+            {
+                //moveVec.y = 0;
+            }
 
         }
         else
@@ -97,7 +98,14 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                 moveVec.y += gravity * Time.deltaTime;
             }
         }
-
+        if(transform.position.z != 0)
+        {
+            cc.Move(new Vector3(0, 0, -transform.position.z));
+        }
+        else
+        {
+            moveVec.z = 0;
+        }
         cc.Move(moveVec * Time.deltaTime);
 
     }
@@ -120,7 +128,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public void SkillOver()
     {
-        state = State.Idle;
+        ChangeState(State.Idle);
     }
     public override void StopAttack()
     {
@@ -131,7 +139,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public void AttackOver()
     {
-        state = State.Idle;
+        ChangeState(State.Idle);
         Weapon.GetComponent<Weapon_HJH>().Attack = false;
     }
     public override void Dash()
@@ -164,4 +172,10 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         am.SetTrigger("JumpAttack");
         Weapon.GetComponent<Weapon_HJH>().Attack = true;
     }
+
+    public void JumpAttackOver()
+    {
+        Weapon.GetComponent<Weapon_HJH>().Attack = false;
+    }
+
 }

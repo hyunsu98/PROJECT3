@@ -45,7 +45,7 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         fallGround = true;
         IgnoreLayerTrue();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(1f);
         IgnoreLayerFalse();
         fallGround = false;
     }
@@ -115,7 +115,9 @@ public class PlayerMove_HJH : MonoBehaviour
             case State.Run:
                 am.SetTrigger("Run");
                 break;
-
+            case State.Jump:
+                am.SetTrigger("Jump");
+                break;
         }
 
     }
@@ -326,13 +328,14 @@ public class PlayerMove_HJH : MonoBehaviour
     }
     public virtual void DownJump()
     {
+        moveVec.y = 0;
         StartCoroutine(LayerOpenClose());
     }
 
 
     public virtual void Jump()
     {
-        ChangeState(State.Jump);
+
         //더블 점프 버그있음 왜그런지는 모르겠음
 
         //****
@@ -342,7 +345,7 @@ public class PlayerMove_HJH : MonoBehaviour
         if (jumpCount > 0)
         {
             moveVec.y = jumpPower;
-            am.SetTrigger("Jump");
+            ChangeState(State.Jump);
         }
         jumpCount--;
     }
