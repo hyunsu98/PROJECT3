@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerWarrior_HJH : PlayerMove_HJH
+public class PlayerDwarf_HJH : PlayerMove_HJH
 {
     public GameObject skillEffect;
-    // Start is called before the first frame updatepublic float upDown = 0;
-
     // Update is called once per frame
     void Update()
     {
-
         if (Player == true)
         {
             if (state == State.Idle)
@@ -65,6 +62,10 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                     jumpCheckStart = true;
 
                 }
+                else
+                {
+                    moveVec.y = 0;
+                }
                 if (jumpCheckStart == true && cc.isGrounded)
                 {
                     am.SetTrigger("JumpEnd");
@@ -85,7 +86,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
             {
                 StartCoroutine(Stun(hp.Hp));
             }
-            else if(state == State.JumpAttack)
+            else if (state == State.JumpAttack)
             {
                 //moveVec.y = 0;
             }
@@ -98,7 +99,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                 moveVec.y += gravity * Time.deltaTime;
             }
         }
-        if(transform.position.z != 0)
+        if (transform.position.z != 0)
         {
             cc.Move(new Vector3(0, 0, -transform.position.z));
         }
@@ -107,75 +108,45 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
             moveVec.z = 0;
         }
         cc.Move(moveVec * Time.deltaTime);
-
-    }
-    void JumpCountReturn()
-    {
-        jumpCount = firstJumpCount;
     }
     public override void Skill1()
     {
         am.SetTrigger("Skill");
 
-
     }
-    public void Skill()
+    public void SkillEffect()
     {
-        GameObject skill = Instantiate(skillEffect, gameObject.transform.position, Quaternion.identity);
+        GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0,1,0), Quaternion.identity);
         Destroy(skill, 1f);
-        skill.GetComponent<Weapon_HJH>().Attack = true;
+        skill.GetComponent<Weapon2_HJH>().Attack = true;
         state = State.Attack;
     }
-    public void SkillOver()
+    void JumpCountReturn()
     {
-        ChangeState(State.Idle);
-    }
-    public override void StopAttack()
-    {
-        am.SetTrigger("Attack");
-        Weapon.GetComponent<Weapon_HJH>().Attack = true;
-        state = State.Attack;
-
-    }
-    public void AttackOver()
-    {
-        ChangeState(State.Idle);
-        Weapon.GetComponent<Weapon_HJH>().Attack = false;
-    }
-    public override void Dash()
-    {
-        Instantiate(dashEffect, transform.position, Quaternion.identity);
-        StartCoroutine(DashEffect());
+        jumpCount = firstJumpCount;
     }
     public override void Jump()
     {
         base.Jump();
     }
-    IEnumerator DashEffect()
-    {
-        if (transform.rotation.y > 0)
-        {
-            cc.Move(new Vector3(dashRange, 0, 0));
-        }
-        else
-        {
-            cc.Move(new Vector3(-dashRange, 0, 0));
-        }
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        Weapon.SetActive(false);
-        yield return new WaitForSeconds(0.1f);
-        gameObject.transform.GetChild(0).gameObject.SetActive(true);
-        Weapon.SetActive(true);
-    }
     public override void JumpAttack()
     {
         am.SetTrigger("JumpAttack");
-        Weapon.GetComponent<Weapon_HJH>().Attack = true;
+        Weapon.GetComponent<Weapon2_HJH>().Attack = true;
     }
-
     public void JumpAttackOver()
     {
-        Weapon.GetComponent<Weapon_HJH>().Attack = false;
+        Weapon.GetComponent<Weapon2_HJH>().Attack = false;
     }
-
+    public override void StopAttack()
+    {
+        am.SetTrigger("Attack");
+        Weapon.GetComponent<Weapon2_HJH>().Attack = true;
+        state = State.Attack;
+    }
+    public void AttackOver()
+    {
+        state = State.Idle;
+        Weapon.GetComponent<Weapon2_HJH>().Attack = false;
+    }
 }

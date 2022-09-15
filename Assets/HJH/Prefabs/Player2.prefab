@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 2475399503137562064}
   - component: {fileID: 2524652284191957907}
   - component: {fileID: 2524652284191957906}
-  - component: {fileID: 2524652284191957905}
+  - component: {fileID: 3327749204065425185}
   - component: {fileID: 5728962312677335604}
   - component: {fileID: -3841554685536804767}
   m_Layer: 0
@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
---- !u!114 &2524652284191957905
+--- !u!114 &3327749204065425185
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -531,12 +531,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2525578878964693710}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be24ccc78371cef45856e70a7745c677, type: 3}
+  m_Script: {fileID: 11500000, guid: c08a5a90c0da4664c842eb6fd01294ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 5
+  jumpPower: 8
   gravity: -9.8
-  speed: 0
+  speed: 3
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2
   keyboardMode: 0
@@ -546,7 +546,8 @@ MonoBehaviour:
   distance: 3
   state: 0
   dashRange: 2
-  weapon: 
+  weapon: Axe Orange
+  skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
 --- !u!114 &5728962312677335604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,6 +573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnPoint: {fileID: 0}
+  RespawnCount: 3
 --- !u!1 &2525588061981245610
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,6 +649,8 @@ GameObject:
   - component: {fileID: 2529060498681417122}
   - component: {fileID: 2557777448694968820}
   - component: {fileID: 2547563192216966316}
+  - component: {fileID: 7859791111674664612}
+  - component: {fileID: 3518033097302489164}
   m_Layer: 0
   m_Name: Axe Orange
   m_TagString: Untagged
@@ -719,6 +723,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7859791111674664612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525607613589995902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e700c3a4d41245041b538a4e61b9f2c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: 0
+  Damage: 15
+--- !u!65 &3518033097302489164
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525607613589995902}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5857576, y: 0.119986005, z: 0.9412976}
+  m_Center: {x: 0.00000020592455, y: -0.000043490112, z: -0.16049193}
 --- !u!1 &2525618970221178614
 GameObject:
   m_ObjectHideFlags: 0

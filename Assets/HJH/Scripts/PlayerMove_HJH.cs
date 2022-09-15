@@ -20,7 +20,7 @@ public class PlayerMove_HJH : MonoBehaviour
     public GameObject dashEffect;
     public bool Player = false;
     public float upDown = 0;
-    PlayerHp_HJH hp;
+    protected PlayerHp_HJH hp;
 
     #region 현숙추가
     //****레이어 충돌 변수
@@ -30,9 +30,7 @@ public class PlayerMove_HJH : MonoBehaviour
     //****충돌무시(열림)
     protected void IgnoreLayerTrue()
     {
-        Debug.Log("점프되라");
         Physics.IgnoreLayerCollision(playerLayer, groundLayer, true);
-        print(Physics.GetIgnoreLayerCollision(playerLayer, groundLayer));
     }
     //****충돌적용(닫힘)
     protected void IgnoreLayerFalse()
@@ -198,7 +196,7 @@ public class PlayerMove_HJH : MonoBehaviour
             }
             else if (state == State.Attacked)
             {
-                StartCoroutine(Stun(hp.Hp));
+                
             }
 
         }
@@ -223,7 +221,7 @@ public class PlayerMove_HJH : MonoBehaviour
         jumpCount = firstJumpCount;
     }
 
-    IEnumerator Stun(int stunTime)
+    public IEnumerator Stun(int stunTime)
     {
         am.SetTrigger("Damage");
         yield return new WaitForSeconds(stunTime / 150);
@@ -348,8 +346,8 @@ public class PlayerMove_HJH : MonoBehaviour
         {
             moveVec.y = jumpPower;
             ChangeState(State.Jump);
+            jumpCount--;
         }
-        jumpCount--;
     }
     public void SButton()
     {

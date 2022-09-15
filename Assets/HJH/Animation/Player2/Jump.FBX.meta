@@ -582,7 +582,7 @@ ModelImporter:
       in configuration does not match rotation in animation file:\n\t'RigSpine1'
       : rotation error = 0.505482 deg\n\t'RigSpine4' : rotation error = 3.203683
       deg\n\t'RigNeck1' : rotation error = 3.341381 deg\n\t'RigNeck2' : rotation
-      error = 14.687592 deg\n"
+      error = 14.687593 deg\n"
     animationImportErrors: 
     animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
       might lower retargeting quality:\nNote: Activate translation DOF on avatar
@@ -618,9 +618,9 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0

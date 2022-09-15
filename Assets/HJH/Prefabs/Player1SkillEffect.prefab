@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1596098913886443875}
   - component: {fileID: 735270176993029100}
-  - component: {fileID: 4019752224210128909}
+  - component: {fileID: -3203651054615994354}
   m_Layer: 0
   m_Name: Player1SkillEffect
   m_TagString: Untagged
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.1895728, y: 1, z: 1.8719678}
   m_Center: {x: 0.116374135, y: 0, z: -0.25944185}
---- !u!114 &4019752224210128909
+--- !u!114 &-3203651054615994354
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,11 +56,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1597789563622032027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98687473bcd7a94408973078dc838cc6, type: 3}
+  m_Script: {fileID: 11500000, guid: e700c3a4d41245041b538a4e61b9f2c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Attack: 0
-  Damage: 50
+  Damage: 30
 --- !u!1 &1598199052305843675
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,7 +347,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 3
       minScalar: 1.5
       maxCurve:
         serializedVersion: 2
@@ -5229,7 +5229,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 3
       minScalar: 1.5
       maxCurve:
         serializedVersion: 2
