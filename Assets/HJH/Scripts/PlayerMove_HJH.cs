@@ -281,11 +281,13 @@ public class PlayerMove_HJH : MonoBehaviour
         }
 
         //º® Á¡ÇÁ
-        if (Physics.Raycast(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, out hit, 0.8f, layerMask2) && moveVec.x != 0)
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, out hit, 0.7f, layerMask2) && moveVec.x != 0)
         {
-            Debug.DrawRay(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, Color.green, 0.8f);
+            Debug.DrawRay(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, Color.green, 0.7f);
             print(hit.transform.name);
             moveVec = Vector3.zero;
+
+            am.SetTrigger("WallJump 0");
         }
 
         #endregion
