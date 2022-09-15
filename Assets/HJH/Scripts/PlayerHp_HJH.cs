@@ -6,7 +6,7 @@ public class PlayerHp_HJH : MonoBehaviour
 {
     ImpactReceiver_HJH impact;
     [SerializeField]
-    int hp = 0;
+    public int hp = 0;
     Animator am;
     PlayerMove_HJH pm;
     public int Hp
