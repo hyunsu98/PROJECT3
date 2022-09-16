@@ -274,6 +274,8 @@ public class PlayerMove_LHS : MonoBehaviour
             Debug.DrawRay(this.transform.position + new Vector3(0, 1, 0), this.transform.forward, Color.green, 1);
             print(hit.transform.name);
             moveVec = Vector3.zero;
+
+            am.SetBool("WallJump", true);
         }
         #endregion
 
