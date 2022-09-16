@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 // 리스폰 되면 
 // 일정 거리까지 움직이고 사라지는 발판
 // (오류)
@@ -9,7 +8,7 @@ public class Respawn_LHS : MonoBehaviour
 {
     // 리스폰 카운트
     public int RespawnCount = 3;
-    
+
     // 리스폰 지점
     [SerializeField] Transform respawnPoint;
 
@@ -27,7 +26,7 @@ public class Respawn_LHS : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         playerHp = GetComponent<PlayerHp_HJH>();
-        
+
         // 자식의 gameObject 가져오기
         playerObj = gameObject.transform.GetChild(0).gameObject;
         playerObj2 = gameObject.transform.GetChild(3).gameObject;
@@ -56,7 +55,7 @@ public class Respawn_LHS : MonoBehaviour
 
             // 움직임 금지
             cc.enabled = false;
-            
+
             // 리스폰 지점으로 이동
             transform.position = respawnPoint.position;
 
@@ -71,7 +70,7 @@ public class Respawn_LHS : MonoBehaviour
         playerHp.hp = 0;
         RespawnCount--;
 
-        yield return new WaitForSeconds(1f); 
+        yield return new WaitForSeconds(1f);
 
         // 다시 켜지기
         playerObj.SetActive(true);
