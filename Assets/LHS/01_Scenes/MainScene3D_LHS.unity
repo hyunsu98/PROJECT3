@@ -29765,6 +29765,10 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5128277309780116227, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cd340fe3a4032dd4893aa4ea88705a2b, type: 2}
+    - target: {fileID: 5128277309780116227, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: m_WarningMessage
       value: "\nBinding warning: Some generic clip(s) animate transforms that are
         already bound by a Humanoid avatar. These transforms can only be changed
