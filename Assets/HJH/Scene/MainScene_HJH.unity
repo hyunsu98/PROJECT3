@@ -1035,6 +1035,10 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 3327749204065425185, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: dashEffect
+      value: 
+      objectReference: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
+    - target: {fileID: 3327749204065425185, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: keyboardMode
       value: 1
       objectReference: {fileID: 0}

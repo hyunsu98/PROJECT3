@@ -114,6 +114,10 @@ public class PlayerDwarf_HJH : PlayerMove_HJH
         am.SetTrigger("Skill");
 
     }
+    public void SkillOver()
+    {
+        ChangeState(State.Idle);
+    }
     public void SkillEffect()
     {
         GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0,1,0), Quaternion.identity);
@@ -124,6 +128,27 @@ public class PlayerDwarf_HJH : PlayerMove_HJH
     void JumpCountReturn()
     {
         jumpCount = firstJumpCount;
+    }
+    public override void Dash()
+    {
+        Instantiate(dashEffect, transform.position, Quaternion.identity);
+        StartCoroutine(DashEffect());
+    }
+    IEnumerator DashEffect()
+    {
+        if (transform.rotation.y > 0)
+        {
+            cc.Move(new Vector3(dashRange, 0, 0));
+        }
+        else
+        {
+            cc.Move(new Vector3(-dashRange, 0, 0));
+        }
+        gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        Weapon.SetActive(false);
+        yield return new WaitForSeconds(0.1f);
+        gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        Weapon.SetActive(true);
     }
     public override void Jump()
     {
