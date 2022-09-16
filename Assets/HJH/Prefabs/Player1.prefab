@@ -110,14 +110,14 @@ MonoBehaviour:
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2
   keyboardMode: 0
-  dashEffect: {fileID: 0}
+  dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
   Player: 1
   upDown: 0
   distance: 3
   state: 0
   dashRange: 2
   weapon: Sword
-  skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
+  skillEffect: {fileID: 1806872715020212, guid: 69eec05abe8b0f54286677e6bed19044, type: 3}
 --- !u!114 &5329424675700912626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909e78e5892f214d9dcafa78af95aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
   RespawnCount: 3
+  respawnPoint: {fileID: 0}
 --- !u!1 &5078454442857116849
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attack: 0
   Damage: 10
+  skillSpeed: 2
 --- !u!95 &5128430259218980873
 Animator:
   serializedVersion: 4
