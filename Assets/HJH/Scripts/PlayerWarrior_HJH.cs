@@ -121,8 +121,9 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public void Skill()
     {
-        GameObject skill = Instantiate(skillEffect, gameObject.transform.position, Quaternion.identity);
-        Destroy(skill, 1f);
+        GameObject skill = Instantiate(skillEffect);
+        skill.transform.position = gameObject.transform.position + new Vector3(0,1,0);
+        Destroy(skill, 5f);
         skill.GetComponent<Weapon_HJH>().Attack = true;
         state = State.Attack;
     }
