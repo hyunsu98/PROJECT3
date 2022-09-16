@@ -739,7 +739,7 @@ PrefabInstance:
     - target: {fileID: -3841554685536804767, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1585145977}
     - target: {fileID: 2475399503137562064, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_Controller
       value: 
@@ -7429,7 +7429,7 @@ PrefabInstance:
     - target: {fileID: -3841554685536804767, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1585145977}
     - target: {fileID: 2475399503137562064, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_Controller
       value: 
@@ -10930,7 +10930,7 @@ PrefabInstance:
     - target: {fileID: -3841554685536804767, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: respawnPoint
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1585145977}
     - target: {fileID: 2475399503137562064, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_Controller
       value: 
