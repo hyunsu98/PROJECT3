@@ -10,24 +10,19 @@ public class LobbyManager_LHS : MonoBehaviour
     public Button butQuickJoin;
     //방 입장 Button
     public Button btnJoin;
-    //방 만들기
-    public Button btnCreate;
 
-    //방 제목 InputField
+    //***방 제목 InputField
     public InputField inputRoomName;
-    //비밀 방 InputField
+    //***비밀 방 InputField
     public InputField inputPassword;
-    //비밀 방 Toggle
+    //***비밀 방 Toggle
     public Toggle PassToggle;
-    // 인원 수
+    //***인원 수
     public Toggle numChoice1;
-    //방 생성 Button
+    //***방 생성 Button
     public Button roomCreate;
-    //취소 Button
-    public Button roomQuit;
 
     //방의 정보들   
-    
     //룸 리스트 Content
     public Transform trListContent;
 
@@ -62,6 +57,7 @@ public class LobbyManager_LHS : MonoBehaviour
         }
     }
 
+    // 선택 시 패스워드 작성할 수 있게
     public void OnPassToggle(bool isOn)
     {
         if (isOn)
@@ -71,10 +67,17 @@ public class LobbyManager_LHS : MonoBehaviour
         else
         {
             inputPassword.interactable = false;
-            // 텍스트 삭제
+            // +텍스트 삭제
             
         }
     }
+
+    //접속 버튼 눌렀을때 씬 전환 -> 네트워크 시 변경
+    public void GameLobbySceneChange()
+    {
+        SceneManager.LoadScene("GameLobbyScene_LHS");
+    }
+
 
     void Update()
     {

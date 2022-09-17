@@ -26,6 +26,7 @@ public class RoomCreate_LHS : MonoBehaviour
 
     private void Update()
     {
+        // 애니메이션이 끝나면 팝업창 닫기
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("close"))
         {
             if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
