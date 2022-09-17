@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ConnectionManager_LHS : MonoBehaviour
 {
@@ -12,7 +12,6 @@ public class ConnectionManager_LHS : MonoBehaviour
     //접속 Button
     public Button btnConnect;
 
-    // Start is called before the first frame update
     void Start()
     {
         // 닉네임(InputField)이 변경될때 호출되는 함수 등록
@@ -21,17 +20,18 @@ public class ConnectionManager_LHS : MonoBehaviour
         inputNickName.onSubmit.AddListener(OnSubmit);
     }
 
-    // Update is called once per frame
     void Update()
     {
         
     }
 
+    //접속 버튼 눌렀을때 씬 전환 -> 네트워크 시 변경
     public void LobbySceneChange()
     {
         SceneManager.LoadScene("LobbyScene_LHS");
     }
 
+    // Quit 클릭 시 게임 나가기
     public void Quit()
     {
         Application.Quit();
@@ -48,13 +48,14 @@ public class ConnectionManager_LHS : MonoBehaviour
         print("OnValueChanged : " + s);
     }
 
+    //*** 네트워크 시 변경
     public void OnSubmit(string s)
     {
         //만약에 s의 길이가 0보다 크다면
         if (s.Length > 0)
         {
-            //접속 하자!
-            LobbySceneChange();
+            //접속 하자! 
+            // OnClickConnect();
         }
         print("OnSubmit : " + s);
     }
