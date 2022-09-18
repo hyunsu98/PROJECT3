@@ -18,8 +18,17 @@ public class Weapon_HJH : MonoBehaviour
     {
         if(this.name.Contains("Player1SkillEffect"))
         {
-            transform.position += Vector3.right * Time.deltaTime * skillSpeed;
-            gameObject.GetComponent<Renderer>().sortingOrder = 50;
+            if(GameObject.Find("Player1").transform.eulerAngles.y > 0)
+            {
+                transform.position += Vector3.right * Time.deltaTime * skillSpeed;
+                gameObject.GetComponent<Renderer>().sortingOrder = 50;
+            }
+            else
+            {
+                Debug.Log("??");
+                transform.position += Vector3.left * Time.deltaTime * skillSpeed;
+                gameObject.GetComponent<Renderer>().sortingOrder = 50;
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
