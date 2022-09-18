@@ -25,18 +25,48 @@ public class PlayerMove_HJH : MonoBehaviour
 
     #region 현숙추가
     //****레이어 충돌 변수
-    int playerLayer, groundLayer;
+    int playerLayer1, playerLayer2, playerLayer3, playerLayer4, groundLayer;
     bool fallGround;
 
     //****충돌무시(열림)
     protected void IgnoreLayerTrue()
     {
-        Physics.IgnoreLayerCollision(playerLayer, groundLayer, true);
+        if(this.gameObject.layer == LayerMask.NameToLayer("Player1"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer1, groundLayer, true);
+        }
+        else if(this.gameObject.layer == LayerMask.NameToLayer("Player2"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer2, groundLayer, true);
+        }
+        else if (this.gameObject.layer == LayerMask.NameToLayer("Player3"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer3, groundLayer, true);
+        }
+        else if (this.gameObject.layer == LayerMask.NameToLayer("Player4"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer4, groundLayer, true);
+        }
     }
     //****충돌적용(닫힘)
     protected void IgnoreLayerFalse()
     {
-        Physics.IgnoreLayerCollision(playerLayer, groundLayer, false);
+        if (this.gameObject.layer == LayerMask.NameToLayer("Player1"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer1, groundLayer, false);
+        }
+        else if (this.gameObject.layer == LayerMask.NameToLayer("Player2"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer2, groundLayer, false);
+        }
+        else if (this.gameObject.layer == LayerMask.NameToLayer("Player3"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer3, groundLayer, false);
+        }
+        else if (this.gameObject.layer == LayerMask.NameToLayer("Player4"))
+        {
+            Physics.IgnoreLayerCollision(playerLayer4, groundLayer, false);
+        }
     }
 
     //****착지면에 떨어지는 키를 눌렀을때 0.2초간 레이어 충돌이 무시된 후 다시 적용
@@ -94,7 +124,10 @@ public class PlayerMove_HJH : MonoBehaviour
     {
         #region 현숙추가
         //****LayerMask 지정
-        playerLayer = LayerMask.NameToLayer("Player");
+        playerLayer1 = LayerMask.NameToLayer("Player1");
+        playerLayer2 = LayerMask.NameToLayer("Player2");
+        playerLayer3 = LayerMask.NameToLayer("Player3");
+        playerLayer4 = LayerMask.NameToLayer("Player4");
         groundLayer = LayerMask.NameToLayer("Ground");
 
         layerMask = 1 << 8;
@@ -236,6 +269,7 @@ public class PlayerMove_HJH : MonoBehaviour
             ChangeState(State.Idle);
         }
     }
+
     protected void KeyBoardMove()
     {
         float x = Input.GetAxis("Horizontal");
@@ -271,29 +305,29 @@ public class PlayerMove_HJH : MonoBehaviour
             AButton();
         }
 
-        #region 현숙추가
-        // 점프 발판
-        // 아래로 레이를 쐈을 때 
-        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
-        {
-            print(hit.transform.name);
-            IgnoreLayerFalse();
-        }
-
-        //벽 점프
-        if (Physics.Raycast(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, out hit, 0.7f, layerMask2) && moveVec.x != 0)
-        {
-            Debug.DrawRay(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, Color.green, 0.7f);
-            print(hit.transform.name);
-            if (moveVec.y < 0)
+            #region 현숙추가
+            // 점프 발판
+            // 아래로 레이를 쐈을 때 
+            if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
             {
-                moveVec = Vector3.zero;
+                print(hit.transform.name);
+                IgnoreLayerFalse();
             }
 
-            am.SetTrigger("WallJump 0");
+            //벽 점프
+            if (Physics.Raycast(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, out hit, 0.7f, layerMask2) && moveVec.x != 0)
+            {
+                Debug.DrawRay(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, Color.green, 0.7f);
+                print(hit.transform.name);
+                if (moveVec.y < 0)
+                {
+                    moveVec = Vector3.zero;
+                }
 
-            jumpCount = 1;
-        }
+                am.SetTrigger("WallJump 0");
+
+                jumpCount = 1;
+            }
 
         #endregion
 

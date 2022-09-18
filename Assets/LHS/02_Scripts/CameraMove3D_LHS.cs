@@ -23,6 +23,7 @@ public class CameraMove3D_LHS : MonoBehaviour
 
     Vector3 newPosition;
 
+
     private void Start()
     {
         GameObject[] a = GameObject.FindGameObjectsWithTag("Player");
@@ -31,6 +32,7 @@ public class CameraMove3D_LHS : MonoBehaviour
             targets.Add(a[i].transform);
         }
         cam = GetComponent<Camera>();
+
     }
 
     private void LateUpdate()

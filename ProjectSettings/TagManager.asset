@@ -6,6 +6,9 @@ TagManager:
   tags:
   - DeathZone
   - Ground
+  - Bullet
+  - FxTemporaire
+  - CharacterUi
   layers:
   - Default
   - TransparentFX
@@ -14,12 +17,12 @@ TagManager:
   - Water
   - UI
   - 
-  - Player
+  - Player1
   - Ground
   - Wall
-  - 
-  - 
-  - 
+  - Player2
+  - Player3
+  - Player4
   - 
   - 
   - 
