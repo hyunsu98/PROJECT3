@@ -73,9 +73,9 @@ public class Respawn_LHS : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         // 다시 켜지기
+        cc.enabled = true;
         playerObj.SetActive(true);
         playerObj2.SetActive(true);
-        cc.enabled = true;
 
     }
 }
