@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMove_HJH : MonoBehaviour
 {
+    public GameObject smoke;
     public float jumpPower = 5;
     protected GameObject can;
     public float gravity = -9.8f;
@@ -196,7 +197,7 @@ public class PlayerMove_HJH : MonoBehaviour
             }
             else if (state == State.Attacked)
             {
-                
+                StartCoroutine(Stun(hp.Hp));
             }
 
         }
@@ -204,6 +205,7 @@ public class PlayerMove_HJH : MonoBehaviour
         {
             if(state == State.Attacked)
             {
+                Debug.Log("why");
                 StartCoroutine(Stun(hp.Hp));
             }
             if (!cc.isGrounded)
@@ -224,8 +226,8 @@ public class PlayerMove_HJH : MonoBehaviour
     public IEnumerator Stun(int stunTime)
     {
         am.SetTrigger("Damage");
-        yield return new WaitForSeconds(stunTime / 150);
-        if(cc.isGrounded == true)
+        yield return new WaitForSeconds((float)stunTime / 300);
+        if (cc.isGrounded == true)
         {
             state = State.Jump;
         }

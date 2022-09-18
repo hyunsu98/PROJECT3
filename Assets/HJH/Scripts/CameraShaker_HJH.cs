@@ -4,35 +4,30 @@ using UnityEngine;
 
 public class CameraShaker_HJH : MonoBehaviour
 {
+    CameraMove3D_LHS cm;
     Camera mainCamera;
     Vector3 cameraPos;
-    [SerializeField]
-    [Range(0.01f, 0.1f)] float shakeRange = 0.05f;
-    [SerializeField]
-    [Range(0.1f, 1f)] float duration = 0.5f;
+
     // Start is called before the first frame update
     void Start()
     {
         mainCamera = Camera.main;
+        cm = mainCamera.GetComponent<CameraMove3D_LHS>();
     }
-    public void Shake()
+    public void Shake(float power,float time)
     {
         cameraPos = mainCamera.transform.position;
-        InvokeRepeating("StartShake", 0f, 0.005f);
-        Invoke("StopShake", duration);
+        StartCoroutine(CameraShake(time, power));
     }
-    void StartShake()
+    IEnumerator CameraShake(float duration, float magnitude)
     {
-        float cameraPosX = Random.value + shakeRange * 2 - shakeRange;
-        float cameraPosY = Random.value + shakeRange * 2 - shakeRange;
-        Vector3 cameraPos = mainCamera.transform.position;
-        cameraPos.x += cameraPosX;
-        cameraPos.y += cameraPosY;
-        mainCamera.transform.position = cameraPos;
-    }
-    void StopShake()
-    {
-        CancelInvoke("StartShake");
-        mainCamera.transform.position = cameraPos;
+        float timer = 0;
+        while (timer <= duration)
+        {
+            mainCamera.transform.localPosition = Random.insideUnitSphere * magnitude + cameraPos;
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        mainCamera.transform.localPosition = cameraPos;
     }
 }

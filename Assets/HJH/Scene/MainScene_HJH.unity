@@ -740,6 +740,14 @@ PrefabInstance:
       propertyPath: respawnPoint
       value: 
       objectReference: {fileID: 1177376951}
+    - target: {fileID: -2816808281231262722, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: duration
+      value: 0.193
+      objectReference: {fileID: 0}
+    - target: {fileID: -2816808281231262722, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: shakeRange
+      value: 0.019
+      objectReference: {fileID: 0}
     - target: {fileID: 2475399503137562064, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_Controller
       value: 
@@ -754,6 +762,10 @@ PrefabInstance:
         'RigSpine2'\n\tTransform 'RigSpine3'\n\tand more ...\n\tFrom animation clip
         'Take 001'"
       objectReference: {fileID: 0}
+    - target: {fileID: 2524652284191957906, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 100004, guid: c0b0506a7bb61454c957b568bd46c661, type: 3}
     - target: {fileID: 2524652284191957907, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_Height
       value: 1.58
@@ -1018,6 +1030,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3327749204065425185, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: smoke
+      value: 
+      objectReference: {fileID: 100000, guid: 2e8ced71f4c8364468fa618a1cdba26e, type: 3}
     - target: {fileID: 3327749204065425185, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: speed
       value: 2
@@ -31790,6 +31806,10 @@ PrefabInstance:
         'RigSpine2'\n\tTransform 'RigSpine3'\n\tand more ...\n\tFrom animation clip
         'Take Damage'"
       objectReference: {fileID: 0}
+    - target: {fileID: 5329424675700912626, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
+      propertyPath: effect
+      value: 
+      objectReference: {fileID: 100004, guid: c0b0506a7bb61454c957b568bd46c661, type: 3}
     - target: {fileID: 7016337918096897358, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: Player
       value: 1
