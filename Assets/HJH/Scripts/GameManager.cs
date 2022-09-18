@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
         Warrior,
         Archer,
     }
-    PlayerCharcter playerCharcter;
+    public PlayerCharcter playerCharcter;
     private void Awake()
     {
         if(instance != null)
