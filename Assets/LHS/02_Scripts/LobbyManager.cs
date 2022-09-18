@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class LobbyManager_LHS : MonoBehaviour
+public class LobbyManager : MonoBehaviour
 {
     //빠른 입장 Button
     public Button butQuickJoin;

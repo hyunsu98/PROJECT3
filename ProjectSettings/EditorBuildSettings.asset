@@ -15,8 +15,8 @@ EditorBuildSettings:
     path: Assets/LHS/01_Scenes/GameLobbyScene_LHS.unity
     guid: a3a4f800f15e288469b47c0747297220
   - enabled: 1
-    path: Assets/LHS/01_Scenes/MainScene3D_LHS.unity
-    guid: 1482300671ada944f95a3faa48dc641d
+    path: Assets/HJH/Scene/MainScene_HJH.unity
+    guid: 1166f36e6b8b98d47a1a4f834d2cca85
   - enabled: 1
     path: Assets/LHS/01_Scenes/EndingScene_LHS.unity
     guid: bd5398a65dfc3d241abb9b4f7716ebc2

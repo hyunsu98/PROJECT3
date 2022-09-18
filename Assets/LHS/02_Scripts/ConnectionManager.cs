@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class ConnectionManager_LHS : MonoBehaviour
+public class ConnectionManager : MonoBehaviour
 {
     //´Ð³×ÀÓ InputField
     public InputField inputNickName;
