@@ -7,7 +7,7 @@ onBoardingDoNotAskAgain = false
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
-	"last_search.DA949528" = "dk"
+	"last_search.DA949528" = "lj"
 	"OpenInspectorPreview.DA949528" = "0"
 	"currentGroup.DA949528" = "all"
 }
