@@ -36,6 +36,7 @@ public class PlayerHp_HJH : MonoBehaviour
             pm.moveVec = Vector3.zero;
             impact.AddImpact(new Vector3(-1, 1, 0), ((hp / 30) + 1) * 50);
         }
+        
         Hp += power;
 
 

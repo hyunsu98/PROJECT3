@@ -444,6 +444,7 @@ GameObject:
   - component: {fileID: 3327749204065425185}
   - component: {fileID: 5728962312677335604}
   - component: {fileID: -3841554685536804767}
+  - component: {fileID: -2816808281231262722}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -572,8 +573,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5909e78e5892f214d9dcafa78af95aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  respawnPoint: {fileID: 0}
   RespawnCount: 3
+  respawnPoint: {fileID: 0}
+--- !u!114 &-2816808281231262722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2525578878964693710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c929796396a75544baf33a092b4aff0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeRange: 0.05
+  duration: 0.5
 --- !u!1 &2525588061981245610
 GameObject:
   m_ObjectHideFlags: 0

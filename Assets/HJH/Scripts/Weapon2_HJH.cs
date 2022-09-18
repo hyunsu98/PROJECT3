@@ -19,7 +19,6 @@ public class Weapon2_HJH : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("?");
         if (Attack == true)
         {
             if (other.GetComponent<PlayerHp_HJH>() != null && other.name != "Player2")
