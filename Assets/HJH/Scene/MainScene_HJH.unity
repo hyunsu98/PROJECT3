@@ -6559,7 +6559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c8baad009477547a3c3aea62c60f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startLife: 5
+  startLife: 3
   players: []
   playerCharcter: 0
 --- !u!1 &420264645

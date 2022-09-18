@@ -66,14 +66,16 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviour
         {
             GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Warrior;
             ChangeImage(2);
-        }    }
+        }
+    }
     public void ArcherOn()
     {
         if (select == false)
         {
             GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Archer;
             ChangeImage(3);
-        }    }
+        }
+    }
 
     void ChangeImage(int what)
     {
