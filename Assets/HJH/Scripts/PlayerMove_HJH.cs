@@ -143,12 +143,24 @@ public class PlayerMove_HJH : MonoBehaviour
         {
             case State.Idle:
                 am.SetTrigger("Idle");
+                am.ResetTrigger("Run");
+                am.ResetTrigger("Jump");
+                am.ResetTrigger("JumpAttack");
+                am.ResetTrigger("JumpEnd");
                 break;
             case State.Run:
                 am.SetTrigger("Run");
+                am.ResetTrigger("Idle");
+                am.ResetTrigger("Jump");
+                am.ResetTrigger("JumpAttack");
+                am.ResetTrigger("JumpEnd");
                 break;
             case State.Jump:
                 am.SetTrigger("Jump");
+                am.ResetTrigger("Idle");
+                am.ResetTrigger("Run");
+                am.ResetTrigger("JumpAttack");
+                am.ResetTrigger("JumpEnd");
                 break;
         }
 
