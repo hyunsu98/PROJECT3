@@ -2,25 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : MonoBehaviourPunCallbacks
 {
-    //빠른 입장 Button
-    public Button butQuickJoin;
-    //방 입장 Button
-    public Button btnJoin;
-
-    //***방 제목 InputField
+    //***방 제목(방 이름) InputField
     public InputField inputRoomName;
-    //***비밀 방 InputField
+    //***비밀 방(비밀번호) InputField
     public InputField inputPassword;
     //***비밀 방 Toggle
     public Toggle PassToggle;
-    //***인원 수
+    //***인원 수 / 총 인원
     public Toggle numChoice1;
     //***방 생성 Button
     public Button roomCreate;
+
+    //빠른 입장(매칭) Button
+    public Button butQuickJoin;
+    //방 입장(방 참가) Button
+    public Button btnJoin;
 
     //방의 정보들   
     //룸 리스트 Content
@@ -39,17 +40,18 @@ public class LobbyManager : MonoBehaviour
     public void OnRoomNameValueChanged(string s)
     {
         //생성
-        //방제목과 인원 수 선택시 실행될 수 있게 -> 토글 오류
         roomCreate.interactable = s.Length > 0;
+        //방제목과 인원 수 선택시 실행될 수 있게 -> 토글 오류
+
     }
 
     // 인원 수 선택 시 인원에 맞는 방 캐릭터 생성 될 수 있게
     public void OnToggleClick1(bool isOn)
     {
+
         if (isOn)
         {
             Debug.Log("인원 2");
-
         }
         else
         {
@@ -67,15 +69,14 @@ public class LobbyManager : MonoBehaviour
         else
         {
             inputPassword.interactable = false;
-            // +텍스트 삭제
-            
+            // +텍스트 삭제 
         }
     }
 
     //접속 버튼 눌렀을때 씬 전환 -> 네트워크 시 변경
     public void GameLobbySceneChange()
     {
-        SceneManager.LoadScene("GameLobbyScene_LHS");
+        //SceneManager.LoadScene("GameLobbyScene_LHS");
     }
 
 

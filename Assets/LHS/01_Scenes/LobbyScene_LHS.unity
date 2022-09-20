@@ -4447,13 +4447,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c036cb27c77dab49827e4b4b3d72e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  butQuickJoin: {fileID: 63952741}
-  btnJoin: {fileID: 1287704642}
   inputRoomName: {fileID: 1561314139}
   inputPassword: {fileID: 1553848666}
   PassToggle: {fileID: 23401344}
   numChoice1: {fileID: 1817709903}
   roomCreate: {fileID: 1319127849}
+  butQuickJoin: {fileID: 63952741}
+  btnJoin: {fileID: 1287704642}
   trListContent: {fileID: 1623176490}
 --- !u!1 &1508276270
 GameObject:
@@ -4473,7 +4473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1508276271
 RectTransform:
   m_ObjectHideFlags: 0
