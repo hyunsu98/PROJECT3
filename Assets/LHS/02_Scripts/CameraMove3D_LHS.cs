@@ -24,7 +24,7 @@ public class CameraMove3D_LHS : MonoBehaviour
     Vector3 newPosition;
 
 
-    private void Start()
+    public void StartSetting()
     {
         GameObject[] a = GameObject.FindGameObjectsWithTag("Player");
         for(int i = 0; i <  a.Length; i++)

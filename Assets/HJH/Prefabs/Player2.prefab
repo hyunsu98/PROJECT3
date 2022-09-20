@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2524221434762407590}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RigLPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2523854792543703580}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -445,9 +445,9 @@ GameObject:
   - component: {fileID: 5728962312677335604}
   - component: {fileID: -3841554685536804767}
   - component: {fileID: -2816808281231262722}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -482,7 +482,7 @@ Animator:
   m_GameObject: {fileID: 2525578878964693710}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0072ba2db16e5554b8a913b412c537b2, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d3d5408f7e50ad442a363abe892d2194, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -523,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
+  effect: {fileID: 100004, guid: c0b0506a7bb61454c957b568bd46c661, type: 3}
 --- !u!114 &3327749204065425185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,14 +536,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c08a5a90c0da4664c842eb6fd01294ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoke: {fileID: 100000, guid: 2e8ced71f4c8364468fa618a1cdba26e, type: 3}
   jumpPower: 8
   gravity: -9.8
   speed: 3
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2
-  keyboardMode: 0
-  dashEffect: {fileID: 0}
-  Player: 0
+  keyboardMode: 1
+  dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
+  Player: 1
   upDown: 0
   distance: 3
   state: 0
@@ -587,8 +589,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c929796396a75544baf33a092b4aff0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeRange: 0.05
-  duration: 0.5
 --- !u!1 &2525588061981245610
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2523932176065419716}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: RigRPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1113,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2523987611502088180}
   - component: {fileID: 2513120824034380824}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Dwarf Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}

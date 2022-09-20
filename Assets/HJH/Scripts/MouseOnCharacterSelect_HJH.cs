@@ -16,29 +16,29 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void AlondSelect()
     {
-        GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Aland;
         ChangeImage(0);
         select = true;
+        GameManager.instance.playerCharcters[GameManager.instance.whoIam] = GameManager.PlayerCharcter.Aland;
     }
     public void AliceSelect()
     {
-        GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Alice;
+        GameManager.instance.playerCharcters[GameManager.instance.whoIam] = GameManager.PlayerCharcter.Alice;
         ChangeImage(1);
         select = true;
     }
     public void WarriorSelect()
     {
-        GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Warrior;
+        GameManager.instance.playerCharcters[GameManager.instance.whoIam] = GameManager.PlayerCharcter.Warrior;
         ChangeImage(2);
         select = true;
     }
     public void ArcherSelect()
     {
-        GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Archer;
+        GameManager.instance.playerCharcters[GameManager.instance.whoIam] = GameManager.PlayerCharcter.Archer;
         ChangeImage(3);
         select = true;
     }
@@ -64,7 +64,6 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviour
     {
         if (select == false)
         {
-            GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Warrior;
             ChangeImage(2);
         }
     }
@@ -72,7 +71,6 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviour
     {
         if (select == false)
         {
-            GameManager.instance.playerCharcter = GameManager.PlayerCharcter.Archer;
             ChangeImage(3);
         }
     }

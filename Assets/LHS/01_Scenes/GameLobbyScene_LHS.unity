@@ -3371,7 +3371,7 @@ RectTransform:
   m_GameObject: {fileID: 577282929}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_LocalScale: {x: 0.9999998, y: 0.9999998, z: 0.9999998}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 818027692}
@@ -3381,7 +3381,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 110, y: 0}
+  m_AnchoredPosition: {x: 109.99999, y: 0}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &577282931
@@ -3430,7 +3430,19 @@ MonoBehaviour:
   m_Group: {fileID: 1650253325}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1650253326}
+        m_TargetAssemblyTypeName: LifeToggle_HJH, Assembly-CSharp
+        m_MethodName: Life4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &637586912
 GameObject:
@@ -6185,7 +6197,19 @@ MonoBehaviour:
   m_Group: {fileID: 1650253325}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1650253326}
+        m_TargetAssemblyTypeName: LifeToggle_HJH, Assembly-CSharp
+        m_MethodName: Life5
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1105225581
 GameObject:
@@ -6832,9 +6856,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c8baad009477547a3c3aea62c60f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomMember: 1
   startLife: 3
   players: []
-  playerCharcter: 0
+  playerCharcters: 
+  whoIam: 0
+  characterPrefabs:
+  - {fileID: 5078390142427002503, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
+  - {fileID: 1329418108476140, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
+  - {fileID: 2525578878964693710, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+  - {fileID: 1798490320975608, guid: ed11bc2314fa3a649832366175e72401, type: 3}
 --- !u!1 &1181582904
 GameObject:
   m_ObjectHideFlags: 0
@@ -10308,6 +10339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1650253324}
   - component: {fileID: 1650253325}
+  - component: {fileID: 1650253326}
   m_Layer: 5
   m_Name: ToggleGroup
   m_TagString: Untagged
@@ -10351,7 +10383,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fafe2cfe61f6974895a912c3755e8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowSwitchOff: 1
+  m_AllowSwitchOff: 0
+--- !u!114 &1650253326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650253323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5592e70d62469ab4da24bb3b426ebd18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1705429551
 GameObject:
   m_ObjectHideFlags: 0
@@ -10763,7 +10807,19 @@ MonoBehaviour:
   m_Group: {fileID: 1650253325}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1650253326}
+        m_TargetAssemblyTypeName: LifeToggle_HJH, Assembly-CSharp
+        m_MethodName: Life2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1838653990
 GameObject:
@@ -11483,7 +11539,19 @@ MonoBehaviour:
   m_Group: {fileID: 1650253325}
   onValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1650253326}
+        m_TargetAssemblyTypeName: LifeToggle_HJH, Assembly-CSharp
+        m_MethodName: Life3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_IsOn: 0
 --- !u!1 &1987596143
 GameObject:

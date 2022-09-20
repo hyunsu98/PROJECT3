@@ -142,6 +142,8 @@ public class PlayerMove_HJH : MonoBehaviour
         switch (s)
         {
             case State.Idle:
+                Invoke("JumpCountReturn", 1f);
+                moveVec.y = 0;
                 am.SetTrigger("Idle");
                 am.ResetTrigger("Run");
                 am.ResetTrigger("Jump");
