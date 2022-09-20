@@ -546,6 +546,9 @@ MonoBehaviour:
   dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
   Player: 1
   upDown: 0
+  audioClips:
+  - {fileID: 8300000, guid: ce7de4e4c8b0fda4194663d9af09d909, type: 3}
+  - {fileID: 8300000, guid: d15090a3eb59ac145a19c354c6f626ad, type: 3}
   distance: 3
   state: 0
   dashRange: 2

@@ -126,6 +126,8 @@ public class PlayerDwarf_HJH : PlayerMove_HJH
     }
     public void SkillEffect()
     {
+        audio.clip = audioClips[1];
+        audio.Play();
         GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0,1,0), Quaternion.identity);
         Destroy(skill, 1f);
         skill.GetComponent<Weapon2_HJH>().Attack = true;
@@ -174,6 +176,8 @@ public class PlayerDwarf_HJH : PlayerMove_HJH
         am.SetTrigger("Attack");
         Weapon.GetComponent<Weapon2_HJH>().Attack = true;
         state = State.Attack;
+        audio.clip = audioClips[0];
+        audio.Play();
     }
     public void AttackOver()
     {

@@ -22,7 +22,8 @@ public class PlayerMove_HJH : MonoBehaviour
     public bool Player = false;
     public float upDown = 0;
     protected PlayerHp_HJH hp;
-
+    public AudioClip[] audioClips;
+    protected AudioSource audio;
     #region 현숙추가
     //****레이어 충돌 변수
     int playerLayer1, playerLayer2, playerLayer3, playerLayer4, groundLayer;
@@ -102,7 +103,7 @@ public class PlayerMove_HJH : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        
+        audio = GetComponent<AudioSource>();   
         hp = GetComponent<PlayerHp_HJH>();
         joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
         Transform[] allChildren = GetComponentsInChildren<Transform>();

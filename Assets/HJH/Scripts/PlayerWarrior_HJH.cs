@@ -128,6 +128,8 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public void Skill()
     {
+        audio.clip = audioClips[1];
+        audio.Play();
         GameObject skill = Instantiate(skillEffect);
         skill.transform.position = gameObject.transform.position + new Vector3(0,1,0);
         Destroy(skill, 5f);
@@ -143,6 +145,8 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         am.SetTrigger("Attack");
         Weapon.GetComponent<Weapon_HJH>().Attack = true;
         state = State.Attack;
+        audio.clip = audioClips[0];
+        audio.Play();
 
     }
     public void AttackOver()
