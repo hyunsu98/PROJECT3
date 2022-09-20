@@ -1003,9 +1003,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c8baad009477547a3c3aea62c60f88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roomMember: 1
   startLife: 3
   players: []
-  playerCharcter: 0
+  playerCharcters: 
+  whoIam: 0
+  characterPrefabs:
+  - {fileID: 5078390142427002503, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
+  - {fileID: 2525578878964693710, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+  - {fileID: 1329418108476140, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
+  - {fileID: 1798490320975608, guid: ed11bc2314fa3a649832366175e72401, type: 3}
 --- !u!4 &1199562740
 Transform:
   m_ObjectHideFlags: 0

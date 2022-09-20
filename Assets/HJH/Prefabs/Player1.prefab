@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 5329424675700912626}
   - component: {fileID: -5237858175099546372}
   - component: {fileID: 4296032836080984101}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -59,7 +59,12 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
+    'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
+    'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigSpine2'\n\tTransform 'RigSpine3'\n\tand
+    more ...\n\tFrom animation clip 'Take Damage'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
@@ -105,12 +110,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4b7b1a5c3af2f4fa80145a0f109575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 5
+  smoke: {fileID: 0}
+  jumpPower: 8
   gravity: -9.8
   speed: 3
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2
-  keyboardMode: 0
+  keyboardMode: 1
   dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
   Player: 1
   upDown: 0
@@ -132,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
+  effect: {fileID: 100004, guid: c0b0506a7bb61454c957b568bd46c661, type: 3}
 --- !u!114 &-5237858175099546372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,8 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c929796396a75544baf33a092b4aff0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeRange: 0.05
-  duration: 0.5
 --- !u!1 &5078454442857116849
 GameObject:
   m_ObjectHideFlags: 0
@@ -781,7 +786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5077524092508249171}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RigRPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1518,7 +1523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5073849265647042605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RigLPlatform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1614,7 +1619,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5073586502649271677}
   - component: {fileID: 5160713637956798447}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Adventurer Aland 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1828,7 +1833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5073624182219439283}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -28,6 +28,7 @@ public class Respawn_LHS : MonoBehaviour
     {
         cc = GetComponent<CharacterController>();
         playerHp = GetComponent<PlayerHp_HJH>();
+        respawnPoint = GameObject.Find("RespawnPoint").transform;
 
         // 자식의 gameObject 가져오기
         playerObj = gameObject.transform.GetChild(0).gameObject;

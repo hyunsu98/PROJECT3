@@ -8,10 +8,11 @@ public class Weapon_HJH : MonoBehaviour
     public int Damage = 10;
     public float skillSpeed = 2f;
     bool check = true;
+    GameObject usePlayer;
     // Start is called before the first frame update
     void Start()
     {
-        
+        usePlayer = GameObject.Find("Player1(Clone)");
     }
 
     // Update is called once per frame
@@ -19,7 +20,7 @@ public class Weapon_HJH : MonoBehaviour
     {
         if(this.name.Contains("Player1SkillEffect") && check == true)
         {
-            if(GameObject.Find("Player1").transform.rotation.y > 0)
+            if(usePlayer.transform.rotation.y > 0)
             {
                 StartCoroutine(Right());
                 check = false;
@@ -53,10 +54,9 @@ public class Weapon_HJH : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
         if(Attack == true)
         {
-            if (other.GetComponent<PlayerHp_HJH>() != null && other.name != "Player1")
+            if (other.GetComponent<PlayerHp_HJH>() != null && other.GetComponent<PlayerWarrior_HJH>() == null)
             {
                 other.GetComponent<PlayerHp_HJH>().Damage(other.transform.position - transform.position,Damage);
                 Attack = false;

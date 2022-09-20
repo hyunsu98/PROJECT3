@@ -21,7 +21,7 @@ public class Weapon2_HJH : MonoBehaviour
     {
         if (Attack == true)
         {
-            if (other.GetComponent<PlayerHp_HJH>() != null && other.name != "Player2")
+            if (other.GetComponent<PlayerHp_HJH>() != null && other.GetComponent<PlayerDwarf_HJH>() == null)
             {
                 other.GetComponent<PlayerHp_HJH>().Damage(other.transform.position - transform.position, Damage);
                 Attack = false;
