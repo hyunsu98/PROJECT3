@@ -4,6 +4,21 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/LHS/01_Scenes/ConnectionScene_LHS.unity
+    guid: 49b11c7779a197447942065ebe832dc5
+  - enabled: 1
+    path: Assets/LHS/01_Scenes/LobbyScene_LHS.unity
+    guid: a3d22ecd6ecf31546b3b177368c0577e
+  - enabled: 1
+    path: Assets/LHS/01_Scenes/GameLobbyScene_LHS.unity
+    guid: a3a4f800f15e288469b47c0747297220
+  - enabled: 1
+    path: Assets/HJH/Scene/MainScene_HJH.unity
+    guid: 1166f36e6b8b98d47a1a4f834d2cca85
+  - enabled: 1
+    path: Assets/LHS/01_Scenes/EndingScene_LHS.unity
+    guid: bd5398a65dfc3d241abb9b4f7716ebc2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 633627afcc42bac47a7ef8f49fcca473, type: 2}

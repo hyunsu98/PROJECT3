@@ -93,6 +93,12 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         }
         else
         {
+            if (state == State.Attacked)
+            {
+                GameObject sm = Instantiate(smoke);
+                sm.transform.position = transform.position;
+                StartCoroutine(Stun(hp.Hp));
+            }
             if (!cc.isGrounded)
             {
                 moveVec.y += gravity * Time.deltaTime;

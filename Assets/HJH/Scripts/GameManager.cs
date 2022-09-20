@@ -8,6 +8,15 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public int startLife = 3;
     bool sceneStartTrigger = true;
+    public GameObject[] players;
+    public enum PlayerCharcter
+    {
+        Aland,
+        Alice,
+        Warrior,
+        Archer,
+    }
+    public PlayerCharcter playerCharcter;
     private void Awake()
     {
         if(instance != null)
@@ -18,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
         }
+        DontDestroyOnLoad(gameObject);
     }
     // Start is called before the first frame update
     void Start()
@@ -31,11 +41,10 @@ public class GameManager : MonoBehaviour
         //mainScene¿¡ µé¾î°¬À» ¶§ - Àú°Å ºôµå¼¼ÆÃ¿¡ µû¶ó¼­ ¼ýÀÚ ¹Ù²ãÁà¾ßµÊ
         if(SceneManager.GetActiveScene().name == "MainScene_HJH" && sceneStartTrigger == true)
         {
-            Debug.Log("??");
-            StartScene();
+            MainScene();
         }
     }
-    void StartScene()
+    void MainScene()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         GameObject[] ui = GameObject.FindGameObjectsWithTag("CharacterUi");
@@ -53,7 +62,9 @@ public class GameManager : MonoBehaviour
                 Destroy(ui[i]);
             }
         }
+
         sceneStartTrigger = false;
 
     }
+
 }
