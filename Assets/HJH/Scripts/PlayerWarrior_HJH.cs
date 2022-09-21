@@ -7,6 +7,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
 {
     public GameObject skillEffect;
     // Start is called before the first frame updatepublic float upDown = 0;
+    public AudioClip[] sound;
 
     // Update is called once per frame
     void Update()

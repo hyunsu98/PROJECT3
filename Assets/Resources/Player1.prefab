@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff4b7b1a5c3af2f4fa80145a0f109575, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smoke: {fileID: 0}
+  smoke: {fileID: 100000, guid: 2e8ced71f4c8364468fa618a1cdba26e, type: 3}
   jumpPower: 8
   gravity: -9.8
   speed: 3
@@ -125,6 +125,7 @@ MonoBehaviour:
   dashRange: 2
   weapon: Sword
   skillEffect: {fileID: 1806872715020212, guid: 69eec05abe8b0f54286677e6bed19044, type: 3}
+  sound: []
 --- !u!114 &5329424675700912626
 MonoBehaviour:
   m_ObjectHideFlags: 0

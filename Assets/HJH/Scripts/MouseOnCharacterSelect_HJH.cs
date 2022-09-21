@@ -5,12 +5,10 @@ using UnityEngine;
 public class MouseOnCharacterSelect_HJH : MonoBehaviour
 {
     bool select = false;
-    GameObject ui;
+    public GameObject[] ui;
     // Start is called before the first frame update
     void Start()
     {
-        ui = GameObject.Find("CharacterSelect");
-        Debug.Log(ui.name);
     }
 
     // Update is called once per frame
@@ -79,8 +77,8 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviour
     {
         for(int i =0; i < 5; i++)
         {
-            ui.transform.GetChild(i).gameObject.SetActive(false);
+            ui[0].transform.GetChild(i).gameObject.SetActive(false);
         }
-        ui.transform.GetChild(what).gameObject.SetActive(true);
+        ui[0].transform.GetChild(what).gameObject.SetActive(true);
     }
 }
