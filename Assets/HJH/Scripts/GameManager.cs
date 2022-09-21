@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using Photon.Pun;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviourPunCallbacks
 {
     public int roomMember = 4;
     public static GameManager instance;
     public int startLife = 3; //모든 게임메니저에 보내야됨
     public GameObject[] players;
+    public List<PhotonView> playerPhoton = new List<PhotonView>();
     public PlayerCharcter[] playerCharcters;
     public int whoIam = 0 ;
     public GameObject[] characterPrefabs;
-
+    public Button gameStartButton;
     bool MainsceneStartTrigger = true; // 안보내도됨
     bool lobbySceneStartTrigger = true;
 
@@ -52,11 +55,11 @@ public class GameManager : MonoBehaviour
         }
         else if(SceneManager.GetActiveScene().name == "GameLobbyScene_LHS" && lobbySceneStartTrigger == true)
         {
-            LobbySene();
+            GameLobbySene();
         }
     }
 
-    private void LobbySene()
+    private void GameLobbySene()
     {
         playerCharcters = new PlayerCharcter[roomMember];
         players = new GameObject[roomMember];
@@ -71,7 +74,7 @@ public class GameManager : MonoBehaviour
             switch (i)
             {
                 case 0:
-                    players[i] = Instantiate(characterPrefabs[(int)playerCharcters[i]], startPoint[i].transform.position, Quaternion.Euler(0, 90, 0));
+                    players[i] = PhotonNetwork.Instantiate(characterPrefabs[(int)playerCharcters[i]].name, startPoint[i].transform.position, Quaternion.Euler(0, 90, 0));
                     break;
             }
         }
@@ -95,4 +98,8 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void AddPlayer(PhotonView pv)
+    {
+        playerPhoton.Add(pv);
+    }
 }
