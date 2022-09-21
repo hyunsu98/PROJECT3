@@ -12,9 +12,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager instance;
     public int startLife = 3; //모든 게임메니저에 보내야됨
     public GameObject[] players;
-    public List<PhotonView> playerPhoton = new List<PhotonView>();
     public PlayerCharcter[] playerCharcters;
-    public int whoIam = 0 ;
     public GameObject[] characterPrefabs;
     public Button gameStartButton;
     bool MainsceneStartTrigger = true; // 안보내도됨
@@ -61,8 +59,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     private void GameLobbySene()
     {
-        playerCharcters = new PlayerCharcter[roomMember];
-        players = new GameObject[roomMember];
+        playerCharcters = new PlayerCharcter[PhotonNetwork.CurrentRoom.MaxPlayers];
+        players = new GameObject[PhotonNetwork.CurrentRoom.MaxPlayers];
+        PhotonNetwork.Instantiate("GameLobbyPlayer", Vector3.zero, Quaternion.identity);
         lobbySceneStartTrigger = false;
     }
 
@@ -98,8 +97,5 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     }
 
-    public void AddPlayer(PhotonView pv)
-    {
-        playerPhoton.Add(pv);
-    }
+
 }

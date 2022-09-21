@@ -6873,9 +6873,7 @@ MonoBehaviour:
   roomMember: 1
   startLife: 3
   players: []
-  playerPhoton: []
   playerCharcters: 
-  whoIam: 0
   characterPrefabs:
   - {fileID: 5078390142427002503, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
   - {fileID: 1329418108476140, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
@@ -10520,6 +10518,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5592e70d62469ab4da24bb3b426ebd18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggles:
+  - {fileID: 1817709903}
+  - {fileID: 1959298927}
+  - {fileID: 577282931}
+  - {fileID: 1099834654}
 --- !u!1 &1705429551
 GameObject:
   m_ObjectHideFlags: 0
@@ -11445,7 +11448,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7fea3bf9b724445b250c4da7b1a548, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui: []
+  whoConnectThis: 0
+  ui:
+  - {fileID: 125175226}
+  - {fileID: 936059798}
+  - {fileID: 1629699813}
+  - {fileID: 344869693}
+  buttons:
+  - {fileID: 1384718840}
+  - {fileID: 1109776273}
+  - {fileID: 1514026099}
+  - {fileID: 444638417}
 --- !u!1001 &1947220959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11707,6 +11720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1beed6be3b7af234092ba5757d7e7f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerPhoton: []
   toggles:
   - {fileID: 1817709903}
   - {fileID: 1959298927}
