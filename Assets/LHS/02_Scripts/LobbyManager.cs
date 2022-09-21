@@ -11,8 +11,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public InputField inputRoomName;
     // 방 찾는 제목 InputField
     public InputField findRoomName;
+    // 방 설명
+    public InputField inputRoomDesc;
+
     //***비밀 방(비밀번호) InputField
     public InputField inputPassword;
+    public InputField findPassword;
     //***비밀 방 Toggle
     public Toggle PassToggle;
     //***인원 수 / 총 인원
@@ -47,6 +51,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         inputRoomName.onValueChanged.AddListener(OnRoomNameValueChanged);
         // 방이름(InputField)이 변경될때 호출되는 함수 등록
         inputMaxPlayer.onValueChanged.AddListener(OnMaxPlayerValueChanged);
+        // 방찾기(InputField)이 변경될때 호출되는 함수 등록
+        findRoomName.onValueChanged.AddListener(OnFindRoomNameValueChanged);
 
         //인원 수 제한이 변경될때 호출되는 함수 등록
         numChoice1.onValueChanged.AddListener(OnToggleClick1);
@@ -68,6 +74,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         // 방생성 -> 방이름과 총 인원이 있다면 가능 -> 토글 선택을 한다면 (두개 만족 시)
         btnCreate.interactable = s.Length > 0 && s.Length < 2 && inputRoomName.text.Length > 0;
+    }
+
+    public void OnFindRoomNameValueChanged(string s)
+    {
+        // 방찾기가 변경 될때 방입장 체크
+        btnJoin.interactable = s.Length > 0;
     }
 
 
@@ -110,15 +122,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomOptions.IsVisible = true;
 
         // 추가 셋팅
-        //custom 정보를 셋팅
+        //custom 정보를 Dictionary<object, object>
         ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
 
-        hash["desc"] = "여긴 초보방이다! " + Random.Range(1, 1000);
+        hash["desc"] = inputRoomDesc.text; //"여긴 초보방이다! " + Random.Range(1, 1000);
         hash["map_id"] = Random.Range(0, mapThumbs.Length);
         hash["room_name"] = inputRoomName.text;
         hash["password"] = inputPassword.text;
         roomOptions.CustomRoomProperties = hash;
-        // custom 정보를 공개하는 설정
+        // custom 정보를 공개하는 설정 // 공개하고 싶은 키값들
         roomOptions.CustomRoomPropertiesForLobby = new string[] {
             "desc", "map_id", "room_name", "password"
         };
@@ -147,7 +159,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void JoinRoom()
     {
         //PhotonNetwork.JoinRoom(inputRoomName.text + inputPassword.text);
-        PhotonNetwork.JoinRoom(findRoomName.text + inputPassword.text);
+        PhotonNetwork.JoinRoom(findRoomName.text + findPassword.text);
     }
 
     //방 참가가 완료 되었을 때 호출 되는 함수
@@ -234,9 +246,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             GameObject go = Instantiate(roomItemFactory, trListContent);
             //룸아이템 정보를 셋팅(방제목(0/0))
             RoomItem_LHS item = go.GetComponent<RoomItem_LHS>();
-            item.SetInfo(info.Name, info.PlayerCount, info.MaxPlayers);
-
-            //item.SetInfo(info);
+            item.SetInfo(info);
+            //item.SetInfo(info.Name, info.PlayerCount, info.MaxPlayers);
 
             //roomItem 버튼이 클릭되면 호출되는 함수 등록
             item.onClickAction = SetRoomName;
@@ -246,9 +257,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             //    inputRoomName.text = room;
             //};
 
-            //string desc = (string)info.CustomProperties["desc"];
-            //int map_id = (int)info.CustomProperties["map_id"];
-            //print(desc + ", " + map_id);
+            string desc = (string)info.CustomProperties["desc"];
+            int map_id = (int)info.CustomProperties["map_id"];
+            print(desc + ", " + map_id);
         }
     }
 
