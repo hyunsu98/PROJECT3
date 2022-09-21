@@ -15,40 +15,61 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Toggle PassToggle;
     //***인원 수 / 총 인원
     public Toggle numChoice1;
+    public int maxPlayer; // 총 인원 (진호처럼)
+    // 총인원(수업처럼)
+    public InputField inputMaxPlayer;
     //***방 생성 Button
-    public Button roomCreate;
+    public Button btnCreate;
+
+    //실패 팝업창
+    public GameObject roomFail;
 
     //빠른 입장(매칭) Button
-    public Button butQuickJoin;
+    public Button btnQuickJoin;
     //방 입장(방 참가) Button
     public Button btnJoin;
 
     //방의 정보들   
+    Dictionary<string, RoomInfo> roomCache = new Dictionary<string, RoomInfo>();
     //룸 리스트 Content
     public Transform trListContent;
+
+    //map Thumbnail
+    public GameObject[] mapThumbs;
 
     void Start()
     {
         // 방이름(InputField)이 변경될때 호출되는 함수 등록
         inputRoomName.onValueChanged.AddListener(OnRoomNameValueChanged);
+        // 방이름(InputField)이 변경될때 호출되는 함수 등록
+        inputMaxPlayer.onValueChanged.AddListener(OnMaxPlayerValueChanged);
+
         //인원 수 제한이 변경될때 호출되는 함수 등록
         numChoice1.onValueChanged.AddListener(OnToggleClick1);
         //비밀 방을 만들기 위한 함수
         PassToggle.onValueChanged.AddListener(OnPassToggle);
 
-    } 
+    }
+
     public void OnRoomNameValueChanged(string s)
     {
-        //생성
-        roomCreate.interactable = s.Length > 0;
-        //방제목과 인원 수 선택시 실행될 수 있게 -> 토글 오류
-
+        // 방이름이 변경 될때 체크
+        // 방참가 -> 방이름만 들어가 있으면 가능 // ->방 입장만 가능하게 만들어줘야함 (변경)
+        // btnJoin.interactable = s.Length > 0;
+        // 방생성 -> 방이름과 총 인원이 있다면 가능 -> 토글 선택을 한다면 (두개 만족 시)
+        btnCreate.interactable = s.Length > 0 && inputMaxPlayer.text.Length > 0;
     }
+
+    public void OnMaxPlayerValueChanged(string s)
+    {
+        // 방생성 -> 방이름과 총 인원이 있다면 가능 -> 토글 선택을 한다면 (두개 만족 시)
+        btnCreate.interactable = s.Length > 0 && inputRoomName.text.Length > 0;
+    }
+
 
     // 인원 수 선택 시 인원에 맞는 방 캐릭터 생성 될 수 있게
     public void OnToggleClick1(bool isOn)
     {
-
         if (isOn)
         {
             Debug.Log("인원 2");
@@ -59,7 +80,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // 선택 시 패스워드 작성할 수 있게
+    // 비밀 방 토글 선택 시 패스워드 작성할 수 있게
     public void OnPassToggle(bool isOn)
     {
         if (isOn)
@@ -69,8 +90,184 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         else
         {
             inputPassword.interactable = false;
-            // +텍스트 삭제 
+            // 텍스트 삭제 
+            inputPassword.text = "";
         }
+    }
+
+    //방 생성
+    public void CreateRoom()
+    {
+        // 방 옵션을 설정
+        RoomOptions roomOptions = new RoomOptions();
+        // 최대 인원 (0이면 최대인원)  = 우리는 4명
+        roomOptions.MaxPlayers = 4; //byte.Parse(inputMaxPlayer.text);
+        // 룸 리스트에 보이지 않게? 보이게?
+        roomOptions.IsVisible = true;
+
+        //custom 정보를 셋팅
+        ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+        hash["desc"] = "여긴 초보방이다! " + Random.Range(1, 1000);
+        hash["map_id"] = Random.Range(0, mapThumbs.Length);
+        hash["room_name"] = inputRoomName.text;
+        hash["password"] = inputPassword.text;
+        roomOptions.CustomRoomProperties = hash;
+        // custom 정보를 공개하는 설정
+        roomOptions.CustomRoomPropertiesForLobby = new string[] {
+            "desc", "map_id", "room_name", "password"
+        };
+
+        // 방 생성 요청 (해당 옵션을 이용해서)
+        PhotonNetwork.CreateRoom(inputRoomName.text + inputPassword.text, roomOptions);
+    }
+
+    //방이 생성되면 호출 되는 함수
+    public override void OnCreatedRoom()
+    {
+        base.OnCreatedRoom();
+        print("OnCreatedRoom");
+    }
+
+    //방 생성이 실패 될때 호출 되는 함수
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        base.OnCreateRoomFailed(returnCode, message);
+        print("OnCreateRoomFailed , " + returnCode + ", " + message);
+        // 실패 팝업창
+        roomFail.SetActive(true);
+    }
+
+    //방 참가 요청
+    public void JoinRoom()
+    {
+        PhotonNetwork.JoinRoom(inputRoomName.text + inputPassword.text);
+    }
+
+    //방 참가가 완료 되었을 때 호출 되는 함수
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        print("OnJoinedRoom");
+        PhotonNetwork.LoadLevel("GameLobbyScene_LHS");
+    }
+
+    //방 참가가 실패 되었을 때 호출 되는 함수
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        base.OnJoinRoomFailed(returnCode, message);
+        print("OnJoinRoomFailed, " + returnCode + ", " + message);
+    }
+
+    //방에 대한 정보가 변경되면 호출 되는 함수(추가/삭제/수정)
+    public override void OnRoomListUpdate(List<RoomInfo> roomList)
+    {
+        base.OnRoomListUpdate(roomList);
+
+        //룸리스트 UI 를 전체삭제
+        DeleteRoomListUI();
+        //룸리스트 정보를 업데이트
+        UpdateRoomCache(roomList);
+        //룸리스트 UI 전체 생성
+        CreateRoomListUI();
+    }
+
+    void DeleteRoomListUI()
+    {
+        foreach (Transform tr in trListContent)
+        {
+            Destroy(tr.gameObject);
+        }
+    }
+
+    void UpdateRoomCache(List<RoomInfo> roomList)
+    {
+
+        for (int i = 0; i < roomList.Count; i++)
+        {
+            // 수정, 삭제
+            if (roomCache.ContainsKey(roomList[i].Name))
+            {
+                //만약에 해당 룸이 삭제된것이라면
+                if (roomList[i].RemovedFromList)
+                {
+                    //roomCache 에서 해당 정보를 삭제
+                    roomCache.Remove(roomList[i].Name);
+                }
+                //그렇지 않다면
+                else
+                {
+                    //정보 수정
+                    roomCache[roomList[i].Name] = roomList[i];
+                }
+            }
+            //추가
+            else
+            {
+                roomCache[roomList[i].Name] = roomList[i];
+            }
+        }
+
+        //for (int i = 0; i < roomList.Count; i++)
+        //{
+        //    // 수정, 삭제
+        //    if (roomCache.ContainsKey(roomList[i].Name))
+        //    {
+        //        //만약에 해당 룸이 삭제된것이라면
+        //        if (roomList[i].RemovedFromList)
+        //        {
+        //            //roomCache 에서 해당 정보를 삭제
+        //            roomCache.Remove(roomList[i].Name);
+        //            continue;
+        //        }                
+        //    }
+        //    roomCache[roomList[i].Name] = roomList[i];            
+        //}
+    }
+
+    public GameObject roomItemFactory;
+    void CreateRoomListUI()
+    {
+        //foreach (RoomInfo info in roomCache.Values)
+        //{
+        //    //룸아이템 만든다.
+        //    GameObject go = Instantiate(roomItemFactory, trListContent);
+        //    //룸아이템 정보를 셋팅(방제목(0/0))
+        //    RoomItem item = go.GetComponent<RoomItem>();
+        //    item.SetInfo(info);
+
+        //    //roomItem 버튼이 클릭되면 호출되는 함수 등록
+        //    item.onClickAction = SetRoomName;
+        //    //람다식
+        //    //item.onClickAction = (string room) => {
+        //    //    inputRoomName.text = room;
+        //    //};
+
+        //    string desc = (string)info.CustomProperties["desc"];
+        //    int map_id = (int)info.CustomProperties["map_id"];
+        //    print(desc + ", " + map_id);
+        //}
+    }
+
+
+    //이전 Thumbnail id
+    int prevMapId = -1;
+    void SetRoomName(string room, int map_id)
+    {
+        //룸이름 설정
+        inputRoomName.text = room;
+
+        //만약에 이전 맵 Thumbnail이 활성화가 되어있다면
+        if (prevMapId > -1)
+        {
+            //이전 맵 Thumbnail을 비활성화
+            mapThumbs[prevMapId].SetActive(false);
+        }
+
+        //맵 Thumbnail 설정
+        mapThumbs[map_id].SetActive(true);
+
+        //이전 맵 id 저장
+        prevMapId = map_id;
     }
 
     //접속 버튼 눌렀을때 씬 전환 -> 네트워크 시 변경
@@ -78,7 +275,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         //SceneManager.LoadScene("GameLobbyScene_LHS");
     }
-
 
     void Update()
     {

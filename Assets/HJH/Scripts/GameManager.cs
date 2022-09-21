@@ -75,6 +75,8 @@ public class GameManager : MonoBehaviour
                     break;
             }
         }
+
+
         GameObject[] ui = GameObject.FindGameObjectsWithTag("CharacterUi");
         for(int i =0; i<players.Length; i++)
         {
@@ -83,6 +85,7 @@ public class GameManager : MonoBehaviour
             ui[i].GetComponent<Player1UI_HJH>().LifeCount = startLife;
             //¥–≥◊¿” ∫Ø∞Ê «ÿ¡‡æﬂµ 
         }
+
         for(int i = 0; i < ui.Length; i++)
         {
             if(ui[i].GetComponent<Player1UI_HJH>().player == null)
