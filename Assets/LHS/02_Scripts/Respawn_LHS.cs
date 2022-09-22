@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
 // 리스폰 되면 
 // 일정 거리까지 움직이고 사라지는 발판
 // (오류)
-public class Respawn_LHS : MonoBehaviour
+public class Respawn_LHS : MonoBehaviourPunCallbacks
 {
     // 리스폰 카운트
     public int RespawnCount = 3;
@@ -42,7 +43,8 @@ public class Respawn_LHS : MonoBehaviour
         // 게임이 끝난다
         if (RespawnCount <= 0)
         {
-            SceneManager.LoadScene("EndingScene_LHS");
+            // 포톤뷰 씬 변경 -> 엔딩씬으로
+            PhotonNetwork.LoadLevel("EndingScene_LHS");
             print("죽어야지");
         }
     }

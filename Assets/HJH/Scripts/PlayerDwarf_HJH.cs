@@ -1,120 +1,146 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerDwarf_HJH : PlayerMove_HJH
+public class PlayerDwarf_HJH : PlayerMove_HJH, IPunObservable
 {
     public GameObject skillEffect;
+
+    #region [현숙] 변수
+    //도착 위치
+    Vector3 receivePos;
+    //회전되야 하는 값
+    Quaternion receiveRot;
+    //보간 속력
+    public float lerpSpeed = 100;
+    #endregion
+
     // Update is called once per frame
     void Update()
     {
-        if (Player == true)
+        //[현숙]
+        //만약에 내것이라면 움직임
+        if (photonView.IsMine)
         {
-            if (state == State.Idle)
+            if (Player == true)
             {
-                if (keyboardMode == true)
+                if (state == State.Idle)
                 {
-                    KeyBoardMove();
-                    can.SetActive(false);
+                    if (keyboardMode == true)
+                    {
+                        KeyBoardMove();
+                        can.SetActive(false);
+                    }
+                    else
+                    {
+                        JoyStickMove();
+                        can.SetActive(true);
+                    }
+                    if (moveVec.x != 0)
+                    {
+                        ChangeState(State.Run);
+                    }
                 }
-                else
+                else if (state == State.Run)
                 {
-                    JoyStickMove();
-                    can.SetActive(true);
+                    if (keyboardMode == true)
+                    {
+                        KeyBoardMove();
+                        can.SetActive(false);
+                    }
+                    else
+                    {
+                        JoyStickMove();
+                        can.SetActive(true);
+                    }
+                    if (moveVec.x == 0)
+                    {
+                        ChangeState(State.Idle);
+                    }
                 }
-                if (moveVec.x != 0)
+                else if (state == State.Jump)
                 {
-                    ChangeState(State.Run);
+                    if (keyboardMode == true)
+                    {
+                        KeyBoardMove();
+                        can.SetActive(false);
+                    }
+                    else
+                    {
+                        JoyStickMove();
+                        can.SetActive(true);
+                    }
+                    if (!cc.isGrounded)
+                    {
+                        moveVec.y += gravity * Time.deltaTime;
+                        jumpCheckStart = true;
+
+                    }
+                    else
+                    {
+                        moveVec.y = 0;
+                    }
+                    if (jumpCheckStart == true && cc.isGrounded)
+                    {
+                        am.SetTrigger("JumpEnd");
+                        jumpCheckStart = false;
+                        Invoke("JumpCountReturn", 1f);
+                        state = State.Idle;
+                    }
                 }
+                else if (state == State.Dash)
+                {
+
+                }
+                else if (state == State.Attack)
+                {
+
+                }
+                else if (state == State.Attacked)
+                {
+                    StartCoroutine(Stun(hp.Hp));
+                }
+                else if (state == State.JumpAttack)
+                {
+                    //moveVec.y = 0;
+                }
+
             }
-            else if (state == State.Run)
+            else
             {
-                if (keyboardMode == true)
+                if (state == State.Attacked)
                 {
-                    KeyBoardMove();
-                    can.SetActive(false);
-                }
-                else
-                {
-                    JoyStickMove();
-                    can.SetActive(true);
-                }
-                if (moveVec.x == 0)
-                {
-                    ChangeState(State.Idle);
-                }
-            }
-            else if (state == State.Jump)
-            {
-                if (keyboardMode == true)
-                {
-                    KeyBoardMove();
-                    can.SetActive(false);
-                }
-                else
-                {
-                    JoyStickMove();
-                    can.SetActive(true);
+                    GameObject sm = Instantiate(smoke);
+                    sm.transform.position = transform.position;
+                    StartCoroutine(Stun(hp.Hp));
                 }
                 if (!cc.isGrounded)
                 {
                     moveVec.y += gravity * Time.deltaTime;
-                    jumpCheckStart = true;
-
-                }
-                else
-                {
-                    moveVec.y = 0;
-                }
-                if (jumpCheckStart == true && cc.isGrounded)
-                {
-                    am.SetTrigger("JumpEnd");
-                    jumpCheckStart = false;
-                    Invoke("JumpCountReturn", 1f);
-                    state = State.Idle;
                 }
             }
-            else if (state == State.Dash)
+            if (transform.position.z != 0)
             {
-
+                cc.Move(new Vector3(0, 0, -transform.position.z));
             }
-            else if (state == State.Attack)
+            else
             {
-
+                moveVec.z = 0;
             }
-            else if (state == State.Attacked)
-            {
-                StartCoroutine(Stun(hp.Hp));
-            }
-            else if (state == State.JumpAttack)
-            {
-                //moveVec.y = 0;
-            }
-
+            cc.Move(moveVec * Time.deltaTime);
         }
+
+        //[현숙]
+        // 내것이 아니라면
         else
         {
-            if (state == State.Attacked)
-            {
-                GameObject sm = Instantiate(smoke);
-                sm.transform.position = transform.position;
-                StartCoroutine(Stun(hp.Hp));
-            }
-            if (!cc.isGrounded)
-            {
-                moveVec.y += gravity * Time.deltaTime;
-            }
+            //Lerp를 이용해서 목적지, 목적방향까지 이동 및 회전
+            transform.position = Vector3.Lerp(transform.position, receivePos, lerpSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, receiveRot, lerpSpeed * Time.deltaTime);
         }
-        if (transform.position.z != 0)
-        {
-            cc.Move(new Vector3(0, 0, -transform.position.z));
-        }
-        else
-        {
-            moveVec.z = 0;
-        }
-        cc.Move(moveVec * Time.deltaTime);
     }
+
     public override void Skill1()
     {
         am.SetTrigger("Skill");
@@ -126,11 +152,13 @@ public class PlayerDwarf_HJH : PlayerMove_HJH
     }
     public void SkillEffect()
     {
+        //[현숙]
+        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
+
+        // 밑에도 Rpc로 보내줘야하는가?
         audio.clip = audioClips[1];
         audio.Play();
-        GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0,1,0), Quaternion.identity);
-        Destroy(skill, 1f);
-        skill.GetComponent<Weapon2_HJH>().Attack = true;
+        
         state = State.Attack;
     }
     void JumpCountReturn()
@@ -183,5 +211,38 @@ public class PlayerDwarf_HJH : PlayerMove_HJH
     {
         state = State.Idle;
         Weapon.GetComponent<Weapon2_HJH>().Attack = false;
+    }
+
+    #region [현숙] Photon OnPhotonSerializeView 동기화
+    // 1초에 몇번 보내기 설정가능
+    // stream에는 value 타입만 넣을 수 있음
+    // 게임오브젝트, Transform 넘기기 X
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        //데이터 보내기 //내 PC
+        if (stream.IsWriting) // isMine == true
+        {
+            //position, rotation
+            //SendNext는 List로 구성되어 있음 //다른 데이터도 보낼 수 있음
+            stream.SendNext(transform.rotation);
+            stream.SendNext(transform.position);
+        }
+        //데이터 받기 //다른 사람 PC에서 호출됨
+        else if (stream.IsReading) // ismMine == false
+        {
+            //보낸 순서대로 받음
+            //오브젝트형으로 되어있기 때문에 강제 형변환 필수
+            receiveRot = (Quaternion)stream.ReceiveNext();
+            receivePos = (Vector3)stream.ReceiveNext();
+        }
+    }
+    #endregion
+
+    [PunRPC]
+    void RpcShowSkillEffect()
+    {
+        GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        Destroy(skill, 1f);
+        skill.GetComponent<Weapon2_HJH>().Attack = true;
     }
 }
