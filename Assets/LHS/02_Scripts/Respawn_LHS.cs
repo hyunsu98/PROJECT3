@@ -45,7 +45,6 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
         {
             // Æ÷Åæºä ¾À º¯°æ -> ¿£µù¾ÀÀ¸·Î
             PhotonNetwork.LoadLevel("EndingScene_LHS");
-            print("Á×¾î¾ßÁö");
         }
     }
 

@@ -56,6 +56,7 @@ MonoBehaviour:
   - Settgparent
   - Settgpos
   - Settgscale
+  - RpcShowSkillEffect
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
