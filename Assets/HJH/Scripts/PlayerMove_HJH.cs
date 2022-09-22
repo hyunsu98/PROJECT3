@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerMove_HJH : MonoBehaviour
+public class PlayerMove_HJH : MonoBehaviourPun
 {
     public GameObject smoke;
     public float jumpPower = 5;
@@ -24,11 +25,14 @@ public class PlayerMove_HJH : MonoBehaviour
     protected PlayerHp_HJH hp;
     public AudioClip[] audioClips;
     protected AudioSource audio;
-    #region 현숙추가
+
+    #region [현숙] 변수
     //****레이어 충돌 변수
     int playerLayer1, playerLayer2, playerLayer3, playerLayer4, groundLayer;
     bool fallGround;
+    #endregion
 
+    #region [현숙] 충돌무시함수
     //****충돌무시(열림)
     protected void IgnoreLayerTrue()
     {
@@ -49,6 +53,9 @@ public class PlayerMove_HJH : MonoBehaviour
             Physics.IgnoreLayerCollision(playerLayer4, groundLayer, true);
         }
     }
+    #endregion
+
+    #region [현숙] 충돌적용함수
     //****충돌적용(닫힘)
     protected void IgnoreLayerFalse()
     {
@@ -69,7 +76,9 @@ public class PlayerMove_HJH : MonoBehaviour
             Physics.IgnoreLayerCollision(playerLayer4, groundLayer, false);
         }
     }
+    #endregion
 
+    #region [현숙] 착지면 떨어질 때 충돌처리
     //****착지면에 떨어지는 키를 눌렀을때 0.2초간 레이어 충돌이 무시된 후 다시 적용
     IEnumerator LayerOpenClose()
     {
@@ -79,7 +88,9 @@ public class PlayerMove_HJH : MonoBehaviour
         IgnoreLayerFalse();
         fallGround = false;
     }
+    #endregion
 
+    #region [현숙] Ray변수
     //**** Ray변수
     private RaycastHit hit;
     private int layerMask;
@@ -123,7 +134,7 @@ public class PlayerMove_HJH : MonoBehaviour
     }
     protected void Start()
     {
-        #region 현숙추가
+        #region [현숙] LayerMask지정
         //****LayerMask 지정
         playerLayer1 = LayerMask.NameToLayer("Player1");
         playerLayer2 = LayerMask.NameToLayer("Player2");
@@ -172,7 +183,7 @@ public class PlayerMove_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Player == true)
         {
             if (state == State.Idle)
@@ -320,7 +331,7 @@ public class PlayerMove_HJH : MonoBehaviour
             AButton();
         }
 
-            #region 현숙추가
+            #region [현숙] 점프발판 / 벽점프 
             // 점프 발판
             // 아래로 레이를 쐈을 때 
             if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
@@ -396,8 +407,7 @@ public class PlayerMove_HJH : MonoBehaviour
 
         //더블 점프 버그있음 왜그런지는 모르겠음
 
-        //****
-        // 점프중이라면 True
+        // [현숙] 점프중이라면 True
         IgnoreLayerTrue();
 
         if (jumpCount > 0)
@@ -462,5 +472,6 @@ public class PlayerMove_HJH : MonoBehaviour
     {
 
     }
+
 
 }

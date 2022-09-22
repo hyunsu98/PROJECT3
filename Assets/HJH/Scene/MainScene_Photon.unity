@@ -736,6 +736,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4035813707306993455, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -3841554685536804767, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -3471,6 +3475,73 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &196301793
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 196301796}
+  - component: {fileID: 196301795}
+  - component: {fileID: 196301794}
+  m_Layer: 0
+  m_Name: GameManager_Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &196301794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196301793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 4
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &196301795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196301793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7e98d9e3caec384f85a7cf6be5612e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &196301796
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196301793}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2, y: 2.89, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &218178495
 GameObject:
   m_ObjectHideFlags: 0
@@ -4669,7 +4740,7 @@ Transform:
   - {fileID: 1243796718}
   - {fileID: 239846421}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &289914829
 GameObject:
@@ -6539,7 +6610,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &418157654
 MonoBehaviour:
@@ -6557,8 +6628,8 @@ MonoBehaviour:
   startLife: 3
   players: []
   playerCharcters: 
-  whoIam: 0
   characterPrefabs: []
+  gameStartButton: {fileID: 0}
 --- !u!1 &420264645
 GameObject:
   m_ObjectHideFlags: 0
@@ -6940,7 +7011,7 @@ Transform:
   - {fileID: 917680069}
   - {fileID: 181029635}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &438284701
 GameObject:
@@ -8149,6 +8220,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6199597202216965791, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5237858175099546372, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -8207,7 +8282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5078390142427002503, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5078390142427002503, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: m_TagString
@@ -8407,13 +8482,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: cd340fe3a4032dd4893aa4ea88705a2b, type: 2}
     - target: {fileID: 5128277309780116227, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigPelvis'\n\tTransform
-        'RigSpine2'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-        'RigSpine2'\n\tTransform 'RigSpine3'\n\tand more ...\n\tFrom animation clip
-        'Take Damage'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7016337918096897358, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: Player
@@ -10496,7 +10565,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 27, y: 10.02, z: 0}
 --- !u!1 &709327401
 GameObject:
@@ -31019,6 +31088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4035813707306993455, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -3841554685536804767, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -31029,13 +31102,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: d3d5408f7e50ad442a363abe892d2194, type: 2}
     - target: {fileID: 2475399503137562064, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'RigSpine2'\n\tTransform 'RigSpine3'\n\tTransform
-        'RigSpine1'\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigPelvis'\n\tTransform
-        'RigSpine2'\n\tTransform 'RigSpine3'\n\tand more ...\n\tFrom animation clip
-        'Take 001'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2524652284191957907, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_Height
@@ -31111,7 +31178,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2525578878964693710, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2525578878964693710, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: m_TagString

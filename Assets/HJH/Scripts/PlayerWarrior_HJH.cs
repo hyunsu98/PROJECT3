@@ -12,7 +12,6 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     // Update is called once per frame
     void Update()
     {
-
         if (Player == true)
         {
             if (state == State.Idle)
@@ -190,5 +189,4 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     {
         Weapon.GetComponent<Weapon_HJH>().Attack = false;
     }
-
 }

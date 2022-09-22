@@ -117,7 +117,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 방 옵션을 설정
         RoomOptions roomOptions = new RoomOptions();
         // 최대 인원 (0이면 최대인원)  = 우리는 4명
-        roomOptions.MaxPlayers = 4; //byte.Parse(inputMaxPlayer.text);
+        roomOptions.MaxPlayers = byte.Parse(inputMaxPlayer.text);
         // 룸 리스트에 보이지 않게? 보이게?
         roomOptions.IsVisible = true;
 
