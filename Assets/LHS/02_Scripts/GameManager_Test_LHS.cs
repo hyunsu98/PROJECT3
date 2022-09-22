@@ -15,7 +15,7 @@ public class GameManager_Test_LHS : MonoBehaviour
         PhotonNetwork.SendRate = 60;
 
         //선택한 플레이어 생성
-        PhotonNetwork.Instantiate("Player1", Vector3.zero, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player1", new Vector3(-2,2.3f,0), Quaternion.identity);
         //PhotonNetwork.Instantiate("Player2", Vector3.zero, Quaternion.identity);
         //PhotonNetwork.Instantiate("Player3", Vector3.zero, Quaternion.identity);
         //PhotonNetwork.Instantiate("Player4", Vector3.zero, Quaternion.identity);
