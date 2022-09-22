@@ -43,6 +43,19 @@ MonoBehaviour:
   - SelectedButton
   - LifeSet
   - ToggleSet
+  - ButtonSet
+  - Setparent
+  - Setpos
+  - Setscale
+  - Setmcparent
+  - Setmcpos
+  - Setmcscale
+  - Setpcparent
+  - Setpcpos
+  - Setpcscale
+  - Settgparent
+  - Settgpos
+  - Settgscale
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

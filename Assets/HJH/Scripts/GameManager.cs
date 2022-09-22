@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         playerCharcters = new PlayerCharcter[PhotonNetwork.CurrentRoom.MaxPlayers];
         players = new GameObject[PhotonNetwork.CurrentRoom.MaxPlayers];
-        PhotonNetwork.Instantiate("GameLobbyPlayer", Vector3.zero, Quaternion.identity);
+
         lobbySceneStartTrigger = false;
     }
 
@@ -97,7 +97,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         Camera.main.GetComponent<CameraMove3D_LHS>().StartSetting();
         MainsceneStartTrigger = false;
-
     }
 
 

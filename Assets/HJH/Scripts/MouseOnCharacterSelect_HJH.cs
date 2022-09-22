@@ -10,7 +10,7 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviourPun
     public int whoConnectThis;
 
     bool select = false;
-    public GameObject[] ui;
+    public List<GameObject> ui = new List<GameObject>();
     public Button[] buttons;
     // Start is called before the first frame update
     void Start()
@@ -89,9 +89,9 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviourPun
     {
         for(int i =0; i < 5; i++)
         {
-            ui[whoConnectThis-1].transform.GetChild(i).gameObject.SetActive(false);
+            ui[whoConnectThis-1].transform.GetChild(0).GetChild(i).gameObject.SetActive(false);
         }
-        ui[whoConnectThis -1].transform.GetChild(what).gameObject.SetActive(true);
+        ui[whoConnectThis -1].transform.GetChild(0).GetChild(what).gameObject.SetActive(true);
     }
 
     [PunRPC]

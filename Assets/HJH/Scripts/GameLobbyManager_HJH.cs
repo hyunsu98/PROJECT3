@@ -9,7 +9,7 @@ public class GameLobbyManager_HJH : MonoBehaviour
     public List<PhotonView> playerPhoton = new List<PhotonView>();
     public static GameLobbyManager_HJH instance;
 
-   
+
     private void Awake()
     {
         instance = this;
@@ -21,28 +21,47 @@ public class GameLobbyManager_HJH : MonoBehaviour
     {
         if (!PhotonNetwork.IsMasterClient)
         {
-            for(int i =0; i<toggles.Length; i++)
-            {
-                toggles[i].interactable = false;
-            }
-            for(int i = 0; i< mapButtons.Length; i++)
-            {
-                mapButtons[i].interactable = false;
-            }
+            //GameObject tg = GameObject.Find("ToggleGroup(Clone)");
+            //Debug.Log(tg.name);
+            //for(int i =0; i<4; i++)
+            //{
+            //    toggles[i] = tg.transform.GetChild(i).GetComponent<Toggle>();
+            //}
+            //for (int i = 0; i < toggles.Length; i++)
+            //{
+            //    toggles[i].interactable = false;
+            //}
+            //for (int i = 0; i < mapButtons.Length; i++)
+            //{
+            //    mapButtons[i].interactable = false;
+            //}
         }
+        else
+        {
+            GameObject tg = PhotonNetwork.Instantiate("ToggleGroup", Vector3.zero, Quaternion.identity);
+
+            GameObject mc = PhotonNetwork.Instantiate("MapChoice", Vector3.zero, Quaternion.identity);
+
+            GameObject pc = PhotonNetwork.Instantiate("PlayerChoice", Vector3.zero, Quaternion.identity);
+            
+        }
+        GameObject ct = PhotonNetwork.Instantiate("Character", Vector3.zero, Quaternion.identity);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //게임로비플레이어의 포톤뷰가 들어감
-    public void AddPlayer(PhotonView pv,GameLobbyPlayer_HJH i)
+
+    public void AddPlayer(PhotonView pv, GameLobbyPlayer_HJH i)
     {
         playerPhoton.Add(pv);
-        //게임로비플레이어한테 너가 몇번째인지 알려줌
-        i.playerNum = playerPhoton.Count;
+
+
+        //게임로비플레이어한테 너가 몇번째인지 알려
     }
 }
