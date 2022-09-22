@@ -38,9 +38,11 @@ public class GameLobbyManager_HJH : MonoBehaviour
         
     }
 
+    //게임로비플레이어의 포톤뷰가 들어감
     public void AddPlayer(PhotonView pv,GameLobbyPlayer_HJH i)
     {
         playerPhoton.Add(pv);
+        //게임로비플레이어한테 너가 몇번째인지 알려줌
         i.playerNum = playerPhoton.Count;
     }
 }

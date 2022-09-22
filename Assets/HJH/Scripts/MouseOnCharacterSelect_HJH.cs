@@ -6,7 +6,9 @@ using UnityEngine.UI;
 
 public class MouseOnCharacterSelect_HJH : MonoBehaviourPun
 {
+    // 누가 바꾸고 있는가를 알려주는 변수
     public int whoConnectThis;
+
     bool select = false;
     public GameObject[] ui;
     public Button[] buttons;
@@ -80,6 +82,8 @@ public class MouseOnCharacterSelect_HJH : MonoBehaviourPun
             //ChangeImage(3);
         }
     }
+
+    // 알아서 생성되게 -> UI안에 들어가게
     [PunRPC]
     void ChangeImage(int what)
     {
