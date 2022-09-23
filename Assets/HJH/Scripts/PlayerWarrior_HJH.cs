@@ -139,9 +139,8 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public override void Skill1()
     {
         am.SetTrigger("Skill");
-
-
     }
+
     public void Skill()
     {
         photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
@@ -206,6 +205,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     {
         audio.clip = audioClips[1];
         audio.Play();
+
         GameObject skill = Instantiate(skillEffect);
         skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
         Destroy(skill, 5f);
