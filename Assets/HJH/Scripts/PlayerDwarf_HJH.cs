@@ -7,14 +7,18 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
 {
     public GameObject skillEffect;
 
-    #region [현숙] 변수
-    //도착 위치
-    Vector3 receivePos;
-    //회전되야 하는 값
-    Quaternion receiveRot;
-    //보간 속력
-    public float lerpSpeed = 100;
-    #endregion
+    private void Start()
+    {
+
+        if (photonView.IsMine)
+        {
+            Player = true;
+        }
+        else
+        {
+            Player = false;
+        }
+    }
 
     // Update is called once per frame
     void Update()
@@ -130,15 +134,6 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
             }
             cc.Move(moveVec * Time.deltaTime);
         }
-
-        //[현숙]
-        // 내것이 아니라면
-        else
-        {
-            //Lerp를 이용해서 목적지, 목적방향까지 이동 및 회전
-            transform.position = Vector3.Lerp(transform.position, receivePos, lerpSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.Lerp(transform.rotation, receiveRot, lerpSpeed * Time.deltaTime);
-        }
     }
 
     public override void Skill1()
@@ -153,11 +148,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     public void SkillEffect()
     {
         //[현숙]
-        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
-
-        // 밑에도 Rpc로 보내줘야하는가?
-        audio.clip = audioClips[1];
-        audio.Play();
+        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);  
         
         state = State.Attack;
     }
@@ -213,34 +204,12 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
         Weapon.GetComponent<Weapon2_HJH>().Attack = false;
     }
 
-    #region [현숙] Photon OnPhotonSerializeView 동기화
-    // 1초에 몇번 보내기 설정가능
-    // stream에는 value 타입만 넣을 수 있음
-    // 게임오브젝트, Transform 넘기기 X
-    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    //{
-    //    //데이터 보내기 //내 PC
-    //    if (stream.IsWriting) // isMine == true
-    //    {
-    //        //position, rotation
-    //        //SendNext는 List로 구성되어 있음 //다른 데이터도 보낼 수 있음
-    //        stream.SendNext(transform.rotation);
-    //        stream.SendNext(transform.position);
-    //    }
-    //    //데이터 받기 //다른 사람 PC에서 호출됨
-    //    else if (stream.IsReading) // ismMine == false
-    //    {
-    //        //보낸 순서대로 받음
-    //        //오브젝트형으로 되어있기 때문에 강제 형변환 필수
-    //        receiveRot = (Quaternion)stream.ReceiveNext();
-    //        receivePos = (Vector3)stream.ReceiveNext();
-    //    }
-    //}
-    #endregion
-
     [PunRPC]
     void RpcShowSkillEffect()
     {
+        audio.clip = audioClips[1];
+        audio.Play();
+
         GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
         Destroy(skill, 1f);
         skill.GetComponent<Weapon2_HJH>().Attack = true;

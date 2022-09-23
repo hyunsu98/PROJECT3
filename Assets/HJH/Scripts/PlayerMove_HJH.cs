@@ -9,6 +9,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
     public float jumpPower = 5;
     protected GameObject can;
     public float gravity = -9.8f;
+    [SerializeField] 
     protected VariableJoystick joy;
     public float speed;
     public Vector3 moveVec;
@@ -114,9 +115,12 @@ public class PlayerMove_HJH : MonoBehaviourPun
     // Start is called before the first frame update
     private void Awake()
     {
-        audio = GetComponent<AudioSource>();   
+        audio = GetComponent<AudioSource>();  
         hp = GetComponent<PlayerHp_HJH>();
-        joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
+        if (photonView.IsMine == true)
+        {
+            joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
+        }
         Transform[] allChildren = GetComponentsInChildren<Transform>();
         foreach (Transform child in allChildren)
         {
