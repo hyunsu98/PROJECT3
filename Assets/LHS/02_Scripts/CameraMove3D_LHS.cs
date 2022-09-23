@@ -32,11 +32,12 @@ public class CameraMove3D_LHS : MonoBehaviour
             targets.Add(a[i].transform);
         }
         cam = GetComponent<Camera>();
-
     }
 
     private void LateUpdate()
     {
+        StartSetting();
+
         // 만약 타겟이 0이라면 아무것도 하지 않는다
         if (targets.Count == 0)
             return;

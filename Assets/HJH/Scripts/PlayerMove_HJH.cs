@@ -149,9 +149,16 @@ public class PlayerMove_HJH : MonoBehaviourPun
         #endregion
     }
 
-    protected void Start()
+    public virtual void Start()
     {
-
+        if (photonView.IsMine)
+        {
+            Player = true;
+        }
+        else
+        {
+            Player = false;
+        }
     }
 
     public void ChangeState(State s)

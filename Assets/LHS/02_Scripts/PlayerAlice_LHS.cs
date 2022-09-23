@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
+public class PlayerWarrior_HJH : PlayerMove_HJH
 {
     public GameObject skillEffect;
+    // Start is called before the first frame updatepublic float upDown = 0;
+    public AudioClip[] sound;
 
     public override void Start()
     {
@@ -15,8 +17,6 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     // Update is called once per frame
     void Update()
     {
-        //[현숙]
-        //만약에 내것이라면 움직임
         if (photonView.IsMine)
         {
             if (Player == true)
@@ -73,10 +73,6 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
                         jumpCheckStart = true;
 
                     }
-                    else
-                    {
-                        moveVec.y = 0;
-                    }
                     if (jumpCheckStart == true && cc.isGrounded)
                     {
                         am.SetTrigger("JumpEnd");
@@ -128,30 +124,46 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
         }
     }
 
+    void JumpCountReturn()
+    {
+        jumpCount = firstJumpCount;
+    }
     public override void Skill1()
     {
         am.SetTrigger("Skill");
+    }
 
+    public void Skill()
+    {
+        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
+        state = State.Attack;
     }
     public void SkillOver()
     {
         ChangeState(State.Idle);
     }
-    public void SkillEffect()
+    public override void StopAttack()
     {
-        //[현숙]
-        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);  
-        
+        am.SetTrigger("Attack");
+        Weapon.GetComponent<Weapon_HJH>().Attack = true;
         state = State.Attack;
+        audio.clip = audioClips[0];
+        audio.Play();
+
     }
-    void JumpCountReturn()
+    public void AttackOver()
     {
-        jumpCount = firstJumpCount;
+        ChangeState(State.Idle);
+        Weapon.GetComponent<Weapon_HJH>().Attack = false;
     }
     public override void Dash()
     {
         Instantiate(dashEffect, transform.position, Quaternion.identity);
         StartCoroutine(DashEffect());
+    }
+    public override void Jump()
+    {
+        base.Jump();
     }
     IEnumerator DashEffect()
     {
@@ -169,31 +181,15 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         Weapon.SetActive(true);
     }
-    public override void Jump()
-    {
-        base.Jump();
-    }
     public override void JumpAttack()
     {
         am.SetTrigger("JumpAttack");
-        Weapon.GetComponent<Weapon2_HJH>().Attack = true;
+        Weapon.GetComponent<Weapon_HJH>().Attack = true;
     }
+
     public void JumpAttackOver()
     {
-        Weapon.GetComponent<Weapon2_HJH>().Attack = false;
-    }
-    public override void StopAttack()
-    {
-        am.SetTrigger("Attack");
-        Weapon.GetComponent<Weapon2_HJH>().Attack = true;
-        state = State.Attack;
-        audio.clip = audioClips[0];
-        audio.Play();
-    }
-    public void AttackOver()
-    {
-        state = State.Idle;
-        Weapon.GetComponent<Weapon2_HJH>().Attack = false;
+        Weapon.GetComponent<Weapon_HJH>().Attack = false;
     }
 
     [PunRPC]
@@ -202,8 +198,9 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
         audio.clip = audioClips[1];
         audio.Play();
 
-        GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        Destroy(skill, 1f);
-        skill.GetComponent<Weapon2_HJH>().Attack = true;
+        GameObject skill = Instantiate(skillEffect);
+        skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
+        Destroy(skill, 5f);
+        skill.GetComponent<Weapon_HJH>().Attack = true;
     }
 }
