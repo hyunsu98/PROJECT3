@@ -28,7 +28,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         //그렇지 않다면
         //접속 버튼을 비활성화 하자
         btnConnect.interactable = s.Length > 0;
-        print("OnValueChanged : " + s);
     }
 
     public void OnSubmit(string s)
@@ -38,13 +37,11 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         {
             //접속 하자! 
             OnClickConnect();
-        }
-        print("OnSubmit : " + s);
+        } 
     }
 
     public void OnEndEdit(string s)
     {
-        print("OnEndEdit : " + s);
     }
 
 
@@ -58,15 +55,12 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     public override void OnConnected()
     {
         base.OnConnected();
-        print(System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     //마스터 서버 접속성공시 호출(Lobby에 진입할 수 있는 상태)
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
-        print(System.Reflection.MethodBase.GetCurrentMethod().Name);
-
         //내 닉네임 설정
         PhotonNetwork.NickName = inputNickName.text;
         //로비 진입 요청
@@ -77,8 +71,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
-        print(System.Reflection.MethodBase.GetCurrentMethod().Name);
-
         //LobbyScene으로 이동
         PhotonNetwork.LoadLevel("LobbyScene_LHS");
     }

@@ -134,8 +134,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         roomOptions.CustomRoomPropertiesForLobby = new string[] {
             "desc", "map_id", "room_name", "password"
         };
-
         // 방 생성 요청 (해당 옵션을 이용해서)
+        GameManager.instance.RoomName = inputRoomName.text;
+        Debug.Log(inputRoomName.text);
         PhotonNetwork.CreateRoom(inputRoomName.text + inputPassword.text, roomOptions);
     }
 
@@ -143,7 +144,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnCreatedRoom()
     {
         base.OnCreatedRoom();
-        print("OnCreatedRoom");
+       
     }
 
     //방 생성이 실패 될때 호출 되는 함수
@@ -160,13 +161,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         //PhotonNetwork.JoinRoom(inputRoomName.text + inputPassword.text);
         PhotonNetwork.JoinRoom(findRoomName.text + findPassword.text);
+        GameManager.instance.RoomName = findRoomName.text;
+
     }
 
     //방 참가가 완료 되었을 때 호출 되는 함수
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
-        print("OnJoinedRoom");
+
         PhotonNetwork.LoadLevel("GameLobbyScene_LHS");
         //PhotonNetwork.LoadLevel("MainScene_Photon");
     }
@@ -175,7 +178,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
         base.OnJoinRoomFailed(returnCode, message);
-        print("OnJoinRoomFailed, " + returnCode + ", " + message);
         // 실패 팝업창
         joinFail.SetActive(true);
     }
@@ -260,7 +262,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
             string desc = (string)info.CustomProperties["desc"];
             int map_id = (int)info.CustomProperties["map_id"];
-            print(desc + ", " + map_id);
         }
     }
 

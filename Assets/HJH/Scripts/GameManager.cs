@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject[] characterPrefabs;
     bool MainsceneStartTrigger = true; // ¾Èº¸³»µµµÊ
     bool lobbySceneStartTrigger = true;
-
+    public string RoomName = "?";
 
     public enum PlayerCharcter
     {
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void GameLobbySene()
     {
         players = new GameObject[PhotonNetwork.CurrentRoom.MaxPlayers];
-
+        GameObject.Find("Background_Text").GetComponent<Text>().text = RoomName;
         lobbySceneStartTrigger = false;
     }
 

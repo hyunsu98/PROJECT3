@@ -6,6 +6,16 @@ using UnityEngine.UI;
 
 public class LifeToggle_HJH : MonoBehaviourPun
 {
+    private void Start()
+    {
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            for(int i =0; i < toggles.Length; i++)
+            {
+                toggles[i].interactable = false;
+            }
+        }
+    }
     public Toggle[] toggles;
   public void Life2()
     {

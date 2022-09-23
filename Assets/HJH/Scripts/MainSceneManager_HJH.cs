@@ -18,7 +18,7 @@ public class MainSceneManager_HJH : MonoBehaviourPun
             player.GetComponent<Respawn_LHS>().RespawnCount = GameManager.instance.startLife;
             ui1.GetComponent<Player1UI_HJH>().player = player;
             ui1.GetComponent<Player1UI_HJH>().LifeCount = GameManager.instance.startLife;
-            Debug.Log("SummonEnd");
+            ui1.GetComponent<Player1UI_HJH>().NickName.text = photonView.Owner.NickName;
         }
         
 

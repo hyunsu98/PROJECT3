@@ -51,7 +51,6 @@ public class GameLobbyManager_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GameManager.instance.playerCharcters.Count + " " + playerPhoton.Count);
         if (PhotonNetwork.IsMasterClient && GameManager.instance.playerCharcters.Count == playerPhoton.Count)
         {
             GameObject bt = GameObject.Find("BtnPlay");
