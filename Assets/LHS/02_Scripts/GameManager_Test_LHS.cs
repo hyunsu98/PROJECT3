@@ -9,7 +9,7 @@ public class GameManager_Test_LHS : MonoBehaviour
     void Start()
     {
         // 1. OnPhotonSerializeView 호출빈도
-        PhotonNetwork.SerializationRate = 60;
+        //PhotonNetwork.SerializationRate = 60;
 
         // 2. Rpc(원격 프로시저 호출)호출빈도 //단발성 원할 때 한번
         PhotonNetwork.SendRate = 60;

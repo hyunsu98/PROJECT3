@@ -9,113 +9,129 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     // Start is called before the first frame updatepublic float upDown = 0;
     public AudioClip[] sound;
 
+    private void Start()
+    {
+
+        if (photonView.IsMine)
+        {
+            Player = true;
+        }
+        else
+        {
+            Player = false;
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Player == true)
+        if (photonView.IsMine)
         {
-            if (state == State.Idle)
+            if (Player == true)
             {
-                if (keyboardMode == true)
+                if (state == State.Idle)
                 {
-                    KeyBoardMove();
-                    can.SetActive(false);
+                    if (keyboardMode == true)
+                    {
+                        KeyBoardMove();
+                        can.SetActive(false);
+                    }
+                    else
+                    {
+                        JoyStickMove();
+                        can.SetActive(true);
+                    }
+                    if (moveVec.x != 0)
+                    {
+                        ChangeState(State.Run);
+                    }
                 }
-                else
+                else if (state == State.Run)
                 {
-                    JoyStickMove();
-                    can.SetActive(true);
+                    if (keyboardMode == true)
+                    {
+                        KeyBoardMove();
+                        can.SetActive(false);
+                    }
+                    else
+                    {
+                        JoyStickMove();
+                        can.SetActive(true);
+                    }
+                    if (moveVec.x == 0)
+                    {
+                        ChangeState(State.Idle);
+                    }
                 }
-                if (moveVec.x != 0)
+                else if (state == State.Jump)
                 {
-                    ChangeState(State.Run);
+                    if (keyboardMode == true)
+                    {
+                        KeyBoardMove();
+                        can.SetActive(false);
+                    }
+                    else
+                    {
+                        JoyStickMove();
+                        can.SetActive(true);
+                    }
+                    if (!cc.isGrounded)
+                    {
+                        moveVec.y += gravity * Time.deltaTime;
+                        jumpCheckStart = true;
+
+                    }
+                    if (jumpCheckStart == true && cc.isGrounded)
+                    {
+                        am.SetTrigger("JumpEnd");
+                        jumpCheckStart = false;
+                        Invoke("JumpCountReturn", 1f);
+                        state = State.Idle;
+                    }
                 }
+                else if (state == State.Dash)
+                {
+
+                }
+                else if (state == State.Attack)
+                {
+
+                }
+                else if (state == State.Attacked)
+                {
+                    StartCoroutine(Stun(hp.Hp));
+                }
+                else if (state == State.JumpAttack)
+                {
+                    //moveVec.y = 0;
+                }
+
             }
-            else if (state == State.Run)
+            else
             {
-                if (keyboardMode == true)
+                if (state == State.Attacked)
                 {
-                    KeyBoardMove();
-                    can.SetActive(false);
-                }
-                else
-                {
-                    JoyStickMove();
-                    can.SetActive(true);
-                }
-                if (moveVec.x == 0)
-                {
-                    ChangeState(State.Idle);
-                }
-            }
-            else if (state == State.Jump)
-            {
-                if (keyboardMode == true)
-                {
-                    KeyBoardMove();
-                    can.SetActive(false);
-                }
-                else
-                {
-                    JoyStickMove();
-                    can.SetActive(true);
+                    GameObject sm = Instantiate(smoke);
+                    sm.transform.position = transform.position;
+                    StartCoroutine(Stun(hp.Hp));
                 }
                 if (!cc.isGrounded)
                 {
                     moveVec.y += gravity * Time.deltaTime;
-                    jumpCheckStart = true;
-
-                }
-                if (jumpCheckStart == true && cc.isGrounded)
-                {
-                    am.SetTrigger("JumpEnd");
-                    jumpCheckStart = false;
-                    Invoke("JumpCountReturn", 1f);
-                    state = State.Idle;
                 }
             }
-            else if (state == State.Dash)
+            if (transform.position.z != 0)
             {
-
+                cc.Move(new Vector3(0, 0, -transform.position.z));
             }
-            else if (state == State.Attack)
+            else
             {
-
+                moveVec.z = 0;
             }
-            else if (state == State.Attacked)
-            {
-                StartCoroutine(Stun(hp.Hp));
-            }
-            else if(state == State.JumpAttack)
-            {
-                //moveVec.y = 0;
-            }
-
+            cc.Move(moveVec * Time.deltaTime);
         }
-        else
-        {
-            if (state == State.Attacked)
-            {
-                GameObject sm = Instantiate(smoke);
-                sm.transform.position = transform.position;
-                StartCoroutine(Stun(hp.Hp));
-            }
-            if (!cc.isGrounded)
-            {
-                moveVec.y += gravity * Time.deltaTime;
-            }
-        }
-        if(transform.position.z != 0)
-        {
-            cc.Move(new Vector3(0, 0, -transform.position.z));
-        }
-        else
-        {
-            moveVec.z = 0;
-        }
-        cc.Move(moveVec * Time.deltaTime);
-
     }
+
     void JumpCountReturn()
     {
         jumpCount = firstJumpCount;
@@ -128,12 +144,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public void Skill()
     {
-        audio.clip = audioClips[1];
-        audio.Play();
-        GameObject skill = Instantiate(skillEffect);
-        skill.transform.position = gameObject.transform.position + new Vector3(0,1,0);
-        Destroy(skill, 5f);
-        skill.GetComponent<Weapon_HJH>().Attack = true;
+        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
         state = State.Attack;
     }
     public void SkillOver()
@@ -188,5 +199,16 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public void JumpAttackOver()
     {
         Weapon.GetComponent<Weapon_HJH>().Attack = false;
+    }
+
+    [PunRPC]
+    void RpcShowSkillEffect()
+    {
+        audio.clip = audioClips[1];
+        audio.Play();
+        GameObject skill = Instantiate(skillEffect);
+        skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
+        Destroy(skill, 5f);
+        skill.GetComponent<Weapon_HJH>().Attack = true;
     }
 }
