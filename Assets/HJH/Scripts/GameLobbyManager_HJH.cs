@@ -8,7 +8,6 @@ public class GameLobbyManager_HJH : MonoBehaviour
 {
     public List<PhotonView> playerPhoton = new List<PhotonView>();
     public static GameLobbyManager_HJH instance;
-    public int selectPeople = 0;
 
     private void Awake()
     {
@@ -52,7 +51,8 @@ public class GameLobbyManager_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PhotonNetwork.IsMasterClient && selectPeople == playerPhoton.Count)
+        Debug.Log(GameManager.instance.playerCharcters.Count + " " + playerPhoton.Count);
+        if (PhotonNetwork.IsMasterClient && GameManager.instance.playerCharcters.Count == playerPhoton.Count)
         {
             GameObject bt = GameObject.Find("BtnPlay");
             bt.GetComponent<Button>().interactable = true;
@@ -61,7 +61,7 @@ public class GameLobbyManager_HJH : MonoBehaviour
 
     //게임로비플레이어의 포톤뷰가 들어감
 
-    public void AddPlayer(PhotonView pv, GameLobbyPlayer_HJH i)
+    public void AddPlayer(PhotonView pv)
     {
         playerPhoton.Add(pv);
         //게임로비플레이어한테 너가 몇번째인지 알려

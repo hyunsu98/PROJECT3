@@ -1007,7 +1007,6 @@ MonoBehaviour:
   roomMember: 1
   startLife: 3
   players: []
-  playerCharcters: 
   characterPrefabs:
   - {fileID: 5078390142427002503, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
   - {fileID: 2525578878964693710, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}

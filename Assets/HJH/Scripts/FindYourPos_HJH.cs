@@ -31,7 +31,12 @@ public class FindYourPos_HJH : MonoBehaviour
             transform.parent = GameObject.Find("Uis").transform;
             GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
         }
-        
+        else if (x == "CharacterUI")
+        {
+            transform.parent = GameObject.Find("Uis").transform;
+            GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        }
+
     }
 
     // Update is called once per frame

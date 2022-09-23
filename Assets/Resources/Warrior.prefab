@@ -447,7 +447,7 @@ GameObject:
   - component: {fileID: -2816808281231262722}
   - component: {fileID: -4035813707306993455}
   m_Layer: 10
-  m_Name: Player2
+  m_Name: Warrior
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -555,6 +555,7 @@ MonoBehaviour:
   dashRange: 2
   weapon: Axe Orange
   skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
+  lerpSpeed: 100
 --- !u!114 &5728962312677335604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +612,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 3327749204065425185}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
