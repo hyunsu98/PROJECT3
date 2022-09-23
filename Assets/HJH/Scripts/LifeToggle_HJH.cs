@@ -25,6 +25,7 @@ public class LifeToggle_HJH : MonoBehaviourPun
             photonView.RPC("ToggleSet", RpcTarget.Others, 0);
 
         }
+        GameManager.instance.startLife = 2;
     }
     public void Life3()
     {
@@ -33,6 +34,7 @@ public class LifeToggle_HJH : MonoBehaviourPun
             photonView.RPC("LifeSet", RpcTarget.Others, 3);
             photonView.RPC("ToggleSet", RpcTarget.Others, 1);
         }
+        GameManager.instance.startLife = 3;
     }
     public void Life4()
     {if (PhotonNetwork.IsMasterClient)
@@ -40,6 +42,7 @@ public class LifeToggle_HJH : MonoBehaviourPun
             photonView.RPC("LifeSet", RpcTarget.Others, 4);
             photonView.RPC("ToggleSet", RpcTarget.Others, 2);
         }
+        GameManager.instance.startLife = 4;
     }
     public void Life5()
     {if (PhotonNetwork.IsMasterClient)
@@ -47,6 +50,7 @@ public class LifeToggle_HJH : MonoBehaviourPun
             photonView.RPC("LifeSet", RpcTarget.Others, 5);
             photonView.RPC("ToggleSet", RpcTarget.Others, 3);
         }
+        GameManager.instance.startLife = 5;
     }
 
     [PunRPC]

@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 111
+  controlID: 52
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 51
+  controlID: 77
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -222,7 +222,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 63
+  controlID: 30
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -242,8 +242,8 @@ MonoBehaviour:
     y: 0
     width: 294.40002
     height: 722.8
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -383,22 +383,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/LHS/01_Scenes
+    - Packages
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/LHS/01_Scenes
+  - Packages
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\HP\Desktop\Unity\Project\Civilization_Lyd_Hjh_Alpha\Civilization_Lyd_Hjh_Alpha\PROJECT3
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 99.80002}
-    m_SelectedIDs: 0a730000
-    m_LastClickedID: 29450
-    m_ExpandedIDs: 00000000527200005472000056720000587200005a7200005c7200005e7200006072000000ca9a3b
+    scrollPos: {x: 0, y: 105.400024}
+    m_SelectedIDs: ffffff7f
+    m_LastClickedID: 2147483647
+    m_ExpandedIDs: 000000008e73000090730000927300009473000096730000987300009a7300009c73000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -426,7 +426,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000527200005472000056720000587200005a7200005c7200005e72000060720000
+    m_ExpandedIDs: 000000008e73000090730000927300009473000096730000987300009a7300009c730000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -618,7 +618,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: -141, y: -175.79999}
+      snapOffset: {x: -141, y: -148.6}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: unity-grid-and-snap-toolbar
@@ -821,9 +821,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.170167, y: 2.1435602, z: 0.070121884}
+    m_Target: {x: 524.38824, y: 170.52989, z: -1.2721443}
     speed: 2
-    m_Value: {x: -1.170167, y: 2.1435602, z: 0.070121884}
+    m_Value: {x: 524.38824, y: 170.52989, z: -1.2721443}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -870,13 +870,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.042294912, y: -0.009894126, z: 0.00041885994, w: -0.99905837}
+    m_Target: {x: -0.03330271, y: 0.006593174, z: -0.00021969588, w: -0.99942595}
     speed: 2
-    m_Value: {x: -0.042294815, y: -0.009894104, z: 0.00041885898, w: -0.9990561}
+    m_Value: {x: -0.03330263, y: 0.006593158, z: -0.00021969536, w: -0.99942356}
   m_Size:
-    m_Target: 4.3775964
+    m_Target: 79.285515
     speed: 2
-    m_Value: 4.3775964
+    m_Value: 79.285515
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -932,20 +932,20 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 60bf0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0078fdff028afdff9a8efdff3c98fdff62defdffb2eefdff6cf3fdffd4fbfdffda0bfeff3416feff261efeff682efeffe039feffcc3efeffda48feffc455feff0c6cfeff9879feff0287feff448afeff7c98feff3ca0feff70aafeff5eacfeffe6ccfeffa00effffae0effff9419ffffaa59ffffd68bffffc4a8ffff84b9ffff1cc8ffffaad6ffff9ae6ffffc0fafffff4ffffff62890000d8890000ec8f0000f4950000fc9b0000fea600000eb300003ec90000b4c9000028e100006ae10000e0e100008800010094090100de090100902c0100482d0100562e01005a6401002e650100
+      m_ExpandedIDs: ee27fdff5c50fdff126bfdff8481fdffd296fdff5cc2fdff8cd3fdff90d3fdff94d3fdff98d3fdffd8d3fdffdcd3fdffe0d3fdffe4d3fdff10d4fdff38d4fdffecd7fdff58e9fdff5ce9fdff60e9fdff64e9fdff70e9fdffa4e9fdffa8e9fdfface9fdffb0e9fdffdce9fdff04eafdffb8edfdff7801feff684ffeff6c4ffeff704ffeff744ffeffb44ffeffb84ffeffbc4ffeffc04ffeffec4ffeff1450feffc853feffd86ffeff0a70feffc272fefff472feff0473feff6e7cfeff2e45ffff9854ffffe268ffff167fffffd08affffac8effff5ea6ffffd2b0ffffcab2ffffbef7ffff72fafffff4ffffff2cb200000cc4000010d80000d8e400004ee50000224501004e45010098450100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Aland(Clone)
-        m_OriginalName: Aland(Clone)
+        m_Name: NickNameText
+        m_OriginalName: NickNameText
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -141230
+        m_UserData: -101702
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0

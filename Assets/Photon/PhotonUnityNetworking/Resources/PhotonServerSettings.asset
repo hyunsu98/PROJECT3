@@ -60,6 +60,9 @@ MonoBehaviour:
   - SameList
   - SetDic
   - MoveMainScene
+  - SetInfo
+  - Dam
+  - AtSet
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

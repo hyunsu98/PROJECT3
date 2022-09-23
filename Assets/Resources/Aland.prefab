@@ -105,6 +105,7 @@ MonoBehaviour:
   smoke: {fileID: 100000, guid: 2e8ced71f4c8364468fa618a1cdba26e, type: 3}
   jumpPower: 8
   gravity: -9.8
+  joy: {fileID: 0}
   speed: 3
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2

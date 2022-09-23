@@ -153,7 +153,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public override void StopAttack()
     {
         am.SetTrigger("Attack");
-        Weapon.GetComponent<Weapon_HJH>().Attack = true;
+        photonView.RPC("AtSet", RpcTarget.All, false);
         state = State.Attack;
         audio.clip = audioClips[0];
         audio.Play();
@@ -162,7 +162,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public void AttackOver()
     {
         ChangeState(State.Idle);
-        Weapon.GetComponent<Weapon_HJH>().Attack = false;
+        photonView.RPC("AtSet", RpcTarget.All, false);
     }
     public override void Dash()
     {
@@ -192,12 +192,18 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public override void JumpAttack()
     {
         am.SetTrigger("JumpAttack");
-        Weapon.GetComponent<Weapon_HJH>().Attack = true;
+
+        photonView.RPC("AtSet", RpcTarget.All, true);
     }
 
     public void JumpAttackOver()
     {
-        Weapon.GetComponent<Weapon_HJH>().Attack = false;
+        photonView.RPC("AtSet", RpcTarget.All, false);
+    }
+    [PunRPC]
+    void AtSet(bool set)
+    {
+        Weapon.GetComponent<Weapon_HJH>().Attack = set;
     }
 
     [PunRPC]

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerHp_HJH : MonoBehaviour
+public class PlayerHp_HJH : MonoBehaviourPun
 {
     ImpactReceiver_HJH impact;
     [SerializeField]
@@ -27,24 +28,32 @@ public class PlayerHp_HJH : MonoBehaviour
 
     public void Damage(Vector3 point,int power)
     {
-        if(point.x > 0)
-        {
-            pm.moveVec = Vector3.zero;
-            impact.AddImpact(new Vector3(1, 1, 0), ((hp/30) + 1) * 50);
-        }
-        else
-        {
-            pm.moveVec = Vector3.zero;
-            impact.AddImpact(new Vector3(-1, 1, 0), ((hp / 30) + 1) * 50);
-        }
-        cs.Shake((float)hp / 100,0.5f);
-        GameObject ef = Instantiate(effect);
-        ef.transform.position = transform.position + new Vector3(0, 1, 0);
-        ef.GetComponent<Renderer>().sortingOrder = 50;
-        Hp += power;
-
+        Debug.Log(point + " " + power);
+        string thing = point.x.ToString() + " " + point.y.ToString() + " " + point.z.ToString();
+        photonView.RPC("Dam", RpcTarget.All, thing, power);
 
     }
+    //[PunRPC]
+    //public void Dam(string thing, int power)
+    //{
+    //    string[] th = thing.Split();
+    //    Vector3 point = new Vector3(float.Parse(th[0]), float.Parse(th[1]), float.Parse(th[2]));
+    //    if (point.x > 0)
+    //    {
+    //        pm.moveVec = Vector3.zero;
+    //        impact.AddImpact(new Vector3(1, 1, 0), ((hp / 30) + 1) * 50);
+    //    }
+    //    else
+    //    {
+    //        pm.moveVec = Vector3.zero;
+    //        impact.AddImpact(new Vector3(-1, 1, 0), ((hp / 30) + 1) * 50);
+    //    }
+    //    cs.Shake((float)hp / 100, 0.5f);
+    //    GameObject ef = Instantiate(effect);
+    //    ef.transform.position = transform.position + new Vector3(0, 1, 0);
+    //    ef.GetComponent<Renderer>().sortingOrder = 50;
+    //    Hp += power;
+    //}
     // Start is called before the first frame update
     void Start()
     {

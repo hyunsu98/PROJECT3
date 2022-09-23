@@ -343,7 +343,6 @@ public class PlayerMove_HJH : MonoBehaviourPun
             // 아래로 레이를 쐈을 때 
             if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
             {
-                print(hit.transform.name);
                 IgnoreLayerFalse();
             }
 
@@ -351,7 +350,6 @@ public class PlayerMove_HJH : MonoBehaviourPun
             if (Physics.Raycast(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, out hit, 0.7f, layerMask2) && moveVec.x != 0)
             {
                 Debug.DrawRay(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, Color.green, 0.7f);
-                print(hit.transform.name);
                 if (moveVec.y < 0)
                 {
                     moveVec = Vector3.zero;

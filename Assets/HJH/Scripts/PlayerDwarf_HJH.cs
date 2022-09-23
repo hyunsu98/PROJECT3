@@ -192,8 +192,8 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     }
     public override void StopAttack()
     {
-        am.SetTrigger("Attack");
-        Weapon.GetComponent<Weapon2_HJH>().Attack = true;
+        am.SetTrigger("Attack");        
+        photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         audio.clip = audioClips[0];
         audio.Play();
@@ -201,9 +201,13 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     public void AttackOver()
     {
         state = State.Idle;
-        Weapon.GetComponent<Weapon2_HJH>().Attack = false;
+        photonView.RPC("AtSet", RpcTarget.All, false);
     }
-
+    [PunRPC]
+    void AtSet(bool set)
+    {
+        Weapon.GetComponent<Weapon_HJH>().Attack = set;
+    }
     [PunRPC]
     void RpcShowSkillEffect()
     {
