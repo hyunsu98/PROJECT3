@@ -736,6 +736,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4035813707306993455, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -3841554685536804767, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -6563,8 +6567,8 @@ MonoBehaviour:
   startLife: 3
   players: []
   playerCharcters: 
-  whoIam: 0
   characterPrefabs: []
+  gameStartButton: {fileID: 0}
 --- !u!1 &420264645
 GameObject:
   m_ObjectHideFlags: 0
@@ -8155,6 +8159,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6199597202216965791, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: -5237858175099546372, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -30994,6 +31002,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4035813707306993455, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -3841554685536804767, guid: a209c8af4af459a4cbc5644537e481aa, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -32274,6 +32286,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6199597202216965791, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -5237858175099546372, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: respawnPoint
       value: 
@@ -32536,13 +32552,7 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: cd340fe3a4032dd4893aa4ea88705a2b, type: 2}
     - target: {fileID: 5128277309780116227, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'RigPelvis'\n\tTransform 'RigSpine2'\n\tTransform
-        'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform 'RigPelvis'\n\tTransform
-        'RigSpine2'\n\tTransform 'RigSpine3'\n\tTransform 'RigSpine1'\n\tTransform
-        'RigSpine2'\n\tTransform 'RigSpine3'\n\tand more ...\n\tFrom animation clip
-        'Take Damage'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5329424675700912626, guid: da415cdc4ca0d174c8a6817f567f6ca9, type: 3}
       propertyPath: effect

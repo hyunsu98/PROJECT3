@@ -131,9 +131,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
         moveVec = Vector3.zero;
         //am.SetInteger("Jump",jumpCount);
         firstJumpCount = jumpCount;
-    }
-    protected void Start()
-    {
+
         #region [현숙] LayerMask지정
         //****LayerMask 지정
         playerLayer1 = LayerMask.NameToLayer("Player1");
@@ -145,8 +143,13 @@ public class PlayerMove_HJH : MonoBehaviourPun
         layerMask = 1 << 8;
         layerMask2 = 1 << 9;
         #endregion
-        
     }
+
+    protected void Start()
+    {
+
+    }
+
     public void ChangeState(State s)
     {
         if (state == s) return;

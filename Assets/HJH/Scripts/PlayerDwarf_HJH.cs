@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerDwarf_HJH : PlayerMove_HJH, IPunObservable
+public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
 {
     public GameObject skillEffect;
 
@@ -217,25 +217,25 @@ public class PlayerDwarf_HJH : PlayerMove_HJH, IPunObservable
     // 1초에 몇번 보내기 설정가능
     // stream에는 value 타입만 넣을 수 있음
     // 게임오브젝트, Transform 넘기기 X
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        //데이터 보내기 //내 PC
-        if (stream.IsWriting) // isMine == true
-        {
-            //position, rotation
-            //SendNext는 List로 구성되어 있음 //다른 데이터도 보낼 수 있음
-            stream.SendNext(transform.rotation);
-            stream.SendNext(transform.position);
-        }
-        //데이터 받기 //다른 사람 PC에서 호출됨
-        else if (stream.IsReading) // ismMine == false
-        {
-            //보낸 순서대로 받음
-            //오브젝트형으로 되어있기 때문에 강제 형변환 필수
-            receiveRot = (Quaternion)stream.ReceiveNext();
-            receivePos = (Vector3)stream.ReceiveNext();
-        }
-    }
+    //public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    //{
+    //    //데이터 보내기 //내 PC
+    //    if (stream.IsWriting) // isMine == true
+    //    {
+    //        //position, rotation
+    //        //SendNext는 List로 구성되어 있음 //다른 데이터도 보낼 수 있음
+    //        stream.SendNext(transform.rotation);
+    //        stream.SendNext(transform.position);
+    //    }
+    //    //데이터 받기 //다른 사람 PC에서 호출됨
+    //    else if (stream.IsReading) // ismMine == false
+    //    {
+    //        //보낸 순서대로 받음
+    //        //오브젝트형으로 되어있기 때문에 강제 형변환 필수
+    //        receiveRot = (Quaternion)stream.ReceiveNext();
+    //        receivePos = (Vector3)stream.ReceiveNext();
+    //    }
+    //}
     #endregion
 
     [PunRPC]
