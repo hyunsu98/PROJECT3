@@ -206,7 +206,8 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     [PunRPC]
     void AtSet(bool set)
     {
-        Weapon.GetComponent<Weapon_HJH>().Attack = set;
+        Debug.Log(Weapon.name);
+        Weapon.GetComponent<Weapon2_HJH>().Attack = set;
     }
     [PunRPC]
     void RpcShowSkillEffect()
