@@ -3,23 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerWarrior_HJH : PlayerMove_HJH
+public class PlayerAlice_LHS : PlayerMove_HJH
 {
     public GameObject skillEffect;
     // Start is called before the first frame updatepublic float upDown = 0;
     public AudioClip[] sound;
 
-    private void Start()
+    public override void Start()
     {
-
-        if (photonView.IsMine)
-        {
-            Player = true;
-        }
-        else
-        {
-            Player = false;
-        }
+        base.Start();
     }
 
     // Update is called once per frame
