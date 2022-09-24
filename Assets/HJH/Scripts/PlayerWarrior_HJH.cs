@@ -153,7 +153,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public override void StopAttack()
     {
         am.SetTrigger("Attack");
-        photonView.RPC("AtSet", RpcTarget.All, false);
+        photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         audio.clip = audioClips[0];
         audio.Play();

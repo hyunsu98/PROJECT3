@@ -59,7 +59,6 @@ public class Weapon_HJH : MonoBehaviour
             if (other.GetComponent<PlayerHp_HJH>() != null && other.GetComponent<PlayerWarrior_HJH>() == null)
             {
                 other.GetComponent<PlayerHp_HJH>().Damage(other.transform.position - transform.position,Damage);
-                Debug.Log("니가 왜 실행되냐");
                 Attack = false;
             }
         }
