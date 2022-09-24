@@ -7,17 +7,9 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
 {
     public GameObject skillEffect;
 
-    private void Start()
+    public override void Start()
     {
-
-        if (photonView.IsMine)
-        {
-            Player = true;
-        }
-        else
-        {
-            Player = false;
-        }
+        base.Start();
     }
 
     // Update is called once per frame
