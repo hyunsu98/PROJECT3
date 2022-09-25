@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1596098913886443875}
   - component: {fileID: 735270176993029100}
-  - component: {fileID: 6135117724575018367}
+  - component: {fileID: -272181729690196667}
   - component: {fileID: -7537933183147574082}
   m_Layer: 0
   m_Name: Player4SkillEffect
@@ -48,7 +48,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.9844775, y: 1, z: 4.740704}
   m_Center: {x: 0.08260083, y: 0, z: -0.12114406}
---- !u!114 &6135117724575018367
+--- !u!114 &-272181729690196667
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1597789563622032027}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6850845fcfe3b9c4594cde4ce175cc30, type: 3}
+  m_Script: {fileID: 11500000, guid: 28fd5bd5f77f2fe4eac813e3187280dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Attack: 0

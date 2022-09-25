@@ -11614,6 +11614,7 @@ MonoBehaviour:
   - {fileID: 1329418108476140, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
   - {fileID: 1798490320975608, guid: ed11bc2314fa3a649832366175e72401, type: 3}
   RoomName: '?'
+  Winname: 
 --- !u!4 &1199562740
 Transform:
   m_ObjectHideFlags: 0

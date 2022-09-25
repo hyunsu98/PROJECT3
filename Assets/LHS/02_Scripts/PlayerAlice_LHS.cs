@@ -135,7 +135,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
 
     public void Skill()
     {
-        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
+        photonView.RPC("RpcShowSkillEffect2", RpcTarget.All);
         state = State.Attack;
     }
     public void SkillOver()
@@ -202,14 +202,17 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
 
     [PunRPC]
-    void RpcShowSkillEffect()
+    void RpcShowSkillEffect2()
     {
-        audio.clip = audioClips[1];
-        audio.Play();
+        
+            audio.clip = audioClips[1];
+            audio.Play();
 
-        GameObject skill = Instantiate(skillEffect);
-        skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
-        Destroy(skill, 5f);
-        skill.GetComponent<Weapon3_LHS>().Attack = true;
+            GameObject skill = Instantiate(skillEffect);
+            skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
+            Destroy(skill, 5f);
+            skill.GetComponent<Weapon3_LHS>().Attack = true;
+        Debug.Log("Alice");
+       
     }
 }

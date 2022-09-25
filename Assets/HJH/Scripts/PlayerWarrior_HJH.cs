@@ -201,12 +201,15 @@ public class PlayerAlice_LHS : PlayerMove_HJH
     [PunRPC]
     void RpcShowSkillEffect()
     {
-        audio.clip = audioClips[1];
-        audio.Play();
+       
+            audio.clip = audioClips[1];
+            audio.Play();
 
-        GameObject skill = Instantiate(skillEffect);
-        skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
-        Destroy(skill, 5f);
-        skill.GetComponent<Weapon_HJH>().Attack = true;
+            GameObject skill = Instantiate(skillEffect);
+            skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
+            Destroy(skill, 5f);
+            skill.GetComponent<Weapon_HJH>().Attack = true;
+        Debug.Log("Warrior");
+       
     }
 }

@@ -70,6 +70,7 @@ MonoBehaviour:
   - Alice
   - Archer
   - Warrior
+  - RpcShowSkillEffect2
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
