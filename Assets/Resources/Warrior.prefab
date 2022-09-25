@@ -544,7 +544,7 @@ MonoBehaviour:
   state: 0
   dashRange: 2
   weapon: Axe Orange
-  skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
+  skillEffect: {fileID: 1597789563622032027, guid: eb88b93d58e0f8e42aa434a6b149eef8, type: 3}
 --- !u!114 &2524652284191957906
 MonoBehaviour:
   m_ObjectHideFlags: 0

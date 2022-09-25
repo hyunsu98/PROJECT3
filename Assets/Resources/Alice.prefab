@@ -34,7 +34,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1329418108476140}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -58,13 +58,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
+  m_Height: 1.86
+  m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!95 &95728097053499830
 Animator:
   serializedVersion: 4
@@ -103,7 +103,7 @@ MonoBehaviour:
   joy: {fileID: 0}
   speed: 3
   moveVec: {x: 0, y: 0, z: 0}
-  jumpCount: 2
+  jumpCount: 3
   keyboardMode: 1
   dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
   Player: 1
@@ -454,6 +454,8 @@ GameObject:
   - component: {fileID: 4027555892460090266}
   - component: {fileID: 4002611946658044710}
   - component: {fileID: 4010068334129458740}
+  - component: {fileID: 1691375351}
+  - component: {fileID: 1691375352}
   m_Layer: 11
   m_Name: Wand
   m_TagString: Untagged
@@ -526,6 +528,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1691375351
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030761858096732790}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.18077067, y: 0.61779463, z: 0.06590738}
+  m_Center: {x: -0.009509259, y: 0.08291168, z: -0.000000024146418}
+--- !u!114 &1691375352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4030761858096732790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6850845fcfe3b9c4594cde4ce175cc30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: 0
+  Damage: 15
 --- !u!1 &4030781298830630046
 GameObject:
   m_ObjectHideFlags: 0

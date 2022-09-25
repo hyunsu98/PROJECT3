@@ -296,6 +296,8 @@ GameObject:
   - component: {fileID: 4798837498071786}
   - component: {fileID: 33477343548253456}
   - component: {fileID: 23630163188052322}
+  - component: {fileID: 5432584972874476023}
+  - component: {fileID: 3004225414935126639}
   m_Layer: 12
   m_Name: Bow
   m_TagString: Untagged
@@ -368,6 +370,33 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5432584972874476023
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277453835447392}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.34236836, y: 0.04573102, z: 1.1521904}
+  m_Center: {x: -0.03039879, y: 0.000000043399844, z: -0.0000000038243777}
+--- !u!114 &3004225414935126639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277453835447392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28fd5bd5f77f2fe4eac813e3187280dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Attack: 0
+  Damage: 15
 --- !u!1 &1282031999156960
 GameObject:
   m_ObjectHideFlags: 0
@@ -1454,7 +1483,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4033575738913862}
+  - component: {fileID: -8766707533653537356}
   - component: {fileID: 95610794106776834}
+  - component: {fileID: 7214336538963395013}
+  - component: {fileID: -5780804797482561765}
+  - component: {fileID: 446959113183388771}
+  - component: {fileID: 3961300620756200090}
+  - component: {fileID: -4837615994792042390}
+  - component: {fileID: 3085740770574217797}
   - component: {fileID: -547347643835876321}
   - component: {fileID: -6707355808529434251}
   - component: {fileID: -8316290989942033099}
@@ -1485,6 +1521,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &-8766707533653537356
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798490320975608}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 1.86
+  m_Radius: 0.4
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.0001
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0.88, z: 0}
 --- !u!95 &95610794106776834
 Animator:
   serializedVersion: 4
@@ -1495,7 +1549,7 @@ Animator:
   m_GameObject: {fileID: 1798490320975608}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 74fb1076fd82ec44c9d2e925700ae00b, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 97f33d7a6f6850448bb185011f822a68, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1505,6 +1559,184 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7214336538963395013
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798490320975608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be909fb9e0fc8f948b853afafcc89ad5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smoke: {fileID: 100000, guid: 2e8ced71f4c8364468fa618a1cdba26e, type: 3}
+  jumpPower: 10
+  gravity: -9.8
+  joy: {fileID: 0}
+  speed: 3
+  moveVec: {x: 0, y: 0, z: 0}
+  jumpCount: 2
+  keyboardMode: 1
+  dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
+  Player: 0
+  upDown: 0
+  audioClips: []
+  distance: 3
+  state: 0
+  dashRange: 2
+  weapon: Bow
+  skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
+  sound: []
+--- !u!114 &-5780804797482561765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798490320975608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af84cb3e7dd0d0a4285236e0a84f1757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 0
+  effect: {fileID: 100004, guid: c0b0506a7bb61454c957b568bd46c661, type: 3}
+--- !u!114 &446959113183388771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798490320975608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5909e78e5892f214d9dcafa78af95aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RespawnCount: 3
+  respawnPoint: {fileID: 0}
+--- !u!114 &3961300620756200090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798490320975608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b72a290648e3b340a9eeae02c4db949, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4837615994792042390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798490320975608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c929796396a75544baf33a092b4aff0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &3085740770574217797
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1798490320975608}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &-547347643835876321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,6 +1757,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -6707355808529434251}
+  - {fileID: -8316290989942033099}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -1558,8 +1791,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowLayerWeightsInspector: 1
   ShowParameterInspector: 1
-  m_SynchronizeParameters: []
-  m_SynchronizeLayers: []
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 2
+    Name: Damage
+  - Type: 9
+    SynchronizeType: 1
+    Name: Idle
+  - Type: 9
+    SynchronizeType: 2
+    Name: Run
+  - Type: 9
+    SynchronizeType: 1
+    Name: Attack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Jump
+  - Type: 9
+    SynchronizeType: 1
+    Name: JumpEnd
+  - Type: 9
+    SynchronizeType: 1
+    Name: JumpAttack
+  - Type: 9
+    SynchronizeType: 1
+    Name: Dash
+  - Type: 9
+    SynchronizeType: 1
+    Name: Skill
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0
 --- !u!1 &1801285664744404
 GameObject:
   m_ObjectHideFlags: 0
