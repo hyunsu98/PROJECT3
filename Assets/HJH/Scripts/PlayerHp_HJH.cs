@@ -28,7 +28,6 @@ public class PlayerHp_HJH : MonoBehaviourPun
 
     public void Damage(Vector3 point,int power)
     {
-        Debug.Log(point + " " + power);
         string thing = point.x.ToString() + " " + point.y.ToString() + " " + point.z.ToString();
         photonView.RPC("Dam", RpcTarget.All, thing, power);
 

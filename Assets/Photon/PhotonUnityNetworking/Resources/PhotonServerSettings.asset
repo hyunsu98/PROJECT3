@@ -63,6 +63,13 @@ MonoBehaviour:
   - SetInfo
   - Dam
   - AtSet
+  - GoHp
+  - SetPy
+  - SetHp
+  - Aland
+  - Alice
+  - Archer
+  - Warrior
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

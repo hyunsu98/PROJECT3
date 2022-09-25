@@ -21,7 +21,16 @@ EditorBuildSettings:
     path: Assets/HJH/Scene/MainScene_Photon.unity
     guid: b58e3dd8159939a40911ec769dbf49ce
   - enabled: 1
-    path: Assets/LHS/01_Scenes/EndingScene_LHS.unity
+    path: Assets/LHS/01_Scenes/EndingSceneAlice_LHS.unity
     guid: bd5398a65dfc3d241abb9b4f7716ebc2
+  - enabled: 1
+    path: Assets/LHS/01_Scenes/EndingSceneArcher_LHS.unity
+    guid: 9721559d9a05dfd478335845e042db85
+  - enabled: 1
+    path: Assets/LHS/01_Scenes/EndingSceneWarrior_LHS.unity
+    guid: 7a6ef3eee7c988e459af8bb9694a9c24
+  - enabled: 1
+    path: Assets/LHS/01_Scenes/EndingSceneAland_LHS.unity
+    guid: c8b203c1691349c4db8c214d4452bed8
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 633627afcc42bac47a7ef8f49fcca473, type: 2}

@@ -41,11 +41,7 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     {
         // 리스폰카운트가 0보다 작거나 같다면 
         // 게임이 끝난다
-        if (RespawnCount <= 0)
-        {
-            // 포톤뷰 씬 변경 -> 엔딩씬으로
-            PhotonNetwork.LoadLevel("EndingScene_LHS");
-        }
+
     }
 
     // RaspawnTrigger에 충돌했을때 리스폰 지점으로 돌아가고 싶다
@@ -54,6 +50,7 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
         // 태그가 DeathZone이라면
         if (other.tag == "DeathZone")
         {
+            Debug.Log("?");
             // 자식들 안보이게 하기
             playerObj.SetActive(false);
             playerObj2.SetActive(false);
@@ -72,15 +69,17 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     IEnumerator PlayerRespawn()
     {
         // hp를 다시 0으로 생성
-        playerHp.hp = 0;
-        RespawnCount--;
-
+        photonView.RPC("SetHp", RpcTarget.All);
         yield return new WaitForSeconds(1f);
-
         // 다시 켜지기
         cc.enabled = true;
         playerObj.SetActive(true);
         playerObj2.SetActive(true);
-
+    }
+    [PunRPC]
+    void SetHp()
+    {
+        playerHp.hp = 0;
+        RespawnCount--;
     }
 }

@@ -17,7 +17,9 @@ public class GameManager : MonoBehaviourPunCallbacks
     public GameObject[] characterPrefabs;
     bool MainsceneStartTrigger = true; // ¾Èº¸³»µµµÊ
     bool lobbySceneStartTrigger = true;
+    bool endingSceneStartTrigger = true;
     public string RoomName = "?";
+    public string Winname;
 
     public enum PlayerCharcter
     {
@@ -55,13 +57,85 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             GameLobbySene();
         }
+        else if (SceneManager.GetActiveScene().name.Contains("EndingScene") && endingSceneStartTrigger == true)
+        {
+            EndingScene();
+        }
+        else if(MainsceneStartTrigger == false)
+        {
+            int a = 0;
+            GameObject go = null;
+            for(int i =0; i<players.Length; i++)
+            {
+                if(players[i] != null)
+                {
+                    if (players[i].GetComponent<Respawn_LHS>().RespawnCount == 0)
+                    {
+                        a++;
+                    }
+                    else
+                    {
+                        go = players[i];
+                    }
+                }     
+            }
+            if(a == players.Length-1)
+            {
+                if(go.name.Contains("Aland"))
+                {
+                    Winname = go.GetPhotonView().Owner.NickName; 
+                    SceneManager.LoadScene("EndingSceneAland_LHS");
+                }
+                else if (go.name.Contains("Warrior"))
+                {
+                    Winname = go.GetPhotonView().Owner.NickName;
+                    SceneManager.LoadScene("EndingSceneWarrior_LHS");
+                }
+                else if (go.name.Contains("Archer"))
+                {
+                    Winname = go.GetPhotonView().Owner.NickName;
+                    SceneManager.LoadScene("EndingSceneArcher_LHS");
+                }
+                else if (go.name.Contains("Alice"))
+                {
+                    Winname = go.GetPhotonView().Owner.NickName;
+                    SceneManager.LoadScene("EndingSceneAlice_LHS");
+                }
+            }
+        }
     }
-
+    //[PunRPC]
+    //void Aland()
+    //{
+    //    PhotonNetwork.LoadLevel("EndingSceneAland_LHS");
+    //}
+    //[PunRPC]
+    //void Warrior()
+    //{
+    //    PhotonNetwork.LoadLevel("EndingSceneWarrior_LHS");
+    //}
+    //[PunRPC]
+    //void Archer()
+    //{
+    //    PhotonNetwork.LoadLevel("EndingSceneArcher_LHS");
+    //}
+    //[PunRPC]
+    //void Alice()
+    //{
+    //    PhotonNetwork.LoadLevel("EndingSceneAlice_LHS");
+    //}
     private void GameLobbySene()
     {
         players = new GameObject[PhotonNetwork.CurrentRoom.MaxPlayers];
         GameObject.Find("Background_Text").GetComponent<Text>().text = RoomName;
         lobbySceneStartTrigger = false;
+    }
+
+    void EndingScene()
+    {
+        GameObject nick = GameObject.Find("WinNickName");
+        nick.GetComponent<Text>().text = Winname;
+        endingSceneStartTrigger = false;
     }
 
     void MainScene()

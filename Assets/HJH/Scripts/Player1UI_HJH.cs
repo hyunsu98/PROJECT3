@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-public class Player1UI_HJH : MonoBehaviour
+public class Player1UI_HJH : MonoBehaviourPun
 {
     // Start is called before the first frame update
     public GameObject player;
@@ -27,7 +28,13 @@ public class Player1UI_HJH : MonoBehaviour
             {
                 LifeSet();
             }
-            hpText.text = "<size=50><b>" + player.GetComponent<PlayerHp_HJH>().Hp +"</b></size>.0%";
+            photonView.RPC("GoHp",RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    void GoHp()
+    {
+            hpText.text = "<size=50><b>" + player.GetComponent<PlayerHp_HJH>().Hp + "</b></size>.0%";
             if (player.GetComponent<Respawn_LHS>())
             {
                 while (lifes.Count > player.GetComponent<Respawn_LHS>().RespawnCount)
@@ -36,8 +43,10 @@ public class Player1UI_HJH : MonoBehaviour
                     lifes.RemoveAt(lifes.Count - 1);
                 }
             }
-        }
+        
     }
+
+    
     void LifeSet()
     {
         lifes.Add(life);
