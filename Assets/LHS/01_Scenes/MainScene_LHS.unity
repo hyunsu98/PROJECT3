@@ -5578,6 +5578,7 @@ MonoBehaviour:
   players: []
   characterPrefabs: []
   RoomName: '?'
+  Winname: 
 --- !u!1 &420264645
 GameObject:
   m_ObjectHideFlags: 0
