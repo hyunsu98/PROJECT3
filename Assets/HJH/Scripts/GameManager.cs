@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void EndingScene()
     {
-        GameObject nick = GameObject.Find("WinNickName");
+        GameObject nick = GameObject.Find("NickNameText");
         nick.GetComponent<Text>().text = Winname;
         endingSceneStartTrigger = false;
     }
