@@ -12,7 +12,7 @@ public class Weapon_HJH : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        usePlayer = GameObject.Find("Player1(Clone)");
+        usePlayer = GameObject.Find("Aland(Clone)");
     }
 
     // Update is called once per frame

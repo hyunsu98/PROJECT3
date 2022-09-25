@@ -142,10 +142,11 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     {
         ChangeState(State.Idle);
     }
+
     public override void StopAttack()
     {
         am.SetTrigger("Attack");
-        Weapon.GetComponent<Weapon_HJH>().Attack = true;
+        photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         audio.clip = audioClips[0];
         audio.Play();
@@ -154,17 +155,14 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public void AttackOver()
     {
         ChangeState(State.Idle);
-        Weapon.GetComponent<Weapon_HJH>().Attack = false;
+        Weapon.GetComponent<Weapon3_LHS>().Attack = false;
     }
     public override void Dash()
     {
         Instantiate(dashEffect, transform.position, Quaternion.identity);
         StartCoroutine(DashEffect());
     }
-    public override void Jump()
-    {
-        base.Jump();
-    }
+  
     IEnumerator DashEffect()
     {
         if (transform.rotation.y > 0)
@@ -181,15 +179,26 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         gameObject.transform.GetChild(0).gameObject.SetActive(true);
         Weapon.SetActive(true);
     }
+    public override void Jump()
+    {
+        base.Jump();
+    }
+
     public override void JumpAttack()
     {
         am.SetTrigger("JumpAttack");
-        Weapon.GetComponent<Weapon_HJH>().Attack = true;
+        Weapon.GetComponent<Weapon3_LHS>().Attack = true;
     }
 
     public void JumpAttackOver()
     {
-        Weapon.GetComponent<Weapon_HJH>().Attack = false;
+        Weapon.GetComponent<Weapon3_LHS>().Attack = false;
+    }
+
+    [PunRPC]
+    void AtSet(bool set)
+    {
+        Weapon.GetComponent<Weapon3_LHS>().Attack = set;
     }
 
     [PunRPC]
@@ -201,6 +210,6 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
         GameObject skill = Instantiate(skillEffect);
         skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
         Destroy(skill, 5f);
-        skill.GetComponent<Weapon_HJH>().Attack = true;
+        skill.GetComponent<Weapon3_LHS>().Attack = true;
     }
 }
