@@ -11,8 +11,13 @@ public class GameLobbyPlayer_HJH : MonoBehaviourPun
 
     // Start is called before the first frame update
     void Start()
-    { 
+    {
         // 게임 로비 매니저에가 플레이어 구분을 할 수 있게
+        Invoke("LateStart", 0.5f);
+
+    }
+    void LateStart()
+    {
         GameLobbyManager_HJH.instance.AddPlayer(photonView);
         nickText.text = photonView.Owner.NickName;
         mouse = GameObject.Find("PlayerChoice(Clone)").GetComponent<MouseOnCharacterSelect_HJH>();
@@ -23,7 +28,6 @@ public class GameLobbyPlayer_HJH : MonoBehaviourPun
             mouse.whoConnectThis = photonView.ViewID;
         }
     }
-
     void Update()
     {
         

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class PlayerAlice_LHS : PlayerMove_HJH
+public class PlayerWarrior_HJH : PlayerMove_HJH
 {
     public GameObject skillEffect;
     // Start is called before the first frame updatepublic float upDown = 0;
@@ -130,15 +130,17 @@ public class PlayerAlice_LHS : PlayerMove_HJH
     }
     public override void Skill1()
     {
+        Debug.Log("2단계");
         am.SetTrigger("Skill");
     }
 
-    public void Skill()
+    public void SkillAlond()
     {
+        Debug.Log("3단계");
         photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
         state = State.Attack;
     }
-    public void SkillOver()
+    public void SkillOverAlond()
     {
         ChangeState(State.Idle);
     }
