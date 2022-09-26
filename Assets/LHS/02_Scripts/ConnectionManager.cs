@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 public class ConnectionManager : MonoBehaviourPunCallbacks
 {
@@ -73,6 +74,13 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         base.OnJoinedLobby();
         //LobbyScene으로 이동
         PhotonNetwork.LoadLevel("LobbyScene_LHS");
+
+        if (SceneManager.GetActiveScene().name == "LobbyScene_LHS")
+        {
+            Destroy(LHS_DestroyBG.Instance.gameObject);
+        }
+
+
     }
 
     // Quit 클릭 시 게임 나가기
