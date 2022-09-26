@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3203651054615994354}
   - component: {fileID: -7537933183147574082}
   m_Layer: 0
-  m_Name: Player2SkillEffect 1
+  m_Name: Player2SkillEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

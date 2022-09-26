@@ -107,7 +107,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
             {
                 if (state == State.Attacked)
                 {
-                    GameObject sm = Instantiate(smoke);
+                    GameObject sm = PhotonNetwork.Instantiate("Smoke",transform.position,Quaternion.identity);
                     sm.transform.position = transform.position;
                     StartCoroutine(Stun(hp.Hp));
                 }
@@ -150,7 +150,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     }
     public override void Dash()
     {
-        Instantiate(dashEffect, transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("DashEffect", transform.position, Quaternion.identity);
         StartCoroutine(DashEffect());
     }
     IEnumerator DashEffect()
@@ -209,7 +209,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
             audio.clip = audioClips[1];
             audio.Play();
 
-            GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject skill = PhotonNetwork.Instantiate("Player2SkillEffect", gameObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             Destroy(skill, 1f);
             skill.GetComponent<Weapon2_HJH>().Attack = true;
         }

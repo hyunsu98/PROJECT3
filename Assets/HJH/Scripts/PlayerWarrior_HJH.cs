@@ -103,7 +103,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
             {
                 if (state == State.Attacked)
                 {
-                    GameObject sm = Instantiate(smoke);
+                    GameObject sm = PhotonNetwork.Instantiate("Smoke", transform.position, Quaternion.identity);
                     sm.transform.position = transform.position;
                     StartCoroutine(Stun(hp.Hp));
                 }
@@ -160,7 +160,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public override void Dash()
     {
-        Instantiate(dashEffect, transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("DashEffect", transform.position, Quaternion.identity);
         StartCoroutine(DashEffect());
     }
     public override void Jump()
@@ -208,7 +208,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
             audio.clip = audioClips[1];
             audio.Play();
 
-            GameObject skill = Instantiate(skillEffect);
+            GameObject skill = PhotonNetwork.Instantiate("Player1SkillEffect", gameObject.transform.position + new Vector3(0, 1, 0),Quaternion.Euler(90,0,0));
             skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
             Destroy(skill, 5f);
             skill.GetComponent<Weapon_HJH>().Attack = true;
