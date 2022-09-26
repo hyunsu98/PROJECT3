@@ -15,7 +15,10 @@ public class Weapon2_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameObject.name.Contains("SkillEffect"))
+        {
+            Destroy(gameObject, 1f);
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
