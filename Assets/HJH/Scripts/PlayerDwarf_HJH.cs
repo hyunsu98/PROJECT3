@@ -204,11 +204,15 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     [PunRPC]
     void RpcShowSkillEffect()
     {
-        audio.clip = audioClips[1];
-        audio.Play();
+        if (photonView.IsMine)
+        {
+            audio.clip = audioClips[1];
+            audio.Play();
 
-        GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        Destroy(skill, 1f);
-        skill.GetComponent<Weapon2_HJH>().Attack = true;
+            GameObject skill = Instantiate(skillEffect, gameObject.transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            Destroy(skill, 1f);
+            skill.GetComponent<Weapon2_HJH>().Attack = true;
+        }
+        
     }
 }

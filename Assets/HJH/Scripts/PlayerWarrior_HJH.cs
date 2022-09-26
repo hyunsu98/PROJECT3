@@ -203,7 +203,8 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     [PunRPC]
     void RpcShowSkillEffect()
     {
-       
+        if (photonView.IsMine)
+        {
             audio.clip = audioClips[1];
             audio.Play();
 
@@ -211,7 +212,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
             skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
             Destroy(skill, 5f);
             skill.GetComponent<Weapon_HJH>().Attack = true;
-        Debug.Log("Warrior");
+        }
        
     }
 }

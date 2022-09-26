@@ -24,7 +24,6 @@ public class Weapon2_HJH : MonoBehaviour
             if (other.GetComponent<PlayerHp_HJH>() != null && other.GetComponent<PlayerDwarf_HJH>() == null)
             {
                 other.GetComponent<PlayerHp_HJH>().Damage(other.transform.position - transform.position, Damage);
-                Debug.Log("혹시 니가 실행되니?");
                 Attack = false;
             }
         }
