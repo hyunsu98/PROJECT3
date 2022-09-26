@@ -652,6 +652,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1943870581701369706, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1329418108476140, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
       propertyPath: m_Name
       value: Alice
@@ -6325,6 +6329,7 @@ MonoBehaviour:
   players: []
   characterPrefabs: []
   RoomName: '?'
+  Winname: 
 --- !u!1 &420264645
 GameObject:
   m_ObjectHideFlags: 0
