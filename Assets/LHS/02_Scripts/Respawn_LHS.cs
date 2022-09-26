@@ -70,7 +70,7 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     {
         // hp를 다시 0으로 생성
         photonView.RPC("SetHp", RpcTarget.All);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         // 다시 켜지기
         cc.enabled = true;
         playerObj.SetActive(true);

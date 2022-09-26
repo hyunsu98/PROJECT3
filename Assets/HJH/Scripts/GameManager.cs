@@ -126,6 +126,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     //}
     private void GameLobbySene()
     {
+        Destroy(LHS_DestroyBG.Instance.gameObject);
         players = new GameObject[PhotonNetwork.CurrentRoom.MaxPlayers];
         GameObject.Find("Background_Text").GetComponent<Text>().text = RoomName;
         lobbySceneStartTrigger = false;
