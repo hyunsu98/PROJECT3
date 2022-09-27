@@ -58,13 +58,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.86
+  m_Height: 1.5
   m_Radius: 0.4
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.0001
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.88, z: 0}
+  m_MinMoveDistance: 0
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!95 &95728097053499830
 Animator:
   serializedVersion: 4
@@ -104,7 +104,7 @@ MonoBehaviour:
   speed: 3
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 3
-  keyboardMode: 1
+  keyboardMode: 0
   dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
   Player: 1
   upDown: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   state: 0
   dashRange: 2
   weapon: Wand
-  skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
+  skillEffect: {fileID: 100000, guid: 047e9bd2e4e5dee4fa231bfdf1914997, type: 3}
   sound: []
 --- !u!114 &6078719765686963569
 MonoBehaviour:
@@ -536,7 +536,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4030761858096732790}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.18077067, y: 0.61779463, z: 0.06590738}
@@ -554,7 +554,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Attack: 0
-  Damage: 15
+  Damage: 5
 --- !u!1 &4030781298830630046
 GameObject:
   m_ObjectHideFlags: 0

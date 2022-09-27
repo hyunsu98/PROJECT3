@@ -135,7 +135,6 @@ public class PlayerAlice_LHS : PlayerMove_HJH
 
     public void Skill()
     {
-        Debug.Log("이건 2단계면 안됨");
         photonView.RPC("RpcShowSkillEffect2", RpcTarget.All);
         state = State.Attack;
     }
@@ -206,14 +205,13 @@ public class PlayerAlice_LHS : PlayerMove_HJH
     void RpcShowSkillEffect2()
     {
 
-        audio.clip = audioClips[1];
-        audio.Play();
+        //audio.clip = audioClips[1];
+        //audio.Play();
 
         GameObject skill = Instantiate(skillEffect);
         skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
         Destroy(skill, 5f);
         skill.GetComponent<Weapon3_LHS>().Attack = true;
-        Debug.Log("Alice");
 
     }
 }

@@ -15,7 +15,19 @@ public class Weapon3_LHS : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameObject.name.Contains("SkillEffect"))
+        {
+            StartCoroutine(UpDamage(Damage));
+        }
+    }
+    IEnumerator UpDamage(int StartDamage)
+    {
+        for(int i =0; i< 3; i++)
+        {
+            Damage += 20;
+            yield return new WaitForSeconds(1f);
+        }
+        Damage = StartDamage;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -24,7 +36,6 @@ public class Weapon3_LHS : MonoBehaviour
             if (other.GetComponent<PlayerHp_HJH>() != null && other.GetComponent<PlayerAlice_LHS>() == null) 
             {
                 other.GetComponent<PlayerHp_HJH>().Damage(other.transform.position - transform.position, Damage);
-                Debug.Log("혹시 니가 실행되니?");
                 Attack = false;
             }
         }

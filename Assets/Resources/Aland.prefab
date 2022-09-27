@@ -109,7 +109,7 @@ MonoBehaviour:
   speed: 3
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2
-  keyboardMode: 1
+  keyboardMode: 0
   dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
   Player: 1
   upDown: 0
