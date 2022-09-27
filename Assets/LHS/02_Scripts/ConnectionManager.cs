@@ -75,10 +75,6 @@ public class ConnectionManager : MonoBehaviourPunCallbacks
         //LobbyScene으로 이동
         PhotonNetwork.LoadLevel("LobbyScene_LHS");
 
-        if (SceneManager.GetActiveScene().name == "LobbyScene_LHS")
-        {
-            Destroy(LHS_DestroyBG.Instance.gameObject);
-        }
 
 
     }
