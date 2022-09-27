@@ -140,7 +140,9 @@ public class PlayerAlice_LHS : PlayerMove_HJH
     }
     public void SkillOver()
     {
+        state = State.Idle;
         ChangeState(State.Idle);
+        Debug.Log("?");
     }
 
     public override void StopAttack()
@@ -148,14 +150,21 @@ public class PlayerAlice_LHS : PlayerMove_HJH
         am.SetTrigger("Attack");
         photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
-        audio.clip = audioClips[0];
+        //audio.clip = audioClips[0];
         audio.Play();
 
     }
+    public void Test()
+    {
+        Debug.Log("This is Test");
+        state = State.Idle;
+        photonView.RPC("AtSet", RpcTarget.All, false);
+    }
     public void AttackOver()
     {
-        ChangeState(State.Idle);
-        Weapon.GetComponent<Weapon3_LHS>().Attack = false;
+        state = State.Idle;
+        //photonView.RPC("AtSet", RpcTarget.All, false);
+        Debug.Log("Hello");
     }
     public override void Dash()
     {
@@ -209,8 +218,8 @@ public class PlayerAlice_LHS : PlayerMove_HJH
         //audio.Play();
 
         GameObject skill = Instantiate(skillEffect);
-        skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
-        Destroy(skill, 5f);
+        skill.transform.position = gameObject.transform.position + new Vector3(2, 0, 0);
+        Destroy(skill, 3f);
         skill.GetComponent<Weapon3_LHS>().Attack = true;
 
     }

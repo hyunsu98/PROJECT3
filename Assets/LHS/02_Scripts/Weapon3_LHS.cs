@@ -23,7 +23,8 @@ public class Weapon3_LHS : MonoBehaviour
     }
     IEnumerator UpDamage(int StartDamage)
     {
-        for(int i =0; i< 3; i++)
+        gameObject.GetComponent<Renderer>().sortingOrder = 50;
+        for (int i =0; i< 3; i++)
         {
             Damage += 20;
             yield return new WaitForSeconds(1f);
