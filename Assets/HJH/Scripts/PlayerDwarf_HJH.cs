@@ -140,7 +140,10 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     public void SkillEffect()
     {
         //[Çö¼÷]
-        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);  
+        if (photonView.IsMine)
+        {
+            photonView.RPC("RpcShowSkillEffect", RpcTarget.All);  
+        }
         
         state = State.Attack;
     }

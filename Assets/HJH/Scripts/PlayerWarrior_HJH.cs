@@ -136,8 +136,11 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
 
     public void SkillAlond()
     {
-        Debug.Log("3´Ü°è");
-        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
+        if (photonView.IsMine)
+        {
+            photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
+
+        }
         state = State.Attack;
     }
     public void SkillOverAlond()
