@@ -24,7 +24,7 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     GameObject playerObj;
     GameObject playerObj2;
 
-    GameObject respawnBlock;
+    public GameObject respawnBlock;
 
     // Start is called before the first frame update
     void Start()
@@ -35,13 +35,11 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
 
         //respawnBlock = GameObject.Find("RespawnBlock");
         respawnPoint = GameObject.Find("RespawnPoint").transform;
-
+        respawnBlock = GameObject.Find("RespawnBlock");
 
         // 자식의 gameObject 가져오기
         playerObj = gameObject.transform.GetChild(0).gameObject;
-       playerObj2 = gameObject.transform.GetChild(3).gameObject;
-
-
+        playerObj2 = gameObject.transform.GetChild(3).gameObject;
     }
 
     // Update is called once per frame
@@ -68,10 +66,11 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
         playerObj.SetActive(false);
         playerObj2.SetActive(false);
 
-        //respawnBlock.SetActive(true);
-
         // 움직임 금지
         cc.enabled = false;
+
+        // 리스폰 발판 켜지기
+        respawnBlock.SetActive(true);
 
         // 코루틴 발생
         StartCoroutine(PlayerRespawn());
@@ -98,7 +97,7 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
 
         // 코루틴 발생
         // 깜빡이고
-        StartCoroutine(ReplayRespawn());
+        // StartCoroutine(ReplayRespawn());
     }
 
     IEnumerator ReplayRespawn()

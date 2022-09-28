@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RespawnCount: 3
   respawnPoint: {fileID: 0}
+  respawnBlock: {fileID: 0}
 --- !u!114 &3187563655604384292
 MonoBehaviour:
   m_ObjectHideFlags: 0
