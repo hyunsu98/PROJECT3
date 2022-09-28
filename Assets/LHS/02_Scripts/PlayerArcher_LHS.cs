@@ -133,35 +133,36 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     {
         am.SetTrigger("Skill");
     }
-
-    public void Skill()
-    {
-        photonView.RPC("RpcShowSkillEffect", RpcTarget.All);
-        state = State.Attack;
-    }
     public void SkillOver()
     {
-        ChangeState(State.Idle);
+        Debug.Log("hi");
+        state = State.Idle;
+    }
+    public void AttackOverr()
+    {
+        Debug.Log("eg");
+        state = State.Idle;
     }
 
     public override void StopAttack()
     {
         am.SetTrigger("Attack");
-        photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         //audio.clip = audioClips[0];
         //audio.Play();
-
     }
+    public void ShootArrow()
+    {
+        photonView.RPC("StopAttackShoot", RpcTarget.All);
+    }
+
     [PunRPC]
     void StopAttackShoot()
     {
-
-    }
-    public void AttackOver()
-    {
-        ChangeState(State.Idle);
-        Weapon.GetComponent<Weapon4_LHS>().Attack = false;
+        if (photonView.IsMine)
+        {
+            GameObject arrow = PhotonNetwork.Instantiate("Arrow", transform.position + new Vector3(0,1,0), Quaternion.identity);
+        }
     }
     public override void Dash()
     {
@@ -192,8 +193,8 @@ public class PlayerArcher_LHS : PlayerMove_HJH
 
     public override void JumpAttack()
     {
-        am.SetTrigger("JumpAttack");
-        Weapon.GetComponent<Weapon4_LHS>().Attack = true;
+        //am.SetTrigger("JumpAttack");
+        //Weapon.GetComponent<Weapon4_LHS>().Attack = true;
     }
 
     public void JumpAttackOver()
@@ -201,21 +202,5 @@ public class PlayerArcher_LHS : PlayerMove_HJH
         Weapon.GetComponent<Weapon4_LHS>().Attack = false;
     }
 
-    [PunRPC]
-    void AtSet(bool set)
-    {
-        Weapon.GetComponent<Weapon4_LHS>().Attack = set;
-    }
 
-    [PunRPC]
-    void RpcShowSkillEffect()
-    {
-        audio.clip = audioClips[1];
-        audio.Play();
-
-        GameObject skill = Instantiate(skillEffect);
-        skill.transform.position = gameObject.transform.position + new Vector3(0, 1, 0);
-        Destroy(skill, 5f);
-        skill.GetComponent<Weapon4_LHS>().Attack = true;
-    }
 }

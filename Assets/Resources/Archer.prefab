@@ -397,6 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attack: 0
   Damage: 15
+  skillSpeed: 2
 --- !u!1 &1282031999156960
 GameObject:
   m_ObjectHideFlags: 0

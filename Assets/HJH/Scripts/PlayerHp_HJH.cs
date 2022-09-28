@@ -66,6 +66,14 @@ public class PlayerHp_HJH : MonoBehaviourPun
         {
             pm = GetComponent<PlayerDwarf_HJH>();
         }
+        else if (gameObject.name.Contains("Alice"))
+        {
+            pm = GetComponent<PlayerAlice_LHS>();
+        }
+        else if (gameObject.name.Contains("Archer"))
+        {
+            pm = GetComponent<PlayerArcher_LHS>();
+        }
         am = GetComponent<Animator>();
         cs = GetComponent<CameraShaker_HJH>();
     }
