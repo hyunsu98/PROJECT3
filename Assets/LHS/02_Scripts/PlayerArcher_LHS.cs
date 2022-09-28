@@ -8,6 +8,7 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     public GameObject skillEffect;
     // Start is called before the first frame updatepublic float upDown = 0;
     public AudioClip[] sound;
+    public GameObject arrow;
 
     public override void Start()
     {
@@ -150,6 +151,11 @@ public class PlayerArcher_LHS : PlayerMove_HJH
         state = State.Attack;
         //audio.clip = audioClips[0];
         //audio.Play();
+
+    }
+    [PunRPC]
+    void StopAttackShoot()
+    {
 
     }
     public void AttackOver()

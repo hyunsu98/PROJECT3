@@ -218,7 +218,14 @@ public class PlayerAlice_LHS : PlayerMove_HJH
         //audio.Play();
 
         GameObject skill = Instantiate(skillEffect);
-        skill.transform.position = gameObject.transform.position + new Vector3(2, 0, 0);
+        if(gameObject.transform.eulerAngles.y > 0)
+        {
+            skill.transform.position = gameObject.transform.position + new Vector3(2, 0, 0);
+        }
+        else
+        {
+            skill.transform.position = gameObject.transform.position + new Vector3(-2, 0, 0);
+        }
         Destroy(skill, 3f);
         skill.GetComponent<Weapon3_LHS>().Attack = true;
 

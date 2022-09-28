@@ -51,7 +51,7 @@ public class GameLobbyManager_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PhotonNetwork.IsMasterClient && GameManager.instance.playerCharcters.Count == playerPhoton.Count)
+        if (PhotonNetwork.IsMasterClient && GameManager.instance.playerCharcters.Count == playerPhoton.Count && playerPhoton.Count >1)
         {
             GameObject bt = GameObject.Find("BtnPlay");
             bt.GetComponent<Button>().interactable = true;

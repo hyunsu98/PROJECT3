@@ -71,6 +71,7 @@ MonoBehaviour:
   - Archer
   - Warrior
   - RpcShowSkillEffect2
+  - StopAttackShoot
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

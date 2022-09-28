@@ -1589,6 +1589,7 @@ MonoBehaviour:
   weapon: Bow
   skillEffect: {fileID: 1597789563622032027, guid: 62ecf6dc6336fd046b4490ed3f1ed1fc, type: 3}
   sound: []
+  arrow: {fileID: 1992592944748496, guid: 3db101198eee80c449999dc051b3a023, type: 3}
 --- !u!114 &-5780804797482561765
 MonoBehaviour:
   m_ObjectHideFlags: 0
