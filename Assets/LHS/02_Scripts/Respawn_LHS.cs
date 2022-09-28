@@ -24,6 +24,8 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     GameObject playerObj;
     GameObject playerObj2;
 
+    GameObject respawnBlock;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,11 +33,15 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
 
         playerHp = GetComponent<PlayerHp_HJH>();
 
+        //respawnBlock = GameObject.Find("RespawnBlock");
         respawnPoint = GameObject.Find("RespawnPoint").transform;
+
 
         // 자식의 gameObject 가져오기
         playerObj = gameObject.transform.GetChild(0).gameObject;
-        playerObj2 = gameObject.transform.GetChild(3).gameObject;
+       playerObj2 = gameObject.transform.GetChild(3).gameObject;
+
+
     }
 
     // Update is called once per frame
@@ -62,6 +68,8 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
         playerObj.SetActive(false);
         playerObj2.SetActive(false);
 
+        //respawnBlock.SetActive(true);
+
         // 움직임 금지
         cc.enabled = false;
 
@@ -77,15 +85,27 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
             photonView.RPC("SetHp", RpcTarget.All);
         }
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
+
+        // 리스폰 지점으로 이동
+        transform.position = respawnPoint.position;
 
         // 다시 켜지기
-        // 리스폰 지점으로 이동
-
-        transform.position = respawnPoint.position;
-        cc.enabled = true;
         playerObj.SetActive(true);
         playerObj2.SetActive(true);
+
+        cc.enabled = true;
+
+        // 코루틴 발생
+        // 깜빡이고
+        StartCoroutine(ReplayRespawn());
+    }
+
+    IEnumerator ReplayRespawn()
+    {
+        yield return new WaitForSeconds(1f);
+
+        // 움직일 수 있게
     }
 
     [PunRPC]
