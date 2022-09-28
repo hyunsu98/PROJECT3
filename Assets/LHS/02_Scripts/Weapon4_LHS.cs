@@ -14,6 +14,7 @@ public class Weapon4_LHS : MonoBehaviourPun
     void Start()
     {
         usePlayer = GameObject.Find("Archer(Clone)");
+        Destroy(this.gameObject, 10f);
     }
 
     // Update is called once per frame

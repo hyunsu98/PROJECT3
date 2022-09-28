@@ -153,16 +153,19 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     }
     public void ShootArrow()
     {
-        photonView.RPC("StopAttackShoot", RpcTarget.All);
+        Debug.Log("¹Û");
+        if (photonView.IsMine)
+        {
+            Debug.Log("¾È");
+            photonView.RPC("StopAttackShoot", RpcTarget.All);
+        }
     }
 
     [PunRPC]
     void StopAttackShoot()
     {
-        if (photonView.IsMine)
-        {
             GameObject arrow = PhotonNetwork.Instantiate("Arrow", transform.position + new Vector3(0,1,0), Quaternion.identity);
-        }
+            Debug.Log("?");
     }
     public override void Dash()
     {
@@ -190,17 +193,4 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     {
         base.Jump();
     }
-
-    public override void JumpAttack()
-    {
-        //am.SetTrigger("JumpAttack");
-        //Weapon.GetComponent<Weapon4_LHS>().Attack = true;
-    }
-
-    public void JumpAttackOver()
-    {
-        Weapon.GetComponent<Weapon4_LHS>().Attack = false;
-    }
-
-
 }
