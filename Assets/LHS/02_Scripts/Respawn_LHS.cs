@@ -28,7 +28,9 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     void Start()
     {
         cc = GetComponent<CharacterController>();
+
         playerHp = GetComponent<PlayerHp_HJH>();
+
         respawnPoint = GameObject.Find("RespawnPoint").transform;
 
         // 자식의 gameObject 가져오기
@@ -41,41 +43,51 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     {
         // 리스폰카운트가 0보다 작거나 같다면 
         // 게임이 끝난다
-
     }
 
     // RaspawnTrigger에 충돌했을때 리스폰 지점으로 돌아가고 싶다
     private void OnTriggerEnter(Collider other)
     {
         // 태그가 DeathZone이라면
-        if (other.tag == "DeathZone")
+        if (other.tag == "DeathZone" && photonView.IsMine == true)
         {
-            Debug.Log("?");
-            // 자식들 안보이게 하기
-            playerObj.SetActive(false);
-            playerObj2.SetActive(false);
-
-            // 움직임 금지
-            cc.enabled = false;
-
-            // 리스폰 지점으로 이동
-            transform.position = respawnPoint.position;
-
-            // 코루틴 발생
-            StartCoroutine(PlayerRespawn());
+            photonView.RPC("RpcShowDie", RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    void RpcShowDie()
+    {
+        // 자식들 안보이게 하기
+        playerObj.SetActive(false);
+        playerObj2.SetActive(false);
+
+        // 움직임 금지
+        cc.enabled = false;
+
+        // 코루틴 발생
+        StartCoroutine(PlayerRespawn());
     }
 
     IEnumerator PlayerRespawn()
     {
         // hp를 다시 0으로 생성
-        photonView.RPC("SetHp", RpcTarget.All);
-        yield return new WaitForSeconds(1.5f);
+        if (photonView.IsMine == true)
+        {
+            photonView.RPC("SetHp", RpcTarget.All);
+        }
+
+        yield return new WaitForSeconds(1f);
+
         // 다시 켜지기
+        // 리스폰 지점으로 이동
+
+        transform.position = respawnPoint.position;
         cc.enabled = true;
         playerObj.SetActive(true);
         playerObj2.SetActive(true);
     }
+
     [PunRPC]
     void SetHp()
     {
