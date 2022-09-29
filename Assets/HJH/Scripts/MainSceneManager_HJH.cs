@@ -17,7 +17,6 @@ public class MainSceneManager_HJH : MonoBehaviourPun
             GameObject ui1 = PhotonNetwork.Instantiate("CharacterUI", Vector3.zero, Quaternion.identity);
             int id = ui1.GetComponent<PhotonView>().ViewID;
             photonView.RPC("SetInfo", RpcTarget.All, GameManager.instance.startLife, player.name, photonView.Owner.NickName, id);
-
         }
         
 

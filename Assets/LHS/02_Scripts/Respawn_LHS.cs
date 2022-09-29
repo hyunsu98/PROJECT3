@@ -11,7 +11,7 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
 {
     // 리스폰 카운트
     public int RespawnCount = 3;
-
+    CameraShaker_HJH cs;
     // 리스폰 지점
     [SerializeField] Transform respawnPoint;
 
@@ -30,7 +30,7 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     void Start()
     {
         cc = GetComponent<CharacterController>();
-
+        cs = GetComponent<CameraShaker_HJH>();
         playerHp = GetComponent<PlayerHp_HJH>();
 
         //respawnBlock = GameObject.Find("RespawnBlock");
@@ -65,7 +65,12 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
         // 자식들 안보이게 하기
         playerObj.SetActive(false);
         playerObj2.SetActive(false);
-
+        GameObject die = Instantiate(Resources.Load<GameObject>("DieEffect"), playerObj.transform.position, Quaternion.identity);
+        die.GetComponent<Renderer>().sortingOrder = 50;
+        die.transform.GetChild(0).transform.position = playerObj.transform.position;
+        cs.Shake(1, 0.5f);
+        Destroy(die, 1f);
+        die.transform.GetChild(1).transform.position = respawnPoint.position;
         // 움직임 금지
         cc.enabled = false;
 

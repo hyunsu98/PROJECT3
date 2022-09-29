@@ -122,13 +122,13 @@ public class PlayerMove_HJH : MonoBehaviourPun
         {
             joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
         }
-        GameObject.Find("Special").GetComponent<Button>().onClick.AddListener(SButton);
-        GameObject.Find("Jump").GetComponent<Button>().onClick.AddListener(JButton);
-        GameObject.Find("Attack").GetComponent<Button>().onClick.AddListener(AButton);
 #if UNITY_EDITOR
         keyboardMode = true;
 #elif UNITY_ANDROID
         keyboardMode = false;
+        GameObject.Find("Special").GetComponent<Button>().onClick.AddListener(SButton);
+        GameObject.Find("Jump").GetComponent<Button>().onClick.AddListener(JButton);
+        GameObject.Find("Attack").GetComponent<Button>().onClick.AddListener(AButton);
 #elif UNITY_STANDALONE_WIN
         keyboardMode = true;
 #endif
@@ -146,6 +146,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
         moveVec = Vector3.zero;
         //am.SetInteger("Jump",jumpCount);
         firstJumpCount = jumpCount;
+        Debug.Log(gameObject.name);
         GameManager.instance.players[(photonView.ViewID / 1000) - 1] = gameObject;
 
 #region [Çö¼÷] LayerMaskÁöÁ¤

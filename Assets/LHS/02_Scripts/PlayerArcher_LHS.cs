@@ -60,7 +60,6 @@ public class PlayerArcher_LHS : PlayerMove_HJH
                 }
                 else if (state == State.Jump)
                 {
-                    Ray ray = new Ray();
                     RaycastHit raycast = new RaycastHit();
                     if(Physics.Raycast(transform.position,Vector3.down,out raycast, 1.5f))
                     {
