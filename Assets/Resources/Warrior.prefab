@@ -533,7 +533,7 @@ MonoBehaviour:
   speed: 3
   moveVec: {x: 0, y: 0, z: 0}
   jumpCount: 2
-  keyboardMode: 1
+  keyboardMode: 0
   dashEffect: {fileID: 100000, guid: 82efd9436be016c4da0ea65e0ec27ecc, type: 3}
   Player: 1
   upDown: 0
@@ -749,32 +749,11 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 2
-    Name: Run
-  - Type: 9
-    SynchronizeType: 1
-    Name: Idle
-  - Type: 9
-    SynchronizeType: 2
-    Name: Dash
-  - Type: 9
-    SynchronizeType: 1
-    Name: Jump
-  - Type: 9
-    SynchronizeType: 1
-    Name: Attack
-  - Type: 9
     SynchronizeType: 1
     Name: Damage
-  - Type: 9
-    SynchronizeType: 1
-    Name: Skill
-  - Type: 9
-    SynchronizeType: 1
-    Name: JumpAttack
-  - Type: 9
-    SynchronizeType: 1
-    Name: JumpEnd
+  - Type: 3
+    SynchronizeType: 0
+    Name: State
   m_SynchronizeLayers:
   - SynchronizeType: 1
     LayerIndex: 0

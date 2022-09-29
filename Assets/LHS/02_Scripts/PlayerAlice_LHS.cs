@@ -75,7 +75,7 @@ public class PlayerAlice_LHS : PlayerMove_HJH
                     }
                     if (jumpCheckStart == true && cc.isGrounded)
                     {
-                        am.SetTrigger("JumpEnd");
+                        am.SetInteger("State", 0);
                         jumpCheckStart = false;
                         Invoke("JumpCountReturn", 1f);
                         state = State.Idle;
@@ -130,7 +130,7 @@ public class PlayerAlice_LHS : PlayerMove_HJH
     }
     public override void Skill1()
     {
-        am.SetTrigger("Skill");
+        am.SetInteger("State", 5);
     }
 
     public void Skill()
@@ -147,7 +147,7 @@ public class PlayerAlice_LHS : PlayerMove_HJH
 
     public override void StopAttack()
     {
-        am.SetTrigger("Attack");
+        am.SetInteger("State", 4);
         photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         //audio.clip = audioClips[0];
@@ -156,13 +156,12 @@ public class PlayerAlice_LHS : PlayerMove_HJH
     }
     public void Test()
     {
-        Debug.Log("This is Test");
-        state = State.Idle;
+        ChangeState(State.Idle);
         photonView.RPC("AtSet", RpcTarget.All, false);
     }
     public void AttackOver()
     {
-        state = State.Idle;
+        ChangeState(State.Idle);
         //photonView.RPC("AtSet", RpcTarget.All, false);
         Debug.Log("Hello");
     }
@@ -195,7 +194,7 @@ public class PlayerAlice_LHS : PlayerMove_HJH
 
     public override void JumpAttack()
     {
-        am.SetTrigger("JumpAttack");
+        am.SetInteger("State", 3);
         Weapon.GetComponent<Weapon3_LHS>().Attack = true;
     }
 

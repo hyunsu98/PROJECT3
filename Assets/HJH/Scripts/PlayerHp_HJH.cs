@@ -8,7 +8,6 @@ public class PlayerHp_HJH : MonoBehaviourPun
     ImpactReceiver_HJH impact;
     [SerializeField]
     public int hp = 0;
-    Animator am;
     PlayerMove_HJH pm;
     CameraShaker_HJH cs;
     public GameObject effect;
@@ -74,7 +73,6 @@ public class PlayerHp_HJH : MonoBehaviourPun
         {
             pm = GetComponent<PlayerArcher_LHS>();
         }
-        am = GetComponent<Animator>();
         cs = GetComponent<CameraShaker_HJH>();
     }
 

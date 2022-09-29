@@ -79,7 +79,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
                     }
                     if (jumpCheckStart == true && cc.isGrounded)
                     {
-                        am.SetTrigger("JumpEnd");
+                        am.SetInteger("State", 0);
                         jumpCheckStart = false;
                         Invoke("JumpCountReturn", 1f);
                         state = State.Idle;
@@ -130,7 +130,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
 
     public override void Skill1()
     {
-        am.SetTrigger("Skill");
+        am.SetInteger("State", 5);
 
     }
     public void SkillOver()
@@ -178,7 +178,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     }
     public override void JumpAttack()
     {
-        am.SetTrigger("JumpAttack");
+        am.SetInteger("State", 3);
         Weapon.GetComponent<Weapon2_HJH>().Attack = true;
     }
     public void JumpAttackOver()
@@ -187,7 +187,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     }
     public override void StopAttack()
     {
-        am.SetTrigger("Attack");        
+        am.SetInteger("State", 2);
         photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         audio.clip = audioClips[0];
@@ -195,7 +195,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     }
     public void AttackOver()
     {
-        state = State.Idle;
+        ChangeState(State.Idle);
         photonView.RPC("AtSet", RpcTarget.All, false);
     }
     [PunRPC]

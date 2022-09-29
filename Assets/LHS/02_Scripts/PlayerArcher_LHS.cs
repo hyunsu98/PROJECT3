@@ -9,6 +9,7 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     // Start is called before the first frame updatepublic float upDown = 0;
     public AudioClip[] sound;
     public GameObject arrow;
+    bool isgrounded;
 
     public override void Start()
     {
@@ -22,6 +23,7 @@ public class PlayerArcher_LHS : PlayerMove_HJH
         {
             if (Player == true)
             {
+                isgrounded = cc.isGrounded;
                 if (state == State.Idle)
                 {
                     if (keyboardMode == true)
@@ -58,6 +60,15 @@ public class PlayerArcher_LHS : PlayerMove_HJH
                 }
                 else if (state == State.Jump)
                 {
+                    Ray ray = new Ray();
+                    RaycastHit raycast = new RaycastHit();
+                    if(Physics.Raycast(transform.position,Vector3.down,out raycast, 1.5f))
+                    {
+                        if(raycast.distance < 0.6f)
+                        {
+                            isgrounded = true;
+                        }
+                    }
                     if (keyboardMode == true)
                     {
                         KeyBoardMove();
@@ -68,15 +79,15 @@ public class PlayerArcher_LHS : PlayerMove_HJH
                         JoyStickMove();
                         can.SetActive(true);
                     }
-                    if (!cc.isGrounded)
+                    if (!isgrounded)
                     {
                         moveVec.y += gravity * Time.deltaTime;
                         jumpCheckStart = true;
 
                     }
-                    if (jumpCheckStart == true && cc.isGrounded)
+                    if (jumpCheckStart == true && isgrounded)
                     {
-                        am.SetTrigger("JumpEnd");
+                        am.SetInteger("State", 0);
                         jumpCheckStart = false;
                         Invoke("JumpCountReturn", 1f);
                         state = State.Idle;
@@ -108,7 +119,7 @@ public class PlayerArcher_LHS : PlayerMove_HJH
                     sm.transform.position = transform.position;
                     StartCoroutine(Stun(hp.Hp));
                 }
-                if (!cc.isGrounded)
+                if (!isgrounded)
                 {
                     moveVec.y += gravity * Time.deltaTime;
                 }
@@ -131,32 +142,30 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     }
     public override void Skill1()
     {
-        am.SetTrigger("Skill");
+        am.SetInteger("State", 5);
+        state = State.Attack;
     }
     public void SkillOver()
     {
-        Debug.Log("hi");
-        state = State.Idle;
+        
+        ChangeState(State.Idle);
     }
     public void AttackOverr()
     {
-        Debug.Log("eg");
-        state = State.Idle;
+        ChangeState(State.Idle);
     }
 
     public override void StopAttack()
     {
-        am.SetTrigger("Attack");
+        am.SetInteger("State", 4);
         state = State.Attack;
         //audio.clip = audioClips[0];
         //audio.Play();
     }
     public void ShootArrow()
     {
-        Debug.Log("¹Û");
         if (photonView.IsMine)
         {
-            Debug.Log("¾È");
             photonView.RPC("StopAttackShoot", RpcTarget.All);
         }
     }
@@ -164,8 +173,12 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     [PunRPC]
     void StopAttackShoot()
     {
+        if (photonView.IsMine)
+        {
             GameObject arrow = PhotonNetwork.Instantiate("Arrow", transform.position + new Vector3(0,1,0), Quaternion.identity);
             Debug.Log("?");
+
+        }
     }
     public override void Dash()
     {

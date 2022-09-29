@@ -67,7 +67,7 @@ public class Weapon4_LHS : MonoBehaviourPun
                 Attack = false;
                 if (gameObject.name.Contains("Arrow"))
                 {
-                    Destroy(this.gameObject);
+                    photonView.RPC("Destroy", RpcTarget.All);
                 }
             }
             else if(other.GetComponent<PlayerArcher_LHS>() != null)
@@ -76,8 +76,14 @@ public class Weapon4_LHS : MonoBehaviourPun
             }
             else
             {
-                Destroy(this.gameObject);
+                photonView.RPC("Destroy", RpcTarget.All);
             }
         }
+    }
+
+    [PunRPC]
+    private void Destroy()
+    {
+        Destroy(this.gameObject);
     }
 }

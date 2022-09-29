@@ -215,8 +215,8 @@ public class PlayerMove_LHS : MonoBehaviour
     {
         am.SetTrigger("Damage");
         yield return new WaitForSeconds(stunTime / 150);
-        am.SetTrigger("Idle");
-        if(cc.isGrounded == true)
+        am.SetInteger("State", 0);
+        if (cc.isGrounded == true)
         {
             state = State.Jump;
             
@@ -315,7 +315,7 @@ public class PlayerMove_LHS : MonoBehaviour
         {
             Debug.Log("Jump");
             moveVec.y = jumpPower;
-            am.SetTrigger("Jump");
+            am.SetInteger("State", 2);
         }
         jumpCount--;
     }

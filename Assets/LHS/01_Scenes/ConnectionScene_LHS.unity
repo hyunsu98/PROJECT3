@@ -7535,7 +7535,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679062994}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!20 &679062996
 Camera:
   m_ObjectHideFlags: 0
@@ -31695,6 +31695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Attack: 0
   Damage: 15
+  skillSpeed: 2
 --- !u!114 &4764515871160683812
 MonoBehaviour:
   m_ObjectHideFlags: 0

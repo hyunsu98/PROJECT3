@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 
 public class PlayerMove_HJH : MonoBehaviourPun
@@ -121,6 +122,16 @@ public class PlayerMove_HJH : MonoBehaviourPun
         {
             joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
         }
+        GameObject.Find("Special").GetComponent<Button>().onClick.AddListener(SButton);
+        GameObject.Find("Jump").GetComponent<Button>().onClick.AddListener(JButton);
+        GameObject.Find("Attack").GetComponent<Button>().onClick.AddListener(AButton);
+#if UNITY_EDITOR
+        keyboardMode = true;
+#elif UNITY_ANDROID
+        keyboardMode = false;
+#elif UNITY_STANDALONE_WIN
+        keyboardMode = true;
+#endif
         Transform[] allChildren = GetComponentsInChildren<Transform>();
         foreach (Transform child in allChildren)
         {
@@ -137,7 +148,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
         firstJumpCount = jumpCount;
         GameManager.instance.players[(photonView.ViewID / 1000) - 1] = gameObject;
 
-        #region [현숙] LayerMask지정
+#region [현숙] LayerMask지정
         //****LayerMask 지정
         playerLayer1 = LayerMask.NameToLayer("Player1");
         playerLayer2 = LayerMask.NameToLayer("Player2");
@@ -147,7 +158,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
 
         layerMask = 1 << 8;
         layerMask2 = 1 << 9;
-        #endregion
+#endregion
     }
 
     public virtual void Start()
@@ -171,25 +182,13 @@ public class PlayerMove_HJH : MonoBehaviourPun
             case State.Idle:
                 Invoke("JumpCountReturn", 1f);
                 moveVec.y = 0;
-                am.SetTrigger("Idle");
-                am.ResetTrigger("Run");
-                am.ResetTrigger("Jump");
-                am.ResetTrigger("JumpAttack");
-                am.ResetTrigger("JumpEnd");
+                am.SetInteger("State", 0);
                 break;
             case State.Run:
-                am.SetTrigger("Run");
-                am.ResetTrigger("Idle");
-                am.ResetTrigger("Jump");
-                am.ResetTrigger("JumpAttack");
-                am.ResetTrigger("JumpEnd");
+                am.SetInteger("State", 1);
                 break;
             case State.Jump:
-                am.SetTrigger("Jump");
-                am.ResetTrigger("Idle");
-                am.ResetTrigger("Run");
-                am.ResetTrigger("JumpAttack");
-                am.ResetTrigger("JumpEnd");
+                am.SetInteger("State", 2);
                 break;
         }
 
@@ -255,7 +254,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
                 if (jumpCheckStart == true && cc.isGrounded)
                 {
                     moveVec.y = 0;
-                    am.SetTrigger("JumpEnd");
+                    am.SetInteger("State", 0);
                     jumpCheckStart = false;
                     Invoke("JumpCountReturn", 3f);
                     ChangeState(State.Idle);
@@ -346,7 +345,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
             AButton();
         }
 
-            #region [현숙] 점프발판 / 벽점프 
+#region [현숙] 점프발판 / 벽점프 
             // 점프 발판
             // 아래로 레이를 쐈을 때 
             if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
@@ -363,12 +362,10 @@ public class PlayerMove_HJH : MonoBehaviourPun
                     moveVec = Vector3.zero;
                 }
 
-                am.SetTrigger("WallJump 0");
-
                 jumpCount = 1;
             }
 
-        #endregion
+#endregion
 
     }
 
@@ -393,7 +390,28 @@ public class PlayerMove_HJH : MonoBehaviourPun
         {
             moveVec.y += gravity * Time.deltaTime;
         }
-        
+        #region [현숙] 점프발판 / 벽점프 
+        // 점프 발판
+        // 아래로 레이를 쐈을 때 
+        if (Physics.Raycast(this.transform.position, -this.transform.up, out hit, 10, layerMask) && !fallGround)
+        {
+            IgnoreLayerFalse();
+        }
+
+        //벽 점프
+        if (Physics.Raycast(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, out hit, 0.7f, layerMask2) && moveVec.x != 0)
+        {
+            Debug.DrawRay(this.transform.position + new Vector3(0, 1.5f, 0), this.transform.forward, Color.green, 0.7f);
+            if (moveVec.y < 0)
+            {
+                moveVec = Vector3.zero;
+            }
+
+            jumpCount = 1;
+        }
+
+        #endregion
+
     }
 
     public void JButton()

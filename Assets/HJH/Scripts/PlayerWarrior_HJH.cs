@@ -75,7 +75,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
                     }
                     if (jumpCheckStart == true && cc.isGrounded)
                     {
-                        am.SetTrigger("JumpEnd");
+                        am.SetInteger("State",0);
                         jumpCheckStart = false;
                         Invoke("JumpCountReturn", 1f);
                         state = State.Idle;
@@ -131,7 +131,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     public override void Skill1()
     {
         Debug.Log("2´Ü°è");
-        am.SetTrigger("Skill");
+        am.SetInteger("State",5);
     }
 
     public void SkillAlond()
@@ -149,7 +149,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public override void StopAttack()
     {
-        am.SetTrigger("Attack");
+        am.SetInteger("State", 4);
         photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         audio.clip = audioClips[0];
@@ -188,7 +188,7 @@ public class PlayerWarrior_HJH : PlayerMove_HJH
     }
     public override void JumpAttack()
     {
-        am.SetTrigger("JumpAttack");
+        am.SetInteger("State", 3);
 
         photonView.RPC("AtSet", RpcTarget.All, true);
     }
