@@ -664,6 +664,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Alice
       objectReference: {fileID: 0}
+    - target: {fileID: 1329418108476140, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4057803647278556, guid: cc1c1d30061b5f74d94b6e9297b16e82, type: 3}
       propertyPath: m_RootOrder
       value: 9
