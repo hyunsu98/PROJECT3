@@ -45,6 +45,10 @@ public class Respawn_LHS : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if(RespawnCount <= 0)
+        {
+            Destroy(this.gameObject);
+        }
         // 리스폰카운트가 0보다 작거나 같다면 
         // 게임이 끝난다
     }

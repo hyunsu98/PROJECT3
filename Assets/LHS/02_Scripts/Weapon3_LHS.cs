@@ -10,16 +10,16 @@ public class Weapon3_LHS : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (gameObject.name.Contains("SkillEffect"))
+        {
+            StartCoroutine(UpDamage(Damage));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name.Contains("SkillEffect"))
-        {
-            StartCoroutine(UpDamage(Damage));
-        }
+        
     }
     IEnumerator UpDamage(int StartDamage)
     {

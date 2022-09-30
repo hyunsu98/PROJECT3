@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     bool MainsceneStartTrigger = true; // ¾Èº¸³»µµµÊ
     bool lobbySceneStartTrigger = true;
     bool endingSceneStartTrigger = true;
+    bool allPlayersIn = false;
     public string RoomName = "?";
     public string Winname;
 
@@ -67,18 +68,21 @@ public class GameManager : MonoBehaviourPunCallbacks
             GameObject go = null;
             for(int i =0; i<players.Length; i++)
             {
-                if(players[i] != null)
+
+                if(players[i] == null)
                 {
-                    if (players[i].GetComponent<Respawn_LHS>().RespawnCount == 0)
-                    {
-                        a++;
-                    }
-                    else
-                    {
-                        go = players[i];
-                    }
-                }     
+                    a++;
+                }
+                else if(allPlayersIn == true)
+                {
+                    go = players[i];
+                }
             }
+            if (a == 0)
+            {
+                allPlayersIn = true;
+            }
+            Debug.Log(a);
             if(a == players.Length-1)
             {
                 if(go.name.Contains("Aland"))

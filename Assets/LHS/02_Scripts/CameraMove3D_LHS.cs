@@ -29,7 +29,25 @@ public class CameraMove3D_LHS : MonoBehaviour
         GameObject[] a = GameObject.FindGameObjectsWithTag("Player");
         for(int i = 0; i <  a.Length; i++)
         {
-            targets.Add(a[i].transform);
+            if(targets.Count == 0)
+            {
+                targets.Add(a[i].transform);
+            }
+            for(int j =0; j<targets.Count; j++)
+            {
+                if(targets[j] == null)
+                {
+                    targets.RemoveAt(j);
+                }
+                if(targets[j] == a[i].transform)
+                {
+                    break;
+                }
+                if(j == targets.Count - 1)
+                {
+                    targets.Add(a[i].transform);
+                }
+            }
         }
         cam = GetComponent<Camera>();
     }

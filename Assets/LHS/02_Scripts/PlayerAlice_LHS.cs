@@ -135,14 +135,15 @@ public class PlayerAlice_LHS : PlayerMove_HJH
 
     public void Skill()
     {
-        photonView.RPC("RpcShowSkillEffect2", RpcTarget.All);
+        if (photonView.IsMine)
+        {
+            photonView.RPC("RpcShowSkillEffect2", RpcTarget.All);
+        }
         state = State.Attack;
     }
     public void SkillOver()
     {
-        state = State.Idle;
         ChangeState(State.Idle);
-        Debug.Log("?");
     }
 
     public override void StopAttack()
@@ -215,18 +216,11 @@ public class PlayerAlice_LHS : PlayerMove_HJH
 
         //audio.clip = audioClips[1];
         //audio.Play();
-
-        GameObject skill = Instantiate(skillEffect);
-        if(gameObject.transform.eulerAngles.y > 0)
+        if (photonView.IsMine)
         {
-            skill.transform.position = gameObject.transform.position + new Vector3(2, 0, 0);
+            GameObject skill = PhotonNetwork.Instantiate("Player3SkillEffect",transform.position,Quaternion.Euler(new Vector3(-90,0,0)));
+            Destroy(skill, 3f);
+            skill.GetComponent<Weapon3_LHS>().Attack = true;
         }
-        else
-        {
-            skill.transform.position = gameObject.transform.position + new Vector3(-2, 0, 0);
-        }
-        Destroy(skill, 3f);
-        skill.GetComponent<Weapon3_LHS>().Attack = true;
-
     }
 }
