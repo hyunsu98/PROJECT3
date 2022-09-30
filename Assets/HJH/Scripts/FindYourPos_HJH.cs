@@ -11,19 +11,19 @@ public class FindYourPos_HJH : MonoBehaviour
         if (x == "ToggleGroup")
         {
             transform.parent = GameObject.Find("M_NumChoice").transform;
-            GetComponent<RectTransform>().anchoredPosition = new Vector3(19, -1, 0);
+            GetComponent<RectTransform>().anchoredPosition = new Vector3(19, 90, 0);
             GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         }
         else if (x == "MapChoice")
         {
             transform.parent = GameObject.Find("Canvas").transform;
-            GetComponent<RectTransform>().anchoredPosition = new Vector3(-40.9f, 103f, 0);
+            GetComponent<RectTransform>().anchoredPosition = new Vector3(620f, 180f, 0);
             GetComponent<RectTransform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
         }
         else if(x == "PlayerChoice")
         {
             transform.parent = GameObject.Find("Canvas").transform;
-            GetComponent<RectTransform>().anchoredPosition = new Vector3(54f, -3f, 0);
+            GetComponent<RectTransform>().anchoredPosition = new Vector3(1166f, -65f, 0);
             GetComponent<RectTransform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
         }
         else if(x == "Character")
