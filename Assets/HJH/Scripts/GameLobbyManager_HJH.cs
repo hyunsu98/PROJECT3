@@ -51,10 +51,23 @@ public class GameLobbyManager_HJH : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //만약 RoomMax 플레이어가 다 들어오면
+        //히어로 선택이 가능하게 한다
+        if(playerPhoton.Count == PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            GameObject playerChoice = GameObject.Find("PlayerChoice(Clone)");
+            Button[] buttonS = playerChoice.GetComponentsInChildren<Button>();
+            
+            for(int i = 0; i < buttonS.Length; i++)
+            {
+                buttonS[i].interactable = true;
+            }
+        }
+
         if (PhotonNetwork.IsMasterClient && GameManager.instance.playerCharcters.Count == playerPhoton.Count && playerPhoton.Count >1)
         {
-            GameObject bt = GameObject.Find("BtnPlay");
-            bt.GetComponent<Button>().interactable = true;
+                GameObject bt = GameObject.Find("BtnPlay");
+                bt.GetComponent<Button>().interactable = true;
         }
     }
 
