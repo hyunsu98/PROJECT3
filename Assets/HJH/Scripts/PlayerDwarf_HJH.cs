@@ -187,7 +187,7 @@ public class PlayerDwarf_HJH : PlayerMove_HJH //IPunObservable
     }
     public override void StopAttack()
     {
-        am.SetInteger("State", 2);
+        am.SetInteger("State", 4);
         photonView.RPC("AtSet", RpcTarget.All, true);
         state = State.Attack;
         audio.clip = audioClips[0];

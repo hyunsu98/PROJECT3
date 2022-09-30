@@ -457,7 +457,6 @@ public class PlayerMove_HJH : MonoBehaviourPun
         }
         else
         {
-            Debug.Log("1´Ü°è");
             Skill1();
         }
     }

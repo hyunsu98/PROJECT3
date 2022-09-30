@@ -146,7 +146,6 @@ public class PlayerArcher_LHS : PlayerMove_HJH
     }
     public void SkillOver()
     {
-        
         ChangeState(State.Idle);
     }
     public void AttackOverr()
@@ -195,11 +194,7 @@ public class PlayerArcher_LHS : PlayerMove_HJH
         {
             cc.Move(new Vector3(-dashRange, 0, 0));
         }
-        gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        Weapon.SetActive(false);
         yield return new WaitForSeconds(0.1f);
-        gameObject.transform.GetChild(0).gameObject.SetActive(true);
-        Weapon.SetActive(true);
     }
     public override void Jump()
     {
