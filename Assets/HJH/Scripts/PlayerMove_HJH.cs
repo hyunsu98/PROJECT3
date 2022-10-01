@@ -116,6 +116,11 @@ public class PlayerMove_HJH : MonoBehaviourPun
     // Start is called before the first frame update
     private void Awake()
     {
+        if (!photonView.IsMine)
+        {
+            Outline outline = GetComponent<Outline>();
+            outline.OutlineWidth = 0;
+        }
         audio = GetComponent<AudioSource>();  
         hp = GetComponent<PlayerHp_HJH>();
         if (photonView.IsMine == true)
