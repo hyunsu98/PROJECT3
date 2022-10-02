@@ -58,7 +58,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         numChoice1.onValueChanged.AddListener(OnToggleClick1);
         //비밀 방을 만들기 위한 함수
         PassToggle.onValueChanged.AddListener(OnPassToggle);
-
     }
 
     public void OnRoomNameValueChanged(string s)
@@ -110,6 +109,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             inputPassword.text = "";
         }
     }
+    public void RandomeRoom()
+    {
+        PhotonNetwork.JoinRandomRoom();
+    }
 
     //방 생성
     public void CreateRoom()
@@ -136,7 +139,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         };
         // 방 생성 요청 (해당 옵션을 이용해서)
         GameManager.instance.RoomName = inputRoomName.text;
-        Debug.Log(inputRoomName.text);
         PhotonNetwork.CreateRoom(inputRoomName.text + inputPassword.text, roomOptions);
     }
 
@@ -193,6 +195,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //룸리스트 정보를 업데이트
         UpdateRoomCache(roomList);
         //룸리스트 UI 전체 생성
+        CreateRoomListUI();
+    }
+    private void Awake()
+    {
+        Debug.Log("??LL??");
         CreateRoomListUI();
     }
 

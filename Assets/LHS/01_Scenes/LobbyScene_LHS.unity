@@ -446,8 +446,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1487179472}
-        m_TargetAssemblyTypeName: LobbyManager_LHS, Assembly-CSharp
-        m_MethodName: GameLobbySceneChange
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
+        m_MethodName: RandomeRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

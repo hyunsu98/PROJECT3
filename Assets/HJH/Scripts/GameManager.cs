@@ -15,13 +15,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     public Dictionary<int, PlayerCharcter> playerCharcters = new Dictionary<int, PlayerCharcter>();
     public GameObject[] characterPrefabs;
-    bool MainsceneStartTrigger = true; // ¾Èº¸³»µµµÊ
-    bool lobbySceneStartTrigger = true;
-    bool endingSceneStartTrigger = true;
+    public bool MainsceneStartTrigger = true; // ¾Èº¸³»µµµÊ
+    public bool lobbySceneStartTrigger = true;
+    public bool endingSceneStartTrigger = true;
     bool allPlayersIn = false;
     public string RoomName = "?";
     public string Winname;
-
     public enum PlayerCharcter
     {
         Aland,
@@ -45,11 +44,26 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Start()
     {
     }
+    public void SetTriggers()
+    {
+        MainsceneStartTrigger = true;
+        lobbySceneStartTrigger = true;
+        endingSceneStartTrigger = true;
+        allPlayersIn = false;
+        StartCoroutine(Settri());
+    }
+
+    IEnumerator Settri()
+    {
+        yield return new WaitForSeconds(1);
+        MainsceneStartTrigger = true;
+        lobbySceneStartTrigger = true;
+        endingSceneStartTrigger = true;
+    }
 
     // Update is called once per frame
     void Update()
     {
-
         if((SceneManager.GetActiveScene().name == "MainScene_HJH" || SceneManager.GetActiveScene().name == "MainScene_Photon") && MainsceneStartTrigger == true)
         {
             MainScene();
@@ -82,8 +96,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             {
                 allPlayersIn = true;
             }
-            Debug.Log(a);
-            if(a == players.Length-1)
+            if(a == players.Length-1 && go != null)
             {
                 if(go.name.Contains("Aland"))
                 {
@@ -130,7 +143,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     //}
     private void GameLobbySene()
     {
-        Destroy(LHS_DestroyBG.Instance.gameObject);
+        if(GameObject.Find("BGM"))
+        {
+            Destroy(LHS_DestroyBG.Instance.gameObject);
+
+        }
         players = new GameObject[PhotonNetwork.CurrentRoom.MaxPlayers];
         GameObject.Find("Background_Text").GetComponent<Text>().text = RoomName;
         lobbySceneStartTrigger = false;
