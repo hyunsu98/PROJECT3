@@ -153,7 +153,6 @@ public class PlayerMove_HJH : MonoBehaviourPun
         moveVec = Vector3.zero;
         //am.SetInteger("Jump",jumpCount);
         firstJumpCount = jumpCount;
-        Debug.Log(gameObject.name);
         GameManager.instance.players[(photonView.ViewID / 1000) - 1] = gameObject;
 
 #region [Çö¼÷] LayerMaskÁöÁ¤
