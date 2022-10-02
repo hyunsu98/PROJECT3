@@ -116,6 +116,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
     // Start is called before the first frame update
     private void Awake()
     {
+        gameObject.transform.GetChild(0).GetComponent<Renderer>().sortingOrder = 50;
         if (!photonView.IsMine)
         {
             Outline outline = GetComponent<Outline>();
@@ -128,6 +129,7 @@ public class PlayerMove_HJH : MonoBehaviourPun
             joy = GameObject.Find("Variable Joystick").GetComponent<VariableJoystick>();
         }
 #if UNITY_EDITOR
+        Debug.Log("??");
         keyboardMode = true;
 #elif UNITY_ANDROID
         keyboardMode = false;
