@@ -10,7 +10,7 @@ public class EndingManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
     }
-    public GameObject BGM;
+    //public GameObject BGM;
     // Quit 클릭 시 게임 나가기
     public void Quit()
     {
@@ -23,7 +23,7 @@ public class EndingManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveLobby();
         PhotonNetwork.NickName = nick;
         PhotonNetwork.JoinLobby();
-        Instantiate(BGM);
+        //Instantiate(BGM);
     }
     public override void OnJoinedLobby()
     {
