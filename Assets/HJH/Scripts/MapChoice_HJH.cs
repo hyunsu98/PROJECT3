@@ -12,15 +12,17 @@ public class MapChoice_HJH : MonoBehaviourPun
         // 방장이 아니라면 맵 선택 금지!
         if (!PhotonNetwork.IsMasterClient)
         {
-            GameObject MapChoice = GameObject.Find("MapChoice(Clone)");
-            Button[] buttonS = MapChoice.GetComponentsInChildren<Button>();
+            //GameObject MapChoice = GameObject.Find("MapChoice(Clone)");
+            //Button[] buttonS = MapChoice.GetComponentsInChildren<Button>();
 
-            for (int i = 0; i < buttonS.Length; i++)
+            for (int i = 0; i < buttons.Length; i++)
             {
-                buttonS[i].interactable = false;
+                buttons[i].interactable = false;
             }
         }
     }
+
+    public Button [] buttons;
 
     // Update is called once per frame
     void Update()
@@ -34,6 +36,7 @@ public class MapChoice_HJH : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("map11", RpcTarget.All);
+            photonView.RPC("mapSet", RpcTarget.Others, 0);
         }
     }
 
@@ -42,6 +45,7 @@ public class MapChoice_HJH : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("map22", RpcTarget.All);
+            photonView.RPC("mapSet", RpcTarget.Others, 1);
         }
     }
     [PunRPC]
@@ -53,5 +57,11 @@ public class MapChoice_HJH : MonoBehaviourPun
     void map22()
     {
         GameManager.instance.mapName = "MainScene2_Photon";
+    }
+
+    [PunRPC]
+    void mapSet(int index)
+    {
+            buttons[index].interactable = true;
     }
 }
