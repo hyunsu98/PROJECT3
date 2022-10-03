@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     bool allPlayersIn = false;
     public string RoomName = "?";
     public string Winname;
+    public string mapName = "MainScene_Photon";
     public enum PlayerCharcter
     {
         Aland,
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if((SceneManager.GetActiveScene().name == "MainScene_HJH" || SceneManager.GetActiveScene().name == "MainScene_Photon") && MainsceneStartTrigger == true)
+        if((SceneManager.GetActiveScene().name == "MainScene2_Photon" || SceneManager.GetActiveScene().name == "MainScene_Photon") && MainsceneStartTrigger == true)
         {
             MainScene();
         }

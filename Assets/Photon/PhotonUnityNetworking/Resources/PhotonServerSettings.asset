@@ -75,6 +75,8 @@ MonoBehaviour:
   - RpcShowDie
   - OnDestroy
   - Destroy
+  - map11
+  - map22
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
