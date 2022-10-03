@@ -11671,6 +11671,7 @@ MonoBehaviour:
   endingSceneStartTrigger: 1
   RoomName: '?'
   Winname: 
+  mapName: MainScene_Photon
 --- !u!4 &1199562740
 Transform:
   m_ObjectHideFlags: 0
@@ -28158,7 +28159,7 @@ PrefabInstance:
     - target: {fileID: 1292689561248924455, guid: 46ffd6467d7bcaa47b3d398fb7b8cd5f, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 1e7cef6a080d052499068cd128b463a3, type: 3}
+      objectReference: {fileID: 8300000, guid: 49c3dfdfe4a3da640bf00fa15fc76193, type: 3}
     - target: {fileID: 1292689561248924456, guid: 46ffd6467d7bcaa47b3d398fb7b8cd5f, type: 3}
       propertyPath: m_RootOrder
       value: 8
