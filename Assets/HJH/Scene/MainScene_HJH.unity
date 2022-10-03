@@ -4527,7 +4527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 290539379}
   m_LocalRotation: {x: 0.06104851, y: 0, z: 0, w: 0.99813485}
-  m_LocalPosition: {x: 0, y: 8.276477, z: -40}
+  m_LocalPosition: {x: -1.7, y: 23.44, z: -145.96}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6336,6 +6336,9 @@ MonoBehaviour:
   startLife: 3
   players: []
   characterPrefabs: []
+  MainsceneStartTrigger: 1
+  lobbySceneStartTrigger: 1
+  endingSceneStartTrigger: 1
   RoomName: '?'
   Winname: 
 --- !u!1 &420264645
